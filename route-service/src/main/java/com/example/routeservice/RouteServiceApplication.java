@@ -26,10 +26,12 @@ public class RouteServiceApplication {
 	public CommandLineRunner demo(RouteRepository repository) {
 		return (args) -> {
 			// save a few routes
+			/*
 			Route r1 = new Route("Vijecnica-Dobrinja", "Autobus");
 			Route r2 = new Route("Bentbasa-Aerodrom", "Autobus");
 			repository.save(r1);
 			repository.save(r2);
+			 */
 		};
 	}
 }

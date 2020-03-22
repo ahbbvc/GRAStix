@@ -1,10 +1,15 @@
 package com.example.routeservice.Repository;
 
 import com.example.routeservice.Entity.Route;
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
-import java.util.Optional;
 
-public interface RouteRepository extends CrudRepository<Route, Integer> {
+public interface RouteRepository extends JpaRepository<Route, Integer> {
+
+    List<Route> findByRouteNameAndTransportType(String routeName, String transportType);
+
+    List<Route> findByRouteName(String routeName);
+
+    List<Route> findByTransportType(String transportType);
 }
