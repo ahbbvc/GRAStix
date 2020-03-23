@@ -1,11 +1,13 @@
 package com.example.routeservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
 public class Route {
-    @Id 
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -19,7 +21,8 @@ public class Route {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToMany(mappedBy = "route")
+    @JsonIgnore
+    @OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
     private List<RouteStation> routeStations;
 
     public Route() {
@@ -48,5 +51,29 @@ public class Route {
 
     public List<RouteStation> getRouteStations() {
         return routeStations;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
+    }
+
+    public void setTransportType(String transportType) {
+        this.transportType = transportType;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public void setRouteStations(List<RouteStation> routeStations) {
+        this.routeStations = routeStations;
+    }
+
+    public void addRouteStation(RouteStation routeStation) {
+        this.routeStations.add(routeStation);
     }
 }

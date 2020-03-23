@@ -5,9 +5,10 @@ import com.example.routeservice.Repository.RouteRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-
+@RequestMapping("/routes")
 public class RouteController {
 
     private final RouteRepository repository;
@@ -16,33 +17,29 @@ public class RouteController {
         this.repository = repository;
     }
 
-    @GetMapping("/routes")
+    @GetMapping("")
     List<Route> findAllRoutes() {
         return repository.findAll();
     }
 
-    @GetMapping("/routes{name}")
-    List<Route> findRoutesByName(@RequestParam("name") String routeName) {
-        return repository.findByRouteName(routeName);
+    @GetMapping("/{id}")
+    Optional<Route> findRouteById(@PathVariable Integer id) {
+        return repository.findById(id);
     }
 
-    @GetMapping("/routes{type}")
-    List<Route> findRoutesByType(@RequestParam("type") String transportType) {
-        return repository.findByTransportType(transportType);
-    }
-
-    @GetMapping("/routes{name}{type}")
+    @GetMapping("/search")
     List<Route> findRoutesByNameAndType(@RequestParam("name") String routeName, @RequestParam("type") String transportType) {
         return repository.findByRouteNameAndTransportType(routeName, transportType);
     }
 
-    @PostMapping("/routes")
-    Route newRoute(@RequestBody Route data) {
+    @PostMapping("")
+    Route createRoute(@RequestBody Route data) {
         return repository.save(data);
     }
 
-    @DeleteMapping("/routes/{id}")
+    @DeleteMapping("/{id}")
     void deleteRoute(@PathVariable Integer id) {
         repository.deleteById(id);
     }
+
 }

@@ -1,6 +1,9 @@
 package com.example.routeservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -17,10 +20,16 @@ public class RouteStation {
     @JoinColumn(name = "station_id")
     private Station station;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "routeStation")
-    private List<TimeTable> timeTables;
+    private List<TimeTable> timeTables = new ArrayList<>();
 
     public RouteStation() {
+    }
+
+    public RouteStation(Route route, Station station) {
+        this.route = route;
+        this.station = station;
     }
 
     public Integer getId() {
@@ -37,5 +46,25 @@ public class RouteStation {
 
     public List<TimeTable> getTimeTables() {
         return timeTables;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRoute(Route route) {
+        this.route = route;
+    }
+
+    public void setStation(Station station) {
+        this.station = station;
+    }
+
+    public void setTimeTables(List<TimeTable> timeTables) {
+        this.timeTables = timeTables;
+    }
+
+    public void addTimeTable(TimeTable timeTable) {
+        this.timeTables.add(timeTable);
     }
 }
