@@ -1,5 +1,7 @@
 package com.example.ticketservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,12 +13,12 @@ public class MonthlyTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    @ManyToOne
-    @JoinColumn(name= "user_id")
-    private User user;
-
-    @ManyToMany
-    private List<Route> routes;
+    /*@ManyToOne
+    @JoinColumn(name= "user_id")*/
+    private Integer userId;
+    @JsonIgnore
+    @OneToMany(mappedBy = "mticket")
+    private List<MTicketRoute> routes;
 
     @Column (nullable = false)
     private String month;
@@ -27,21 +29,19 @@ public class MonthlyTicket {
     public MonthlyTicket(){
 
     }
-    public MonthlyTicket(String month ){
+    public MonthlyTicket(Integer userId , String month ){
         this.month= month;
         this.validated= false;
-    }
-    public List<Route> getRoutes() {
-        return routes;
-    }
+        this.userId=userId;
 
+    }
 
     public Boolean getValidated() {
         return validated;
     }
 
-    public User getUser() {
-        return user;
+    public void setValidated(Boolean validated) {
+        this.validated = validated;
     }
 
     public Integer getId() {
@@ -51,4 +51,17 @@ public class MonthlyTicket {
     public String getMonth() {
         return month;
     }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public List<MTicketRoute> getRoutes() {
+        return routes;
+    }
+
+    public void setRoutes(List<MTicketRoute> routes) {
+        this.routes = routes;
+    }
+
 }
