@@ -1,8 +1,6 @@
 package com.example.routeservice.controller;
 
-import com.example.routeservice.model.Route;
 import com.example.routeservice.model.RouteStation;
-import com.example.routeservice.model.TimeTable;
 import com.example.routeservice.service.RouteStationService;
 import org.springframework.web.bind.annotation.*;
 

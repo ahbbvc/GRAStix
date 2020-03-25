@@ -4,7 +4,6 @@ import com.example.routeservice.model.TimeTable;
 import com.example.routeservice.service.TimeTableService;
 import org.springframework.web.bind.annotation.*;
 
-import javax.persistence.EntityManager;
 import java.util.List;
 
 @RestController
