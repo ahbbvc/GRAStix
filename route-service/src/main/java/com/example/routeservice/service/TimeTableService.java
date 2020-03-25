@@ -6,7 +6,6 @@ import com.example.routeservice.repository.TimeTableRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
@@ -37,7 +36,6 @@ public class TimeTableService {
         RouteStation routeStation = routeStationService.findById(routeStationId);
 
         timeTable.setRouteStation(routeStation);
-        //routeStation.addTimeTable(timeTable);
 
         return timeTableRepository.save(timeTable);
     }
