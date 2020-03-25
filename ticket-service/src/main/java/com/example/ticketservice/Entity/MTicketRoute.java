@@ -1,5 +1,7 @@
 package com.example.ticketservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,8 +9,9 @@ public class MTicketRoute {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @JsonBackReference
     @ManyToOne
-    @JoinColumn(nullable=false)
+    @JoinColumn
     private MonthlyTicket mticket;
     private Integer route_id;
     public MTicketRoute(){

@@ -1,11 +1,13 @@
 package com.example.ticketservice.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -15,9 +17,10 @@ public class MonthlyTicket {
     private Integer id;
     /*@ManyToOne
     @JoinColumn(name= "user_id")*/
+    @NotNull(message = "User cannot be null")
     private Integer userId;
-    @JsonIgnore
-    @OneToMany(mappedBy = "mticket")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "mticket", cascade = CascadeType.PERSIST)
     private List<MTicketRoute> routes;
 
     @Column (nullable = false)
@@ -35,7 +38,13 @@ public class MonthlyTicket {
         this.userId=userId;
 
     }
+    public MonthlyTicket(Integer userId , String month , List<MTicketRoute> routes){
+        this.month= month;
+        this.validated= false;
+        this.userId=userId;
+        this.routes = routes;
 
+    }
     public Boolean getValidated() {
         return validated;
     }

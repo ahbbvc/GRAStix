@@ -1,6 +1,7 @@
 package com.example.ticketservice.Entity;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Entity
@@ -11,10 +12,12 @@ public class SingleTicket {
 
    /* @ManyToOne
     @JoinColumn(name= "user_id")*/
+   @NotNull(message = "User cannot be null")
     private Integer userId;
 
     /*@ManyToOne
     @JoinColumn(name="route_id")*/
+    @NotNull(message = "Route cannot be null")
     private Integer routeId;
 
 

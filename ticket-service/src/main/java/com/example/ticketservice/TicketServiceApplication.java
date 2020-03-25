@@ -29,17 +29,17 @@ public class TicketServiceApplication {
 	public CommandLineRunner demo(STicketRepository srepository, MTicketRepository mrepository, MTicketRouteRepository mrrepository) {
 		return (args) -> {
 
-		/*	SingleTicket st1 = new SingleTicket(1, 1 );
+		//	SingleTicket st1 = new SingleTicket(1, 1 );
+		//	srepository.save(st1);
 
-
-			MonthlyTicket mt1 = new MonthlyTicket(1 , "March");
+			/*MonthlyTicket mt1 = new MonthlyTicket(2 , "March");
 			MTicketRoute mr1 = new MTicketRoute(1,mt1 );
 			MTicketRoute mr2 = new MTicketRoute(2, mt1);
 			List<MTicketRoute> mTicketRoutes = new ArrayList<MTicketRoute>();
 			mTicketRoutes.add(mr1);
 			mTicketRoutes.add(mr2);
 			mt1.setRoutes(mTicketRoutes);
-			srepository.save(st1);
+
 			mrepository.save(mt1);
 			mrrepository.save(mr1);
 			mrrepository.save(mr2);*/

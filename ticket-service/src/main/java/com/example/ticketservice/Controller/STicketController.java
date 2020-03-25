@@ -2,6 +2,8 @@ package com.example.ticketservice.Controller;
 
 import com.example.ticketservice.Entity.SingleTicket;
 import com.example.ticketservice.Repository.STicketRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,6 +29,16 @@ public class STicketController {
     @GetMapping("/single_tickets/{id}")
     Optional<SingleTicket> STicketById(@PathVariable Integer id){
         return repository.findById(id);
+    }
+    @DeleteMapping("/single_tickets/{id}")
+    ResponseEntity<String> DeleteSTicket(@PathVariable Integer id){
+        Optional<SingleTicket> st = repository.findById(id);
+        if(st==null)
+            return new ResponseEntity<>("Single ticket not found", HttpStatus.NOT_FOUND);
+        else {
+            repository.deleteById(id);
+            return new ResponseEntity<>("Single ticket deleted", HttpStatus.OK);
+        }
     }
 
     @GetMapping(value = "/single_tickets", params = "user_id")
