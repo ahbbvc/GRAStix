@@ -1,4 +1,4 @@
-package com.example.routeservice.Entity;
+package com.example.routeservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

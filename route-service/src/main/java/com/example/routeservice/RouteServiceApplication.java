@@ -1,19 +1,12 @@
 package com.example.routeservice;
 
-import com.example.routeservice.Entity.Route;
-import com.example.routeservice.Entity.RouteStation;
-import com.example.routeservice.Entity.Station;
-import com.example.routeservice.Entity.TimeTable;
-import com.example.routeservice.Repository.RouteRepository;
+import com.example.routeservice.repository.RouteRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Date;
-import java.util.List;
 
 @SpringBootApplication
 public class RouteServiceApplication {
