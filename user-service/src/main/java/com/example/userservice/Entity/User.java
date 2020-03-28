@@ -1,5 +1,7 @@
 package com.example.userservice.Entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -52,43 +54,84 @@ public class User {
                 id, firstName, lastName);
     }
 
-    public Integer getUserId() {
+    public Integer getId() {
         return id;
     }
 
-    public String getName() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getFirstName() {
         return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     public String getLastName() {
         return lastName;
     }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
     public Date getBirthDate() {
         return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
     }
 
     public String getEmail() {
         return email;
     }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getCardNumber() {
         return cardNumber;
     }
 
+    public void setCardNumber(String cardNumber) {
+        this.cardNumber = cardNumber;
+    }
+
     public String getCvv() {
         return cvv;
+    }
+
+    public void setCvv(String cvv) {
+        this.cvv = cvv;
     }
 
     public Date getExpiryDate() {
         return expiryDate;
     }
 
+    public void setExpiryDate(Date expiryDate) {
+        this.expiryDate = expiryDate;
+    }
+
     public String getStatus() {
         return status;
     }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
 }

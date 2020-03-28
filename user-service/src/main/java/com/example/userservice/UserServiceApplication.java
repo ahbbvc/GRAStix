@@ -24,9 +24,10 @@ public class UserServiceApplication {
 	public CommandLineRunner demo(UserRepository repository) {
 		return (args) -> {
 			// save a few users
-			repository.save(new User("Amra", "Habibovic", new Date(1994, 1, 4),
-					"ahabibovic1@etf.unsa.ba", "12345", "123", "123",
-					new Date(2022, 1,1), "student"));
+			/*repository.save(new User("Selma", "Vucijak", new Date(1997, 7, 23),
+					"svucijak1@etf.unsa.ba", "12345", "123", "123",
+					new Date(2022, 1,1), "student"));*/
+
 		};
 	}
 }
