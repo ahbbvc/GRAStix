@@ -38,13 +38,18 @@ public class ValidationService {
             invalidProperties.add("Email");
         }
         if(user.getPassword() == null || user.getPassword().isEmpty()) nullProperties.add("Password");
+        if(user.getStatus() != null &&
+           !user.getStatus().isEmpty() &&
+           !user.getStatus().toLowerCase().matches("^(student|penzioner|radnik)?$")) {
+            invalidProperties.add("Status should be equal to one of the following: Student, Penzioner, Radnik");
+        }
 
         String result = nullProperties.size() > 0 ?
                 "Properties that must be provided: " + String.join(", ", nullProperties) + ". " :
                 "";
 
         if(invalidProperties.size() > 0) {
-            result += "Wrong format: " + String.join(", ", invalidProperties);
+            result += "Wrong format: " + String.join(", ", invalidProperties) + ".";
         }
 
         return result;
