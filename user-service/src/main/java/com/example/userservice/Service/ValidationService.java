@@ -1,6 +1,8 @@
 package com.example.userservice.Service;
 
 import com.example.userservice.Entity.User;
+import com.example.userservice.ExceptionHandling.CustomExceptions.InvalidRequestException;
+import com.example.userservice.ExceptionHandling.CustomExceptions.UserNotFoundException;
 import com.sun.istack.Nullable;
 import org.javatuples.Pair;
 import org.springframework.http.HttpStatus;
@@ -15,17 +17,19 @@ import java.util.Optional;
 public class ValidationService {
     ValidationService() {}
 
-    public boolean validateId(Integer id) {
-        return id != null && id > 0;
+    public void validateId(Integer id) throws InvalidRequestException {
+        if(id == null || id < 1) {
+            throw new InvalidRequestException("Received Id is not valid.");
+        }
     }
 
-    public <T> Pair validateObject(Optional<T> entity) {
-        return entity.isPresent() ?
-                new Pair(HttpStatus.OK, null):
-                new Pair(HttpStatus.NOT_FOUND, "User with received ID was not found.");
+    public <T> void validateObject(Optional<T> entity) throws UserNotFoundException {
+        if(!entity.isPresent()) {
+            throw new UserNotFoundException("User with received ID was not found.");
+        }
     }
 
-    public String validateUserProperties(User user) {
+    public void validateUserProperties(User user) throws InvalidRequestException {
         List<String> nullProperties = new ArrayList<String>();
         List<String> invalidProperties = new ArrayList<String>();
 
@@ -52,10 +56,8 @@ public class ValidationService {
             result += "Wrong format: " + String.join(", ", invalidProperties) + ".";
         }
 
-        return result;
-    }
-
-    public <T> ResponseEntity<T> processResponse(@Nullable T entity, HttpStatus httpStatus, @Nullable  String error) {
-        return entity != null ? new ResponseEntity<T>(entity, httpStatus) : new ResponseEntity(error, httpStatus);
+        if(!result.isEmpty()) {
+            throw new InvalidRequestException(result);
+        }
     }
 }

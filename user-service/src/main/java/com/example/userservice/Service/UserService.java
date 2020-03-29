@@ -1,9 +1,9 @@
 package com.example.userservice.Service;
 
-
 import com.example.userservice.Entity.User;
+import com.example.userservice.ExceptionHandling.CustomExceptions.InvalidRequestException;
+import com.example.userservice.ExceptionHandling.CustomExceptions.UserNotFoundException;
 import com.example.userservice.Repository.UserRepository;
-import org.javatuples.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -25,59 +25,36 @@ public class UserService {
         return new ResponseEntity<>(this._userRepository.findAll(), HttpStatus.OK);
     }
 
-    public ResponseEntity<User> findUserById(Integer id) {
-        if(!this._validationService.validateId(id)) {
-            return this._validationService.processResponse(
-                    null,
-                    HttpStatus.BAD_REQUEST,
-                    "Received Id is not valid.");
-        }
+    public ResponseEntity<User> findUserById(Integer id) throws InvalidRequestException, UserNotFoundException {
+        this._validationService.validateId(id);
 
         Optional<User> user = this._userRepository.findById(id);
-        Pair<HttpStatus, String> validation = this._validationService.validateObject(user);
-        return this._validationService.processResponse(user.orElse(null), validation.getValue0(), validation.getValue1());
+        this._validationService.validateObject(user);
+        return new ResponseEntity(user.get(), HttpStatus.OK);
     }
 
-    public ResponseEntity<User> saveUser(User user) {
-        String validation = this._validationService.validateUserProperties(user);
-        if(!validation.isEmpty()) {
-            return this._validationService.processResponse(
-                    null,
-                    HttpStatus.BAD_REQUEST,
-                    String.format("Invalid request. %s", validation));
-        }
+    public ResponseEntity<User> saveUser(User user) throws InvalidRequestException {
+        this._validationService.validateUserProperties(user);
 
         User newUser = this._userRepository.save(user);
-        return this._validationService.processResponse(newUser, HttpStatus.OK, null);
+        return new ResponseEntity(newUser, HttpStatus.OK);
     }
 
-    public ResponseEntity<User> updateExistingUser(Integer id, User user) {
-        if(!this._validationService.validateId(id)) {
-            return this._validationService.processResponse(
-                    null,
-                    HttpStatus.BAD_REQUEST,
-                    "Received Id is not valid.");
-        }
+    public ResponseEntity<User> updateExistingUser(Integer id, User user) throws InvalidRequestException, UserNotFoundException {
+        this._validationService.validateId(id);
 
-        ResponseEntity<User> foundRes = this.findUserById(id);
-        if(foundRes.getStatusCode() != HttpStatus.OK) return foundRes;
+        this.findUserById(id);
 
         user.setId(id);
         return this.saveUser(user);
     }
 
-    public ResponseEntity deleteUser(Integer id) {
-        if(!this._validationService.validateId(id)) {
-            return this._validationService.processResponse(
-                    null,
-                    HttpStatus.BAD_REQUEST,
-                    "Received Id is not valid.");
-        }
+    public ResponseEntity deleteUser(Integer id) throws InvalidRequestException, UserNotFoundException {
+        this._validationService.validateId(id);
 
-        ResponseEntity<User> foundRes = this.findUserById(id);
-        if(foundRes.getStatusCode() != HttpStatus.OK) return foundRes;
+        this.findUserById(id);
 
         this._userRepository.deleteById(id);
-        return new ResponseEntity("User successfully deleted.", HttpStatus.OK);
+        return new ResponseEntity("User successfully deleted", HttpStatus.OK);
     }
 }
