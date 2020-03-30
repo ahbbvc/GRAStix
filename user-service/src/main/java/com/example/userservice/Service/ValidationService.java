@@ -15,7 +15,7 @@ import java.util.Optional;
 
 @Service
 public class ValidationService {
-    ValidationService() {}
+    public ValidationService() {}
 
     public void validateId(Integer id) throws InvalidRequestException {
         if(id == null || id < 1) {

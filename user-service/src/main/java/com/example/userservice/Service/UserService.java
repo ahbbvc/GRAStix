@@ -16,7 +16,7 @@ public class UserService {
     private final UserRepository _userRepository;
     private final ValidationService _validationService;
 
-    UserService(UserRepository userRepository, ValidationService _validationService) {
+    public UserService(UserRepository userRepository, ValidationService _validationService) {
         this._userRepository = userRepository;
         this._validationService = _validationService;
     }
@@ -55,6 +55,6 @@ public class UserService {
         this.findUserById(id);
 
         this._userRepository.deleteById(id);
-        return new ResponseEntity("User successfully deleted", HttpStatus.OK);
+        return new ResponseEntity("User successfully deleted.", HttpStatus.OK);
     }
 }
