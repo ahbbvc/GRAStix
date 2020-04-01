@@ -14,7 +14,6 @@ public class UserService {
     }
 
     public User findById(Integer id) {
-        //dodati error handling
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow();
     }
 }

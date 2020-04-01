@@ -19,8 +19,7 @@ public class StationService {
     }
 
     public Station findById(Integer id) {
-        //dodati error handling
-        return stationRepository.findById(id).orElse(null);
+        return stationRepository.findById(id).orElseThrow();
     }
 
     public Station createStation(String stationName) {

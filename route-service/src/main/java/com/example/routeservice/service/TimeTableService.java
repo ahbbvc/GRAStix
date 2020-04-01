@@ -23,8 +23,7 @@ public class TimeTableService {
     public List<TimeTable> findAll() { return timeTableRepository.findAll(); }
 
     public TimeTable findById(Integer id) {
-        //dodati error handling
-        return timeTableRepository.findById(id).orElse(null); }
+        return timeTableRepository.findById(id).orElseThrow(); }
 
     public TimeTable createTimeTable(Date timeOfArrival, Date timeOfDeparture) {
         TimeTable newTimeTable = new TimeTable(timeOfArrival, timeOfDeparture);
