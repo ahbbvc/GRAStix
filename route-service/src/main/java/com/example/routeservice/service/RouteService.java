@@ -2,6 +2,7 @@ package com.example.routeservice.service;
 
 import com.example.routeservice.model.Route;
 import com.example.routeservice.repository.RouteRepository;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,8 +21,7 @@ public class RouteService {
     }
 
     public Route findById(Integer id) {
-        //dodati error handling
-        return routeRepository.findById(id).orElse(null);
+        return routeRepository.findById(id).orElseThrow();
     }
 
     public List<Route> findByRouteNameAndTransportType(String routeName, String transportType) {

@@ -25,8 +25,7 @@ public class RouteStationService {
     public List<RouteStation> findAll() { return routeStationRepository.findAll(); }
 
     public RouteStation findById(Integer id) {
-        //dodati error handling
-        return routeStationRepository.findById(id).orElse(null);
+        return routeStationRepository.findById(id).orElseThrow();
     }
 
     public RouteStation createRouteStation(Integer routeId, Integer stationId) {
