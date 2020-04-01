@@ -1,10 +1,8 @@
 package com.example.ticketservice.Controller;
 
-import com.example.ticketservice.Entity.MonthlyTicket;
-import com.example.ticketservice.Entity.SingleTicket;
-import com.example.ticketservice.Repository.MTicketRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import com.example.ticketservice.Model.MonthlyTicket;
+import com.example.ticketservice.Service.MTicketService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,42 +10,39 @@ import java.util.Optional;
 
 @RestController
 public class MTicketController {
-    private final MTicketRepository repository;
-    MTicketController(MTicketRepository repository){
-        this.repository= repository;
+    private final MTicketService mTicketService;
+
+    public MTicketController(MTicketService mTicketService) {
+        this.mTicketService = mTicketService;
     }
 
     @GetMapping("/monthly_tickets")
-    List<MonthlyTicket> AllMTickets(){
-        return repository.findAll();
+    public List<MonthlyTicket> AllMTickets(){
+        return mTicketService.findAll();
     }
 
     @PostMapping("/monthly_tickets")
-    MonthlyTicket newMTicket(@RequestBody MonthlyTicket mt){
-        return repository.save(mt);
+    public MonthlyTicket newMTicket(@Validated  @RequestBody MonthlyTicket mt){
+        return mTicketService.newMTicket(mt);
     }
 
     @GetMapping("/monthly_tickets/{id}")
-    Optional<MonthlyTicket> MTicketsById(@PathVariable Integer id){
-        return repository.findById(id);
+    public MonthlyTicket MTicketById(@PathVariable Integer id){
+        return mTicketService.findById(id);
     }
 
     @GetMapping(value = "/monthly_tickets", params = "user_id")
-    List<MonthlyTicket> UserMTickets(@RequestParam("user_id") Integer userId){
-        return repository.findByUserId(userId);
+    public List<MonthlyTicket> UserMTickets(@RequestParam("user_id") Integer userId){
+        return mTicketService.findUserMickets(userId);
     }
     @GetMapping(value = "/monthly_tickets", params = { "user_id" ,"validated"})
-    List<MonthlyTicket> ValidatedMTickets(@RequestParam("user_id") Integer userId, @RequestParam("validated") Boolean validated){
-        return repository.findByUserIdAndValidated(userId,validated);
+    public List<MonthlyTicket> ValidatedMTickets(@RequestParam("user_id") Integer userId, @RequestParam("validated") Boolean validated){
+        return mTicketService.findValidatedUserMTickets(userId,validated);
     }
 
     @PutMapping("/monthly_tickets/validate/{id}")
-    Optional<MonthlyTicket> ValidateTicket(@PathVariable Integer id){
-        return repository.findById(id)
-                .map(monthlyTicket  -> {
-                    monthlyTicket.setValidated(Boolean.TRUE);
-                    return repository.save(monthlyTicket);
-                });
+    public Optional<MonthlyTicket> ValidateTicket(@PathVariable Integer id){
+       return mTicketService.validateMTicket(id);
     }
 
 

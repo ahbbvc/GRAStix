@@ -1,4 +1,4 @@
-package com.example.ticketservice.Entity;
+package com.example.ticketservice.Model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 

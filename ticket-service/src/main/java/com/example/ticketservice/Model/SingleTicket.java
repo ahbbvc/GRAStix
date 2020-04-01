@@ -1,4 +1,4 @@
-package com.example.ticketservice.Entity;
+package com.example.ticketservice.Model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -6,6 +6,10 @@ import java.sql.Timestamp;
 
 @Entity
 public class SingleTicket {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;

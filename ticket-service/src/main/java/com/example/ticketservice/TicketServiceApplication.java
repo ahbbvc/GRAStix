@@ -1,8 +1,5 @@
 package com.example.ticketservice;
 
-import com.example.ticketservice.Entity.MTicketRoute;
-import com.example.ticketservice.Entity.MonthlyTicket;
-import com.example.ticketservice.Entity.SingleTicket;
 import com.example.ticketservice.Repository.MTicketRepository;
 import com.example.ticketservice.Repository.MTicketRouteRepository;
 import com.example.ticketservice.Repository.STicketRepository;
@@ -13,11 +10,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 
 @SpringBootApplication
 public class TicketServiceApplication {
@@ -25,7 +17,7 @@ public class TicketServiceApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}
-	@Bean
+	/*@Bean
 	public CommandLineRunner demo(STicketRepository srepository, MTicketRepository mrepository, MTicketRouteRepository mrrepository) {
 		return (args) -> {
 
@@ -42,8 +34,8 @@ public class TicketServiceApplication {
 
 			mrepository.save(mt1);
 			mrrepository.save(mr1);
-			mrrepository.save(mr2);*/
+			mrrepository.save(mr2);
 
 		};
-	}
+	}*/
 }

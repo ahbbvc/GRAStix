@@ -13,7 +13,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="route-service" target="1.8" />
-      <module name="ticket-service" target="1.8" />
+      <module name="ticket-service" target="10" />
       <module name="user-service" target="1.8" />
     </bytecodeTargetLevel>
   </component>

@@ -1,6 +1,5 @@
-package com.example.ticketservice.Entity;
+package com.example.ticketservice.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import javax.persistence.*;
@@ -12,17 +11,18 @@ import java.util.List;
 
 @Entity
 public class MonthlyTicket {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     /*@ManyToOne
     @JoinColumn(name= "user_id")*/
-    @NotNull(message = "User cannot be null")
+    @NotNull(message = "User can not be null")
     private Integer userId;
     @JsonManagedReference
     @OneToMany(mappedBy = "mticket", cascade = CascadeType.PERSIST)
     private List<MTicketRoute> routes;
-
+    @NotNull(message = "Month can not be null")
     @Column (nullable = false)
     private String month;
 
@@ -48,6 +48,10 @@ public class MonthlyTicket {
     public Boolean getValidated() {
         return validated;
     }
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
 
     public void setValidated(Boolean validated) {
         this.validated = validated;

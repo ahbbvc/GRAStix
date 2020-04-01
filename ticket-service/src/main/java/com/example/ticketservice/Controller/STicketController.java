@@ -1,9 +1,11 @@
 package com.example.ticketservice.Controller;
 
-import com.example.ticketservice.Entity.SingleTicket;
+import com.example.ticketservice.Model.SingleTicket;
 import com.example.ticketservice.Repository.STicketRepository;
+import com.example.ticketservice.Service.STicketService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,62 +14,52 @@ import java.util.Optional;
 
 @RestController
 public class STicketController {
-    private final STicketRepository repository;
-    STicketController(STicketRepository repository) {
-        this.repository = repository;
+    private final STicketService sTicketService;
+    STicketController(STicketService sTicketService) {
+        this.sTicketService= sTicketService;
     }
     @GetMapping("/single_tickets")
-    List<SingleTicket> AllSTickets(){
-        return repository.findAll();
+    public List<SingleTicket> AllSTickets(){
+        return sTicketService.findAll();
     }
 
     @PostMapping("/single_tickets")
-    SingleTicket newSTicket(@RequestBody SingleTicket st){
-        return repository.save(st);
+    public SingleTicket newSTicket(@Validated @RequestBody SingleTicket st){
+        return sTicketService.newSTicket(st);
     }
 
     @GetMapping("/single_tickets/{id}")
-    Optional<SingleTicket> STicketById(@PathVariable Integer id){
-        return repository.findById(id);
+    public SingleTicket STicketById(@PathVariable Integer id){
+        return sTicketService.findById(id);
     }
     @DeleteMapping("/single_tickets/{id}")
-    ResponseEntity<String> DeleteSTicket(@PathVariable Integer id){
-        Optional<SingleTicket> st = repository.findById(id);
-        if(st==null)
-            return new ResponseEntity<>("Single ticket not found", HttpStatus.NOT_FOUND);
-        else {
-            repository.deleteById(id);
-            return new ResponseEntity<>("Single ticket deleted", HttpStatus.OK);
-        }
+    ResponseEntity<Object> DeleteSTicket(@PathVariable Integer id){
+        return sTicketService.deleteSTicket(id);
     }
 
     @GetMapping(value = "/single_tickets", params = "user_id")
-    List<SingleTicket> UserSTickets(@RequestParam("user_id") Integer userId){
-        return repository.findByUserId(userId);
+    public List<SingleTicket> UserSTickets(@RequestParam("user_id") Integer userId){
+        return sTicketService.findUserSTickets(userId);
     }
 
     @GetMapping(value = "/single_tickets", params = "route_id")
-    List<SingleTicket> SticketsByRoute(@RequestParam("route_id") Integer routeId){
-        return repository.findByRouteId(routeId);
+    public List<SingleTicket> SticketsByRoute(@RequestParam("route_id") Integer routeId){
+        return sTicketService.findSticketsByRoute(routeId);
     }
 
     @GetMapping(value = "/single_tickets", params = {"validated"})
-    List<SingleTicket> ValidatedTickets( @RequestParam("validated") Boolean validated){
-        return repository.findByValidated( validated);
+    public List<SingleTicket> ValidatedTickets( @RequestParam("validated") Boolean validated){
+        return sTicketService.findValidatedTickets(validated);
     }
 
     @GetMapping(value = "/single_tickets", params = {"user_id", "validated"})
-    List<SingleTicket> UserSTickets(@RequestParam("user_id") Integer userId, @RequestParam("validated") Boolean validated){
-        return repository.findByUserIdAndValidated(userId, validated);
+    public List<SingleTicket> validatedUserSTickets(@RequestParam("user_id") Integer userId, @RequestParam("validated") Boolean validated){
+        return sTicketService.findValidatedUserSTickets(userId, validated);
     }
 
     @PutMapping("/single_tickets/validate/{id}")
-    Optional<SingleTicket> ValidateTicket(@PathVariable Integer id){
-        return repository.findById(id)
-                .map(singleTicket -> {
-                    singleTicket.setValidated(Boolean.TRUE);
-                    return repository.save(singleTicket);
-                });
+    public Optional<SingleTicket> ValidateTicket(@PathVariable Integer id){
+        return sTicketService.validateSTicket(id);
     }
 
 

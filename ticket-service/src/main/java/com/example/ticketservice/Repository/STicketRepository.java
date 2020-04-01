@@ -1,5 +1,5 @@
 package com.example.ticketservice.Repository;
-import com.example.ticketservice.Entity.SingleTicket;
+import com.example.ticketservice.Model.SingleTicket;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
