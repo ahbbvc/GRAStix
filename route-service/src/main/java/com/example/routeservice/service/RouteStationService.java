@@ -41,6 +41,7 @@ public class RouteStationService {
     }
 
     public void deleteById(Integer id) {
+        RouteStation routeStation = routeStationRepository.findById(id).orElseThrow();
         routeStationRepository.deleteById(id);
     }
 }

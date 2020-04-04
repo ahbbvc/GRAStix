@@ -5,7 +5,6 @@ import com.example.routeservice.service.RouteService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/routes")
@@ -35,6 +34,11 @@ public class RouteController {
     @PostMapping("")
     Route createRoute(@RequestBody Route data) {
         return routeService.createRoute(data.getRouteName(), data.getTransportType());
+    }
+
+    @PutMapping("/{id}")
+    Route updateRoute(@PathVariable Integer id, @RequestBody Route data) {
+        return routeService.updateRoute(id, data.getRouteName(), data.getTransportType());
     }
 
     @DeleteMapping("/{id}")
