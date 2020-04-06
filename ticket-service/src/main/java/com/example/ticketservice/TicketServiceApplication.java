@@ -3,17 +3,22 @@ package com.example.ticketservice;
 import com.example.ticketservice.Repository.MTicketRepository;
 import com.example.ticketservice.Repository.MTicketRouteRepository;
 import com.example.ticketservice.Repository.STicketRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 
 @SpringBootApplication
+@EnableEurekaClient
 public class TicketServiceApplication {
-	private static final Logger log = LoggerFactory.getLogger(TicketServiceApplication.class);
 	public static void main(String[] args) {
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}
@@ -38,4 +43,16 @@ public class TicketServiceApplication {
 
 		};
 	}*/
+}
+@RestController
+class ServiceInstanceRestController {
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(
+			@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
+	}
 }
