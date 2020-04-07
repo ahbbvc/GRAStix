@@ -1,33 +1,34 @@
 package com.example.userservice;
 
-import com.example.userservice.Entity.User;
-import com.example.userservice.Repository.UserRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.Bean;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 
-import java.util.Date;
+import java.util.List;
 
 @SpringBootApplication
+@EnableEurekaClient
 public class UserServiceApplication {
-
-	private static final Logger log = LoggerFactory.getLogger(UserServiceApplication.class);
-
 	public static void main(String[] args) {
 		SpringApplication.run(UserServiceApplication.class, args);
 	}
+}
 
-	@Bean
-	public CommandLineRunner demo(UserRepository repository) {
-		return (args) -> {
-			// save a few users
-			/*repository.save(new User("Selma", "Vucijak", new Date(1997, 7, 23),
-					"svucijak1@etf.unsa.ba", "12345", "123", "123",
-					new Date(2022, 1,1), "student"));*/
+@RestController
+class ServiceInstanceRestController {
 
-		};
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(
+			@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
 	}
 }
