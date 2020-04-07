@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,15 +34,32 @@ public class ValidationService {
         List<String> nullProperties = new ArrayList<String>();
         List<String> invalidProperties = new ArrayList<String>();
 
-        if(user.getFirstName() == null || user.getFirstName().isEmpty()) nullProperties.add("First Name");
-        if(user.getLastName() == null || user.getLastName().isEmpty()) nullProperties.add("Last Name");
-        if(user.getBirthDate() == null) nullProperties.add("Birth Date");
+        if(user.getFirstName() == null || user.getFirstName().isEmpty())  {
+            nullProperties.add("First Name");
+        } else if(!user.getFirstName().toLowerCase().matches("^[a-zA-Z]+( ?[a-zA-Z])*$")) {
+            invalidProperties.add("First Name");
+        }
+
+        if(user.getLastName() == null || user.getLastName().isEmpty()) {
+            nullProperties.add("Last Name");
+        } else if(!user.getLastName().matches("^[a-zA-Z]+( ?[a-zA-Z])*$")) {
+            invalidProperties.add("Last Name");
+        }
+
+        if(user.getBirthDate() == null) {
+            nullProperties.add("Birth Date");
+        } else if(user.getBirthDate().after(new Date())) {
+            invalidProperties.add("Birth date");
+        }
+
         if (user.getEmail() == null || user.getEmail().isEmpty()) {
             nullProperties.add("Email");
         } else if(!user.getEmail().matches("[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}")){
             invalidProperties.add("Email");
         }
+
         if(user.getPassword() == null || user.getPassword().isEmpty()) nullProperties.add("Password");
+
         if(user.getStatus() != null &&
            !user.getStatus().isEmpty() &&
            !user.getStatus().toLowerCase().matches("^(student|penzioner|radnik)?$")) {
