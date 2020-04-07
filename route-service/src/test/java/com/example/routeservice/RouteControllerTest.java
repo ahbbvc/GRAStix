@@ -1,6 +1,6 @@
 package com.example.routeservice;
 
-import com.example.routeservice.model.Station;
+import com.example.routeservice.model.Route;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -19,14 +19,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-public class StationControllerTest {
+public class RouteControllerTest {
     @Autowired
     private MockMvc mvc;
 
     @Test
     @Order(2)
-    public void getAllStations() throws Exception {
-        mvc.perform( MockMvcRequestBuilders.get("/stations")
+    public void getAllRoutes() throws Exception {
+        mvc.perform( MockMvcRequestBuilders.get("/routes")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[*].id").isNotEmpty());
@@ -34,9 +34,9 @@ public class StationControllerTest {
 
     @Test
     @Order(3)
-    public void getStationById() throws Exception {
+    public void getRouteById() throws Exception {
         mvc.perform( MockMvcRequestBuilders
-                .get("/stations/{id}", 1)
+                .get("/routes/{id}", 1)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1));
@@ -44,15 +44,16 @@ public class StationControllerTest {
 
     @Test
     @Order(1)
-    public void createStation() throws Exception {
+    public void createRoute() throws Exception {
         mvc.perform( MockMvcRequestBuilders
-                .post("/stations")
-                .content(asJsonString(new Station(1,"Ilidza")))
+                .post("/routes")
+                .content(asJsonString(new Route(1,"A-B", "Bus")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.stationName").value("Ilidza"));
+                .andExpect(jsonPath("$.routeName").value("A-B"))
+                .andExpect(jsonPath("$.transportType").value("Bus"));
     }
 
     public static String asJsonString(final Object obj) {
@@ -65,22 +66,23 @@ public class StationControllerTest {
 
     @Test
     @Order(4)
-    public void updateStation() throws Exception
+    public void updateRoute() throws Exception
     {
         mvc.perform( MockMvcRequestBuilders
-                .put("/stations/{id}", 1)
-                .content(asJsonString(new Station(1, "Bascarsija")))
+                .put("/routes/{id}", 1)
+                .content(asJsonString(new Route(1, "B-C", "Tram")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.stationName").value("Bascarsija"));
+                .andExpect(jsonPath("$.routeName").value("B-C"))
+                .andExpect(jsonPath("$.transportType").value("Tram"));
     }
 
     @Test
     @Order(5)
-    public void deleteStation() throws Exception
+    public void deleteRoute() throws Exception
     {
-        mvc.perform( MockMvcRequestBuilders.delete("/stations/{id}", 1) )
+        mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", 1) )
                 .andExpect(status().isOk());
     }
 
