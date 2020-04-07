@@ -34,6 +34,13 @@ public class TimeTable {
     public TimeTable() {
     }
 
+    public TimeTable(Integer id, Date timeOfArrival, Date timeOfDeparture, boolean regular) {
+        this.id = id;
+        this.timeOfArrival = timeOfArrival;
+        this.timeOfDeparture = timeOfDeparture;
+        this.regular = regular;
+    }
+
     public TimeTable(Date timeOfArrival, Date timeOfDeparture, boolean regular) {
         this.timeOfArrival = timeOfArrival;
         this.timeOfDeparture = timeOfDeparture;

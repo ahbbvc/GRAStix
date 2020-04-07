@@ -25,6 +25,11 @@ public class Station {
     public Station() {
     }
 
+    public Station(Integer id, String stationName) {
+        this.id = id;
+        this.stationName = stationName;
+    }
+
     public Station(String stationName) {
         this.stationName = stationName;
     }

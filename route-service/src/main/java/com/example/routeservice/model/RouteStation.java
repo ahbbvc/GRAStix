@@ -27,6 +27,12 @@ public class RouteStation {
     public RouteStation() {
     }
 
+    public RouteStation(Integer id, Route route, Station station) {
+        this.id = id;
+        this.route = route;
+        this.station = station;
+    }
+
     public RouteStation(Route route, Station station) {
         this.route = route;
         this.station = station;
