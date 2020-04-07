@@ -32,21 +32,3 @@ class ServiceInstanceRestController {
 		return this.discoveryClient.getInstances(applicationName);
 	}
 }
-
-/*@SpringBootApplication
-@EnableEurekaClient
-@RestController
-public class UserServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(UserServiceApplication.class, args);
-	}
-
-	@Autowired
-	private DiscoveryClient discoveryClient;
-
-	@RequestMapping("/service-instances/{applicationName}")
-	public List<ServiceInstance> serviceInstancesByApplicationName(
-			@PathVariable String applicationName) {
-		return this.discoveryClient.getInstances(applicationName);
-	}
-}*/
