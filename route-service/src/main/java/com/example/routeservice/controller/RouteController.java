@@ -1,14 +1,20 @@
 package com.example.routeservice.controller;
 
 import com.example.routeservice.model.Route;
+import com.example.routeservice.model.User;
 import com.example.routeservice.service.RouteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("/routes")
 public class RouteController {
+
+    @Autowired
+    private RestTemplate restTemplate;
 
     private final RouteService routeService;
 
@@ -33,7 +39,10 @@ public class RouteController {
 
     @PostMapping("")
     Route createRoute(@RequestBody Route data) {
-        return routeService.createRoute(data.getRouteName(), data.getTransportType());
+        // Hardkodiran userid
+        Integer userId = 9;
+        User user = restTemplate.getForObject("http://service-instances/user-service/user/" + userId, User.class);
+        return routeService.createRoute(data.getRouteName(), data.getTransportType(), user);
     }
 
     @PutMapping("/{id}")
