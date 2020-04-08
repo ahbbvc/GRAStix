@@ -31,6 +31,10 @@ public class StationController {
         return stationService.createStation(data.getStationName());
     }
 
+    @PutMapping("/{id}")
+    Station updateRoute(@PathVariable Integer id, @RequestBody Station data) {
+        return stationService.updateStation(id, data.getStationName());
+    }
     @DeleteMapping("/{id}")
     void deleteStation(@PathVariable Integer id) {
         stationService.deleteById(id);

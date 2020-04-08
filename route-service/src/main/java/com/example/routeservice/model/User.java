@@ -15,7 +15,7 @@ public class User {
     private Integer id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Route> routes;
 
     public User() {

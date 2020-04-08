@@ -1,5 +1,6 @@
 package com.example.routeservice.service;
 
+import com.example.routeservice.exception.InvalidTimeTableException;
 import com.example.routeservice.model.RouteStation;
 import com.example.routeservice.model.TimeTable;
 import com.example.routeservice.repository.TimeTableRepository;
@@ -25,8 +26,10 @@ public class TimeTableService {
     public TimeTable findById(Integer id) {
         return timeTableRepository.findById(id).orElseThrow(); }
 
-    public TimeTable createTimeTable(Date timeOfArrival, Date timeOfDeparture) {
-        TimeTable newTimeTable = new TimeTable(timeOfArrival, timeOfDeparture);
+    public TimeTable createTimeTable(Date timeOfArrival, Date timeOfDeparture, boolean regular) throws InvalidTimeTableException {
+        TimeTable newTimeTable = new TimeTable(timeOfArrival, timeOfDeparture, regular);
+        if(timeOfArrival.compareTo(timeOfDeparture) > 0)
+            throw new InvalidTimeTableException("Time of arrival must be before time of departure");
         return timeTableRepository.save(newTimeTable);
     }
 
@@ -39,5 +42,17 @@ public class TimeTableService {
         return timeTableRepository.save(timeTable);
     }
 
-    public void deleteById(Integer id) { timeTableRepository.deleteById(id);}
+    public TimeTable updateTimeTable(Integer id, Date timeOfArrival, Date timeOfDeparture, boolean regular) {
+               TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
+                timeTable.setTimeOfArrival(timeOfArrival);
+                timeTable.setTimeOfDeparture(timeOfDeparture);
+                timeTable.setRegular(regular);
+                return timeTableRepository.save(timeTable);
+            }
+
+    public void deleteById(Integer id) {
+       TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
+        timeTableRepository.deleteById(id);
+   }
+
 }

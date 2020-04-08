@@ -25,9 +25,9 @@ public class RouteStationController {
     }
 
     @PostMapping("")
-    RouteStation createRouteStation(@RequestParam("route_id") Integer route_id,
-                                    @RequestParam("station_id") Integer station_id) {
-        return routeStationService.createRouteStation(route_id, station_id);
+    RouteStation createRouteStation(@RequestParam("route") Integer routeId,
+                                    @RequestParam("station") Integer stationId) {
+        return routeStationService.createRouteStation(routeId, stationId);
     }
 
     @DeleteMapping("/{id}")

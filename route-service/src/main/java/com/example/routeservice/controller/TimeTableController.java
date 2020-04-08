@@ -1,5 +1,6 @@
 package com.example.routeservice.controller;
 
+import com.example.routeservice.exception.InvalidTimeTableException;
 import com.example.routeservice.model.TimeTable;
 import com.example.routeservice.service.TimeTableService;
 import org.springframework.web.bind.annotation.*;
@@ -27,13 +28,18 @@ public class TimeTableController {
     }
 
     @PostMapping("")
-    TimeTable createTimeTable(@RequestBody TimeTable data) {
-        return timeTableService.createTimeTable(data.getTimeOfArrival(), data.getTimeofDeparture());
+    TimeTable createTimeTable(@RequestBody TimeTable data) throws InvalidTimeTableException {
+        return timeTableService.createTimeTable(data.getTimeOfArrival(), data.getTimeOfDeparture(), data.isRegular());
     }
 
     @PostMapping("/addtimetable")
-    TimeTable addTimeTable(@RequestParam("timetable_id") Integer timeTableId, @RequestParam("routestation_id") Integer routeStationId) {
+    TimeTable addTimeTable(@RequestParam("timetable") Integer timeTableId, @RequestParam("routestation") Integer routeStationId) {
         return timeTableService.addTimeTable(timeTableId, routeStationId);
+    }
+
+    @PutMapping("/{id}")
+    TimeTable updateTimeTable(@PathVariable Integer id, @RequestBody TimeTable data) {
+        return timeTableService.updateTimeTable(id, data.getTimeOfArrival(), data.getTimeOfDeparture(), data.isRegular());
     }
 
     @DeleteMapping("/{id}")

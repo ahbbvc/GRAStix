@@ -1,86 +1,59 @@
 package com.example.routeservice;
 
 import com.example.routeservice.model.Route;
-import com.example.routeservice.service.RouteService;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.BDDMockito.given;
-import static org.hamcrest.Matchers.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RouteControllerTest {
     @Autowired
     private MockMvc mvc;
 
-    @MockBean
-    private RouteService routeService;
-
     @Test
+    @Order(2)
     public void getAllRoutes() throws Exception {
-        Route newRoute = new Route("A-B", "Bus");
-        List<Route> allRoutes = Arrays.asList(newRoute);
-
-        given(routeService.findAll()).willReturn(allRoutes);
-
-        mvc.perform(get("/routes")
-                .contentType(MediaType.APPLICATION_JSON))
+        mvc.perform( MockMvcRequestBuilders.get("/routes")
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].routeName", is(newRoute.getRouteName())));
+                .andExpect(jsonPath("$[*].id").isNotEmpty());
     }
 
     @Test
+    @Order(3)
     public void getRouteById() throws Exception {
-        Route newRoute = new Route("A-B", "Bus");
-        newRoute.setId(1);
-        given(routeService.findById(newRoute.getId())).willReturn(newRoute);
-
-        mvc.perform(get("/routes/1")
-                .contentType(MediaType.APPLICATION_JSON))
+        mvc.perform( MockMvcRequestBuilders
+                .get("/routes/{id}", 1)
+                .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(newRoute.getId())))
-                .andExpect(jsonPath("$.routeName", is(newRoute.getRouteName())));
+                .andExpect(jsonPath("$.id").value(1));
     }
 
     @Test
-    public void getRouteByNameAndTransportType() throws Exception {
-        /*
-        Route newRoute = new Route("A-B", "Bus");
-        List<Route> allRoutes = Arrays.asList(newRoute);
-        given(routeService.findByRouteNameAndTransportType(newRoute.getRouteName(), newRoute.getTransportType()))
-                .willReturn(allRoutes);
-        String url = "/routes?name=" + newRoute.getRouteName() + "&type="+newRoute.getTransportType();
-        mvc.perform(get(url)
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)))
-                .andExpect(jsonPath("$[0].routeName", is(newRoute.getRouteName())));
-         */
-    }
-
-    @Test
-    public void createRoute() throws Exception
-    {
+    @Order(1)
+    public void createRoute() throws Exception {
         mvc.perform( MockMvcRequestBuilders
                 .post("/routes")
-                .content(asJsonString(new Route("A-B", "Bus")))
+                .content(asJsonString(new Route(1,"A-B", "Bus")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.routeName").value("A-B"))
+                .andExpect(jsonPath("$.transportType").value("Bus"));
     }
 
     public static String asJsonString(final Object obj) {
@@ -91,11 +64,26 @@ public class RouteControllerTest {
         }
     }
 
+    @Test
+    @Order(4)
+    public void updateRoute() throws Exception
+    {
+        mvc.perform( MockMvcRequestBuilders
+                .put("/routes/{id}", 1)
+                .content(asJsonString(new Route(1, "B-C", "Tram")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.routeName").value("B-C"))
+                .andExpect(jsonPath("$.transportType").value("Tram"));
+    }
 
     @Test
-    public void deleteRouteById() throws Exception
+    @Order(5)
+    public void deleteRoute() throws Exception
     {
-        mvc.perform(MockMvcRequestBuilders.delete("/routes/{id}", 1) )
+        mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", 1) )
                 .andExpect(status().isOk());
     }
+
 }

@@ -21,10 +21,16 @@ public class RouteStation {
     private Station station;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "routeStation")
+    @OneToMany(mappedBy = "routeStation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TimeTable> timeTables = new ArrayList<>();
 
     public RouteStation() {
+    }
+
+    public RouteStation(Integer id, Route route, Station station) {
+        this.id = id;
+        this.route = route;
+        this.station = station;
     }
 
     public RouteStation(Route route, Station station) {
@@ -62,9 +68,5 @@ public class RouteStation {
 
     public void setTimeTables(List<TimeTable> timeTables) {
         this.timeTables = timeTables;
-    }
-
-    public void addTimeTable(TimeTable timeTable) {
-        this.timeTables.add(timeTable);
     }
 }

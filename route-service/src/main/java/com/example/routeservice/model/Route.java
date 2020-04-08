@@ -3,6 +3,8 @@ package com.example.routeservice.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
@@ -11,10 +13,14 @@ public class Route {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    @Column
+    @NotNull(message = "Route name cannot be null or empty")
+    @NotBlank(message = "Route name cannot be null or empty")
     private String routeName;
 
-    @Column(nullable = false)
+    @Column
+    @NotNull(message = "Transport type cannot be null or empty")
+    @NotBlank(message = "Transport type cannot be null or empty")
     private String transportType;
 
     @ManyToOne
@@ -22,10 +28,16 @@ public class Route {
     private User user;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "route", cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<RouteStation> routeStations;
 
     public Route() {
+    }
+
+    public Route(Integer id, String routeName, String transportType) {
+        this.id = id;
+        this.routeName = routeName;
+        this.transportType = transportType;
     }
 
     public Route(String routeName, String transportType) {
@@ -73,7 +85,4 @@ public class Route {
         this.routeStations = routeStations;
     }
 
-    public void addRouteStation(RouteStation routeStation) {
-        this.routeStations.add(routeStation);
-    }
 }
