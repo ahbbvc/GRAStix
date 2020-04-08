@@ -1,9 +1,12 @@
 package com.example.ticketservice.Controller;
 
 import com.example.ticketservice.Model.MonthlyTicket;
+import com.example.ticketservice.Model.RequestWraper;
 import com.example.ticketservice.Service.MTicketService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -11,6 +14,8 @@ import java.util.Optional;
 @RestController
 public class MTicketController {
     private final MTicketService mTicketService;
+    @Autowired
+    RestTemplate restTemplate;
 
     public MTicketController(MTicketService mTicketService) {
         this.mTicketService = mTicketService;
@@ -22,8 +27,8 @@ public class MTicketController {
     }
 
     @PostMapping("/monthly_tickets")
-    public MonthlyTicket newMTicket(@Validated  @RequestBody MonthlyTicket mt){
-        return mTicketService.newMTicket(mt);
+    public MonthlyTicket newMTicket(@RequestBody RequestWraper rp){
+        return mTicketService.newMTicket(rp.getUserId(), rp.getRoutes(), rp.getMonth());
     }
 
     @GetMapping("/monthly_tickets/{id}")

@@ -1,12 +1,18 @@
 package com.example.ticketservice.Controller;
 
+import com.example.ticketservice.Model.Route;
 import com.example.ticketservice.Model.SingleTicket;
+import com.example.ticketservice.Model.User;
 import com.example.ticketservice.Repository.STicketRepository;
 import com.example.ticketservice.Service.STicketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +21,11 @@ import java.util.Optional;
 @RestController
 public class STicketController {
     private final STicketService sTicketService;
-    STicketController(STicketService sTicketService) {
+    final RestTemplate restTemplate;
+
+    STicketController(STicketService sTicketService, RestTemplate restTemplate) {
         this.sTicketService= sTicketService;
+        this.restTemplate = restTemplate;
     }
     @GetMapping("/single_tickets")
     public List<SingleTicket> AllSTickets(){
@@ -30,7 +39,12 @@ public class STicketController {
 
     @GetMapping("/single_tickets/{id}")
     public SingleTicket STicketById(@PathVariable Integer id){
+
         return sTicketService.findById(id);
+        /*Integer userId = st.getUserId();
+        String url = "http://user-service/user/" + userId;
+        User u = restTemplate.exchange(url,  HttpMethod.GET, null, new ParameterizedTypeReference<User>() {}).getBody();
+        */
     }
     @DeleteMapping("/single_tickets/{id}")
     ResponseEntity<Object> DeleteSTicket(@PathVariable Integer id){
