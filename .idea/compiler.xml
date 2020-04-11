@@ -6,9 +6,9 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="user-service" />
-        <module name="route-service" />
         <module name="eureka-server" />
+        <module name="route-service" />
+        <module name="user-service" />
         <module name="ticket-service" />
       </profile>
     </annotationProcessing>
