@@ -41,7 +41,7 @@ public class RouteController {
     Route createRoute(@RequestBody Route data) {
         // Hardkodiran userid
         Integer userId = 9;
-        User user = restTemplate.getForObject("http://service-instances/user-service/user/" + userId, User.class);
+        User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
         return routeService.createRoute(data.getRouteName(), data.getTransportType(), user);
     }
 
