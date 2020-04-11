@@ -1,9 +1,6 @@
 package com.example.ticketservice;
 
-import com.example.ticketservice.Repository.MTicketRepository;
-import com.example.ticketservice.Repository.MTicketRouteRepository;
-import com.example.ticketservice.Repository.STicketRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
@@ -16,20 +13,22 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+
 import java.util.List;
 
 
 @SpringBootApplication
 @EnableEurekaClient
 public class TicketServiceApplication {
-	public static void main(String[] args) {
-		SpringApplication.run(TicketServiceApplication.class, args);
-	}
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+	public static void main(String[] args) {
+		SpringApplication.run(TicketServiceApplication.class, args);
+	}
+
 	/*@Bean
 	public CommandLineRunner demo(STicketRepository srepository, MTicketRepository mrepository, MTicketRouteRepository mrrepository) {
 		return (args) -> {

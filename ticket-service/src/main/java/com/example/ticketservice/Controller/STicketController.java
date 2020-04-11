@@ -41,10 +41,8 @@ public class STicketController {
     public SingleTicket STicketById(@PathVariable Integer id){
 
         return sTicketService.findById(id);
-        /*Integer userId = st.getUserId();
-        String url = "http://user-service/user/" + userId;
-        User u = restTemplate.exchange(url,  HttpMethod.GET, null, new ParameterizedTypeReference<User>() {}).getBody();
-        */
+        //return restTemplate.getForObject("http://user-service/user/9" , User.class);
+
     }
     @DeleteMapping("/single_tickets/{id}")
     ResponseEntity<Object> DeleteSTicket(@PathVariable Integer id){
