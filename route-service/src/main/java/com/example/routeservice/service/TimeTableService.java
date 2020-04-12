@@ -14,6 +14,7 @@ import java.util.List;
 public class TimeTableService {
 
     private final TimeTableRepository timeTableRepository;
+
     @Autowired
     private RouteStationService routeStationService;
 
@@ -36,22 +37,22 @@ public class TimeTableService {
     public TimeTable addTimeTable(Integer timeTableId, Integer routeStationId) {
         TimeTable timeTable = findById(timeTableId);
         RouteStation routeStation = routeStationService.findById(routeStationId);
-
         timeTable.setRouteStation(routeStation);
-
         return timeTableRepository.save(timeTable);
     }
 
-    public TimeTable updateTimeTable(Integer id, Date timeOfArrival, Date timeOfDeparture, boolean regular) {
-               TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
-                timeTable.setTimeOfArrival(timeOfArrival);
-                timeTable.setTimeOfDeparture(timeOfDeparture);
-                timeTable.setRegular(regular);
-                return timeTableRepository.save(timeTable);
-            }
+    public TimeTable updateTimeTable(Integer id, Date timeOfArrival, Date timeOfDeparture, boolean regular) throws InvalidTimeTableException {
+        TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
+        if(timeOfArrival.compareTo(timeOfDeparture) > 0)
+            throw new InvalidTimeTableException("Time of arrival must be before time of departure");
+        timeTable.setTimeOfArrival(timeOfArrival);
+        timeTable.setTimeOfDeparture(timeOfDeparture);
+        timeTable.setRegular(regular);
+        return timeTableRepository.save(timeTable);
+    }
 
     public void deleteById(Integer id) {
-       TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
+        TimeTable timeTable = timeTableRepository.findById(id).orElseThrow();
         timeTableRepository.deleteById(id);
    }
 

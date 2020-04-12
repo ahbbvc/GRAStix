@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -38,15 +39,15 @@ public class RouteController {
     }
 
     @PostMapping("")
-    Route createRoute(@RequestBody Route data) {
+    Route createRoute(@Valid @RequestBody Route data) {
         // Hardkodiran userid
-        Integer userId = 9;
-        User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
-        return routeService.createRoute(data.getRouteName(), data.getTransportType(), user);
+        //Integer userId = 9;
+        //User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
+        return routeService.createRoute(data.getRouteName(), data.getTransportType());
     }
 
     @PutMapping("/{id}")
-    Route updateRoute(@PathVariable Integer id, @RequestBody Route data) {
+    Route updateRoute(@PathVariable Integer id, @Valid @RequestBody Route data) {
         return routeService.updateRoute(id, data.getRouteName(), data.getTransportType());
     }
 
