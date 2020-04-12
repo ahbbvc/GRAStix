@@ -1,13 +1,13 @@
 package com.example.ticketservice.Controller;
 
-import com.example.ticketservice.Model.MonthlyTicket;
-import com.example.ticketservice.Model.RequestWraper;
+import com.example.ticketservice.Model.*;
 import com.example.ticketservice.Service.MTicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,8 +27,15 @@ public class MTicketController {
     }
 
     @PostMapping("/monthly_tickets")
-    public MonthlyTicket newMTicket(@RequestBody RequestWraper rp){
-        return mTicketService.newMTicket(rp.getUserId(), rp.getRoutes(), rp.getMonth());
+    public MTicketResponseWrapper newMTicket(@RequestBody RequestWraper rp){
+        MonthlyTicket mt =  mTicketService.newMTicket(rp.getUserId(), rp.getRoutes(), rp.getMonth());
+        User u  = restTemplate.getForObject("http://user-service/user/" + mt.getUserId() , User.class);
+        List<Route> routes = new ArrayList<Route>();
+        for(MTicketRoute mtr : mt.getRoutes()){
+            Route r = restTemplate.getForObject("http://route-service/routes/" + mtr.getRoute_id(), Route.class);
+            routes.add(r);
+        }
+        return new MTicketResponseWrapper(mt.getId(), u,routes, mt.getValidated(), mt.getMonth()) ;
     }
 
     @GetMapping("/monthly_tickets/{id}")
@@ -37,8 +44,19 @@ public class MTicketController {
     }
 
     @GetMapping(value = "/monthly_tickets", params = "user_id")
-    public List<MonthlyTicket> UserMTickets(@RequestParam("user_id") Integer userId){
-        return mTicketService.findUserMickets(userId);
+    public List<MTicketResponseWrapper> UserMTickets(@RequestParam("user_id") Integer userId){
+        List<MonthlyTicket> mtickets =  mTicketService.findUserMickets(userId);
+        List<MTicketResponseWrapper> mts = new ArrayList<MTicketResponseWrapper>();
+        for (MonthlyTicket mt : mtickets){
+            User u  = restTemplate.getForObject("http://user-service/user/" + mt.getUserId() , User.class);
+            List<Route> routes = new ArrayList<Route>();
+            for(MTicketRoute mtr : mt.getRoutes()){
+                Route r = restTemplate.getForObject("http://route-service/routes/" + mtr.getRoute_id(), Route.class);
+                routes.add(r);
+            }
+            mts.add(new MTicketResponseWrapper(mt.getId(),u,routes, mt.getValidated(), mt.getMonth()));
+        }
+        return mts;
     }
     @GetMapping(value = "/monthly_tickets", params = { "user_id" ,"validated"})
     public List<MonthlyTicket> ValidatedMTickets(@RequestParam("user_id") Integer userId, @RequestParam("validated") Boolean validated){

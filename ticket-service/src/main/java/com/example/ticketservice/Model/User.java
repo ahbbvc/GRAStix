@@ -3,20 +3,20 @@ package com.example.ticketservice.Model;
 import javax.persistence.*;
 import java.util.Date;
 
-@Entity
+
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(nullable = false)
+    //@Column(nullable = false)
     private String firstName;
 
-    @Column(nullable = false)
+    // @Column(nullable = false)
     private String lastName;
 
-    @Column(nullable = false)
+   /* @Column(nullable = false)
     private Date birthDate;
 
     @Column(nullable = false)
@@ -28,23 +28,23 @@ public class User {
     private String cardNumber;
     private String cvv;
     private Date expiryDate;
-    private String status;
+    private String status;*/
 
     public User() {}
 
-    public User(String firstName, String lastName, Date birthDate, String email, String password, String cardNumber,
-                String cvv, Date expiryDate, String status) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.birthDate = birthDate;
-        this.email = email;
-        this.password = password;   //dodati hashiranje passworda
-        this.cardNumber = cardNumber;   //isto
-        this.cvv = cvv;
-        this.expiryDate = expiryDate;
-        this.status = status;
-    }
-
+    /* public User(String firstName, String lastName, Date birthDate, String email, String password, String cardNumber,
+                 String cvv, Date expiryDate, String status) {
+         this.firstName = firstName;
+         this.lastName = lastName;
+         this.birthDate = birthDate;
+         this.email = email;
+         this.password = password;   //dodati hashiranje passworda
+         this.cardNumber = cardNumber;   //isto
+         this.cvv = cvv;
+         this.expiryDate = expiryDate;
+         this.status = status;
+     }
+ */
     @Override
     public String toString() {
         return String.format(
@@ -75,7 +75,7 @@ public class User {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
-
+/*
     public Date getBirthDate() {
         return birthDate;
     }
@@ -131,5 +131,5 @@ public class User {
     public void setStatus(String status) {
         this.status = status;
     }
-
+*/
 }

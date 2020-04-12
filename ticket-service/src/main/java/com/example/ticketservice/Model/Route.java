@@ -7,21 +7,20 @@ import java.util.List;
 
 
 public class Route {
+    @Id
     private Integer id;
 
     private String routeName;
 
     private String transportType;
-    User user;
 
     public Route() {
     }
 
-    public Route(Integer id, String routeName, String transportType, User user ) {
+    public Route(Integer id, String routeName, String transportType ) {
         this.id = id;
         this.routeName = routeName;
         this.transportType = transportType;
-        this.user = user;
 
     }
 
