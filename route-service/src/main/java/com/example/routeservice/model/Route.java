@@ -14,13 +14,13 @@ public class Route {
     private Integer id;
 
     @Column
-    @NotNull(message = "Route name cannot be null or empty")
-    @NotBlank(message = "Route name cannot be null or empty")
+    @NotNull(message = "Route name cannot be null")
+    @NotBlank(message = "Route name cannot be empty")
     private String routeName;
 
     @Column
-    @NotNull(message = "Transport type cannot be null or empty")
-    @NotBlank(message = "Transport type cannot be null or empty")
+    @NotNull(message = "Transport type cannot be null")
+    @NotBlank(message = "Transport type cannot be empty")
     private String transportType;
 
     @ManyToOne
@@ -34,13 +34,13 @@ public class Route {
     public Route() {
     }
 
-    public Route(Integer id, String routeName, String transportType) {
-        this.id = id;
+    public Route(String routeName, String transportType) {
         this.routeName = routeName;
         this.transportType = transportType;
     }
 
-    public Route(String routeName, String transportType) {
+    public Route(Integer id, String routeName, String transportType) {
+        this.id = id;
         this.routeName = routeName;
         this.transportType = transportType;
     }

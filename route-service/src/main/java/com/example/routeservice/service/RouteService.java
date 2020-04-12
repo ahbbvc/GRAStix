@@ -29,9 +29,8 @@ public class RouteService {
         return routeRepository.findByRouteNameAndTransportType(routeName, transportType);
     }
 
-    public Route createRoute(String routeName, String transportType, User user) {
+    public Route createRoute(String routeName, String transportType) {
         Route newRoute = new Route(routeName, transportType);
-        newRoute.setUser(user);
         return routeRepository.save(newRoute);
     }
 

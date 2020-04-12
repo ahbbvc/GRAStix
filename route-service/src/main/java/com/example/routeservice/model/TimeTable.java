@@ -1,6 +1,7 @@
 package com.example.routeservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
 import javax.validation.constraints.Future;
@@ -14,14 +15,16 @@ public class TimeTable {
     private Integer id;
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-M-yyyy hh:mm:ss")
     @NotNull(message = "Time of arrival cannot be null")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonDeserialize(using = CustomJsonDeserializer.class)
     @Future(message = "Time of arrival must be in the future")
     private Date timeOfArrival;
 
     @Column
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-M-yyyy hh:mm:ss")
     @NotNull(message = "Time of departure cannot be null")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonDeserialize(using = CustomJsonDeserializer.class)
     @Future(message = "Time of departure must be in the future")
     private Date timeOfDeparture;
 

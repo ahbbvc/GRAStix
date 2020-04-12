@@ -14,8 +14,8 @@ public class Station {
     private Integer id;
 
     @Column
-    @NotNull(message = "Station name cannot be null or empty")
-    @NotBlank(message = "Station name cannot be null or empty")
+    @NotNull(message = "Station name cannot be null")
+    @NotBlank(message = "Station name cannot be empty")
     private String stationName;
 
     @JsonIgnore
@@ -25,12 +25,12 @@ public class Station {
     public Station() {
     }
 
-    public Station(Integer id, String stationName) {
-        this.id = id;
+    public Station(String stationName) {
         this.stationName = stationName;
     }
 
-    public Station(String stationName) {
+    public Station(Integer id, String stationName) {
+        this.id = id;
         this.stationName = stationName;
     }
 

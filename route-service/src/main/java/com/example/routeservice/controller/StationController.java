@@ -4,6 +4,7 @@ import com.example.routeservice.model.Station;
 import com.example.routeservice.service.StationService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 @RestController
@@ -27,16 +28,18 @@ public class StationController {
     }
 
     @PostMapping("")
-    Station createStation(@RequestBody Station data) {
+    Station createStation(@Valid @RequestBody Station data) {
         return stationService.createStation(data.getStationName());
     }
 
     @PutMapping("/{id}")
-    Station updateRoute(@PathVariable Integer id, @RequestBody Station data) {
+    Station updateRoute(@PathVariable Integer id, @Valid @RequestBody Station data) {
         return stationService.updateStation(id, data.getStationName());
     }
+
     @DeleteMapping("/{id}")
     void deleteStation(@PathVariable Integer id) {
         stationService.deleteById(id);
     }
+
 }

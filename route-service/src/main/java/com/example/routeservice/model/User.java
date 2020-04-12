@@ -21,6 +21,10 @@ public class User {
     public User() {
     }
 
+    public User(Integer id) {
+        this.id = id;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -29,4 +33,11 @@ public class User {
         return routes;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
+    }
 }
