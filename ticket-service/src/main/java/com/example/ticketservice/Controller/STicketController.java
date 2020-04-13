@@ -39,10 +39,10 @@ public class STicketController {
         return new STicketResponseWraper(st2.getId(), u, r, st2.getValidated(), st2.getTime());
     }
     @GetMapping("/single_tickets/{id}")
-    public User STicketById(@PathVariable Integer id){
+    public SingleTicket STicketById(@PathVariable Integer id){
 
-        //return sTicketService.findById(id);
-        return restTemplate.getForObject("http://user-service/user/9" , User.class);
+        return sTicketService.findById(id);
+        //return restTemplate.getForObject("http://user-service/user/9" , User.class);
 
     }
     @DeleteMapping("/single_tickets/{id}")
