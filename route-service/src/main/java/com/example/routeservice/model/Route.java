@@ -39,12 +39,6 @@ public class Route {
         this.transportType = transportType;
     }
 
-    public Route(Integer id, String routeName, String transportType) {
-        this.id = id;
-        this.routeName = routeName;
-        this.transportType = transportType;
-    }
-
     public Integer getId() {
         return id;
     }

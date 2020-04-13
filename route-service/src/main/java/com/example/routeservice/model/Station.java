@@ -29,11 +29,6 @@ public class Station {
         this.stationName = stationName;
     }
 
-    public Station(Integer id, String stationName) {
-        this.id = id;
-        this.stationName = stationName;
-    }
-
     public Integer getId() {
         return id;
     }
