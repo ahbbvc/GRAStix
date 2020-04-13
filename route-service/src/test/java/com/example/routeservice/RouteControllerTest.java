@@ -2,15 +2,13 @@ package com.example.routeservice;
 
 import com.example.routeservice.model.Route;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.MethodOrderer;
-import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -18,14 +16,14 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class RouteControllerTest {
+
     @Autowired
     private MockMvc mvc;
 
     @Test
-    @Order(2)
     public void getAllRoutes() throws Exception {
+        createRoute();
         mvc.perform( MockMvcRequestBuilders.get("/routes")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -33,44 +31,85 @@ public class RouteControllerTest {
     }
 
     @Test
-    @Order(3)
     public void getRouteById() throws Exception {
+        Route route = createRoute();
         mvc.perform( MockMvcRequestBuilders
-                .get("/routes/{id}", 1)
+                .get("/routes/{id}", route.getId())
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id").value(1));
+                .andExpect(jsonPath("$.id").value(route.getId()));
     }
 
     @Test
-    @Order(1)
-    public void createRoute() throws Exception {
+    public void getRouteByIdNoValue() throws Exception {
+        Route route = deleteRoute();
         mvc.perform( MockMvcRequestBuilders
+                .get("/routes/{id}", route.getId())
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isInternalServerError());
+    }
+
+    @Test
+    public void getRouteByIdBadRequest() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
+                .get("/routes/{id}", "abc")
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void getRoutesByNameAndType() throws Exception {
+        Route route = createRoute();
+        String url = "/routes/search?name=" + route.getRouteName() + "&type=" + route.getTransportType();
+        mvc.perform( MockMvcRequestBuilders
+                .get(url)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[*].id").isNotEmpty());
+    }
+
+    @Test
+    public void getRoutesByNameAndTypeBadRequest() throws Exception {
+        String url = "/routes/search?name=bla&abc=bla";
+        mvc.perform( MockMvcRequestBuilders
+                .get(url)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public Route createRoute() throws Exception {
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
                 .post("/routes")
-                .content(asJsonString(new Route(1,"A-B", "Bus")))
+                .content(asJsonString(new Route("A-B", "Bus")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.routeName").value("A-B"))
-                .andExpect(jsonPath("$.transportType").value("Bus"));
-    }
+                .andExpect(jsonPath("$.transportType").value("Bus"))
+                .andReturn();
 
-    public static String asJsonString(final Object obj) {
-        try {
-            return new ObjectMapper().writeValueAsString(obj);
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, Route.class);
     }
 
     @Test
-    @Order(4)
-    public void updateRoute() throws Exception
-    {
+    public void createRouteBadRequest() throws Exception {
         mvc.perform( MockMvcRequestBuilders
-                .put("/routes/{id}", 1)
-                .content(asJsonString(new Route(1, "B-C", "Tram")))
+                .post("/routes")
+                .content(asJsonString(new Route("A-B", "")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public void updateRoute() throws Exception {
+        Route route = createRoute();
+        mvc.perform( MockMvcRequestBuilders
+                .put("/routes/{id}", route.getId())
+                .content(asJsonString(new Route("B-C", "Tram")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -79,11 +118,37 @@ public class RouteControllerTest {
     }
 
     @Test
-    @Order(5)
-    public void deleteRoute() throws Exception
-    {
-        mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", 1) )
+    public void updateRouteBadRequest() throws Exception {
+        Route route = createRoute();
+        mvc.perform( MockMvcRequestBuilders
+                .put("/routes/{id}", route.getId())
+                .content(asJsonString(new Route("", "")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
+    }
+
+    @Test
+    public Route deleteRoute() throws Exception {
+        Route route = createRoute();
+        mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", route.getId()) )
                 .andExpect(status().isOk());
+        return route;
+    }
+
+    @Test
+    public void deleteRouteNoValue() throws Exception {
+        Route route = deleteRoute();
+        mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", route.getId()) )
+                .andExpect(status().isInternalServerError());
+    }
+
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

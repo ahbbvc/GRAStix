@@ -66,7 +66,7 @@ public class TimeTableControllerTest {
 
         mvc.perform( MockMvcRequestBuilders
                 .post("/timetables")
-                .content(asJsonString(new TimeTable(1, cal1.getTime(),
+                .content(asJsonString(new TimeTable(cal1.getTime(),
                         cal2.getTime(),true)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
@@ -107,7 +107,7 @@ public class TimeTableControllerTest {
 
         mvc.perform( MockMvcRequestBuilders
                 .put("/timetables/{id}", 1)
-                .content(asJsonString(new TimeTable(1, cal1.getTime(),
+                .content(asJsonString(new TimeTable(cal1.getTime(),
                         cal2.getTime(), true)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
