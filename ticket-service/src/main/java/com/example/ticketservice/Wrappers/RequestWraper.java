@@ -1,4 +1,4 @@
-package com.example.ticketservice.Model;
+package com.example.ticketservice.Wrappers;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

@@ -15,8 +15,6 @@ public class MonthlyTicket {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    /*@ManyToOne
-    @JoinColumn(name= "user_id")*/
     @NotNull(message = "User can not be null")
     private Integer userId;
     @JsonManagedReference

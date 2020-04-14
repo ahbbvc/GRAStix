@@ -1,12 +1,8 @@
 package com.example.ticketservice.Controller;
 
 import com.example.ticketservice.Model.*;
-import com.example.ticketservice.Repository.STicketRepository;
 import com.example.ticketservice.Service.STicketService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
+import com.example.ticketservice.Wrappers.STicketResponseWraper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -32,21 +28,19 @@ public class STicketController {
     }
 
     @PostMapping("/single_tickets")
-    public STicketResponseWraper newSTicket(@Validated @RequestBody SingleTicket st){
-        SingleTicket st2 =sTicketService.newSTicket(st);
-        User u  = restTemplate.getForObject("http://user-service/user/" + st2.getUserId() , User.class);
-        Route r = restTemplate.getForObject("http://route-service/routes/" + st2.getRouteId(), Route.class);
-        return new STicketResponseWraper(st2.getId(), u, r, st2.getValidated(), st2.getTime());
+    public STicketResponseWraper newSTicket(@Validated @RequestBody SingleTicket st) throws Exception{
+            User u = restTemplate.getForObject("http://user-service/user/" + st.getUserId(), User.class);
+
+            Route r = restTemplate.getForObject("http://route-service/routes/" + st.getRouteId(), Route.class);
+            SingleTicket st2 = sTicketService.newSTicket(st);
+            return new STicketResponseWraper(st2.getId(), u, r, st2.getValidated(), st2.getTime());
     }
     @GetMapping("/single_tickets/{id}")
-    public SingleTicket STicketById(@PathVariable Integer id){
-
+    public ResponseEntity<SingleTicket> STicketById(@PathVariable Integer id) throws  Exception{
         return sTicketService.findById(id);
-        //return restTemplate.getForObject("http://user-service/user/9" , User.class);
-
     }
     @DeleteMapping("/single_tickets/{id}")
-    ResponseEntity<Object> DeleteSTicket(@PathVariable Integer id){
+    ResponseEntity<Object> DeleteSTicket(@PathVariable Integer id) throws Exception{
         return sTicketService.deleteSTicket(id);
     }
 
@@ -54,8 +48,8 @@ public class STicketController {
     public List<STicketResponseWraper> UserSTickets(@RequestParam("user_id") Integer userId){
         List<SingleTicket> stickets =  sTicketService.findUserSTickets(userId);
         List<STicketResponseWraper> sts =  new ArrayList<STicketResponseWraper>();
+        User u  = restTemplate.getForObject("http://user-service/user/" + userId , User.class);
         for (SingleTicket st : stickets){
-            User u  = restTemplate.getForObject("http://user-service/user/" + st.getUserId() , User.class);
             Route r = restTemplate.getForObject("http://route-service/routes/" + st.getRouteId(), Route.class);
             sts.add(new STicketResponseWraper(st.getId(), u, r, st.getValidated(), st.getTime()));
         }
@@ -78,7 +72,7 @@ public class STicketController {
     }
 
     @PutMapping("/single_tickets/validate/{id}")
-    public Optional<SingleTicket> ValidateTicket(@PathVariable Integer id){
+    public Optional<SingleTicket> ValidateTicket(@PathVariable Integer id) throws Exception{
         return sTicketService.validateSTicket(id);
     }
 
