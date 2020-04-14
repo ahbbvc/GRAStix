@@ -1,9 +1,7 @@
 package com.example.routeservice.service;
 
 import com.example.routeservice.model.Route;
-import com.example.routeservice.model.User;
 import com.example.routeservice.repository.RouteRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -46,4 +44,5 @@ public class RouteService {
         Route route = routeRepository.findById(id).orElseThrow();
         routeRepository.deleteById(id);
     }
+
 }

@@ -6,7 +6,6 @@ import com.example.routeservice.service.TimeTableService;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import javax.naming.Binding;
 import javax.validation.Valid;
 import java.util.List;
 

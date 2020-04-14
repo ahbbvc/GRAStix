@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class Route {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -35,12 +36,6 @@ public class Route {
     }
 
     public Route(String routeName, String transportType) {
-        this.routeName = routeName;
-        this.transportType = transportType;
-    }
-
-    public Route(Integer id, String routeName, String transportType) {
-        this.id = id;
         this.routeName = routeName;
         this.transportType = transportType;
     }

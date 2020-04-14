@@ -46,4 +46,5 @@ public class RouteStationService {
         RouteStation routeStation = routeStationRepository.findById(id).orElseThrow();
         routeStationRepository.deleteById(id);
     }
+
 }

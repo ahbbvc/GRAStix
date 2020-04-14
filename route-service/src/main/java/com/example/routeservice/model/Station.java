@@ -9,6 +9,7 @@ import java.util.List;
 
 @Entity
 public class Station {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -26,11 +27,6 @@ public class Station {
     }
 
     public Station(String stationName) {
-        this.stationName = stationName;
-    }
-
-    public Station(Integer id, String stationName) {
-        this.id = id;
         this.stationName = stationName;
     }
 
