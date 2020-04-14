@@ -12,7 +12,7 @@ Online prodaja karata za gradski prevoz
 
 * Java verzija 13/14
 * Samo jedan korisnik može biti povezan na bazu
-* Potrebno je pokrenuti sve servise za pokretanje aplikacije i testova u ticket-service
+* Potrebno je pokrenuti sve servise prije pokretanja aplikacije i testova u ticket-service
 
 ### Pokretanje aplikacije
 
