@@ -13,6 +13,7 @@ Online prodaja karata za gradski prevoz
 * Java verzija 8+
 * Samo jedan korisnik može biti povezan na bazu
 * Potrebno je pokrenuti sve servise prije pokretanja aplikacije i testova u ticket-service
+* Testove za route-service treba pokrenuti prije testova za ticket-service (zbog dodavanja unosa u bazu)
 
 ### Pokretanje aplikacije
 
@@ -24,5 +25,4 @@ Prvo pokrenuti eureka-server
 
 Izvršiti komandu: ```mvn test``` u folderu servisa
 
-Napomena: Testove za route-service treba pokrenuti prije testova za ticket-service (zbog dodavanja unosa u bazu)
 
