@@ -23,7 +23,7 @@ public class RouteControllerTest {
 
     @Test
     public void getAllRoutes() throws Exception {
-        createRoute();
+        newRoute();
         mvc.perform( MockMvcRequestBuilders.get("/routes")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -32,7 +32,7 @@ public class RouteControllerTest {
 
     @Test
     public void getRouteById() throws Exception {
-        Route route = createRoute();
+        Route route = newRoute();
         mvc.perform( MockMvcRequestBuilders
                 .get("/routes/{id}", route.getId())
                 .accept(MediaType.APPLICATION_JSON))
@@ -59,7 +59,7 @@ public class RouteControllerTest {
 
     @Test
     public void getRoutesByNameAndType() throws Exception {
-        Route route = createRoute();
+        Route route = newRoute();
         String url = "/routes/search?name=" + route.getRouteName() + "&type=" + route.getTransportType();
         mvc.perform( MockMvcRequestBuilders
                 .get(url)
@@ -78,8 +78,8 @@ public class RouteControllerTest {
     }
 
     @Test
-    public Route createRoute() throws Exception {
-        MvcResult result = mvc.perform( MockMvcRequestBuilders
+    public void createRoute() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
                 .post("/routes")
                 .content(asJsonString(new Route("A-B", "Bus")))
                 .contentType(MediaType.APPLICATION_JSON)
@@ -87,11 +87,7 @@ public class RouteControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
                 .andExpect(jsonPath("$.routeName").value("A-B"))
-                .andExpect(jsonPath("$.transportType").value("Bus"))
-                .andReturn();
-
-        String json = result.getResponse().getContentAsString();
-        return new ObjectMapper().readValue(json, Route.class);
+                .andExpect(jsonPath("$.transportType").value("Bus"));
     }
 
     @Test
@@ -106,7 +102,7 @@ public class RouteControllerTest {
 
     @Test
     public void updateRoute() throws Exception {
-        Route route = createRoute();
+        Route route = newRoute();
         mvc.perform( MockMvcRequestBuilders
                 .put("/routes/{id}", route.getId())
                 .content(asJsonString(new Route("B-C", "Tram")))
@@ -119,7 +115,7 @@ public class RouteControllerTest {
 
     @Test
     public void updateRouteBadRequest() throws Exception {
-        Route route = createRoute();
+        Route route = newRoute();
         mvc.perform( MockMvcRequestBuilders
                 .put("/routes/{id}", route.getId())
                 .content(asJsonString(new Route("", "")))
@@ -130,7 +126,7 @@ public class RouteControllerTest {
 
     @Test
     public Route deleteRoute() throws Exception {
-        Route route = createRoute();
+        Route route = newRoute();
         mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", route.getId()) )
                 .andExpect(status().isOk());
         return route;
@@ -141,6 +137,19 @@ public class RouteControllerTest {
         Route route = deleteRoute();
         mvc.perform( MockMvcRequestBuilders.delete("/routes/{id}", route.getId()) )
                 .andExpect(status().isInternalServerError());
+    }
+
+    public Route newRoute() throws Exception {
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
+                .post("/routes")
+                .content(asJsonString(new Route("A-B", "Bus")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, Route.class);
     }
 
     public static String asJsonString(final Object obj) {

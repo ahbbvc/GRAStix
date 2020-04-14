@@ -23,7 +23,7 @@ public class StationControllerTest {
 
     @Test
     public void getAllStations() throws Exception {
-        createStation();
+        newStation();
         mvc.perform( MockMvcRequestBuilders.get("/stations")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -32,7 +32,7 @@ public class StationControllerTest {
 
     @Test
     public void getStationById() throws Exception {
-        Station station = createStation();
+        Station station = newStation();
         mvc.perform( MockMvcRequestBuilders
                 .get("/stations/{id}", station.getId())
                 .accept(MediaType.APPLICATION_JSON))
@@ -58,19 +58,15 @@ public class StationControllerTest {
     }
 
     @Test
-    public Station createStation() throws Exception {
-        MvcResult result = mvc.perform( MockMvcRequestBuilders
+    public void createStation() throws Exception {
+        mvc.perform( MockMvcRequestBuilders
                 .post("/stations")
                 .content(asJsonString(new Station("Ilidza")))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                .andExpect(jsonPath("$.stationName").value("Ilidza"))
-                .andReturn();
-
-        String json = result.getResponse().getContentAsString();
-        return new ObjectMapper().readValue(json, Station.class);
+                .andExpect(jsonPath("$.stationName").value("Ilidza"));
     }
 
     @Test
@@ -85,7 +81,7 @@ public class StationControllerTest {
 
     @Test
     public void updateStation() throws Exception {
-        Station station = createStation();
+        Station station = newStation();
         mvc.perform( MockMvcRequestBuilders
                 .put("/stations/{id}", station.getId())
                 .content(asJsonString(new Station("Bascarsija")))
@@ -97,7 +93,7 @@ public class StationControllerTest {
 
     @Test
     public void updateStationBadRequest() throws Exception {
-        Station station = createStation();
+        Station station = newStation();
         mvc.perform( MockMvcRequestBuilders
                 .put("/stations/{id}", station.getId())
                 .content(asJsonString(new Station("")))
@@ -108,7 +104,7 @@ public class StationControllerTest {
 
     @Test
     public Station deleteStation() throws Exception {
-        Station station = createStation();
+        Station station = newStation();
         mvc.perform( MockMvcRequestBuilders.delete("/stations/{id}", station.getId()) )
                 .andExpect(status().isOk());
         return station;
@@ -119,6 +115,19 @@ public class StationControllerTest {
         Station station = deleteStation();
         mvc.perform( MockMvcRequestBuilders.delete("/stations/{id}", station.getId()) )
                 .andExpect(status().isInternalServerError());
+    }
+
+    public Station newStation() throws Exception {
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
+                .post("/stations")
+                .content(asJsonString(new Station("Ilidza")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, Station.class);
     }
 
     public static String asJsonString(final Object obj) {

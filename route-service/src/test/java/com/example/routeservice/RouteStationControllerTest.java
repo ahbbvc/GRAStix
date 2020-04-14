@@ -19,13 +19,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class RouteStationControllerTest {
-/*
+
     @Autowired
     private MockMvc mvc;
 
     @Test
     public void getAllRouteStations() throws Exception {
-        createRouteStation();
+        newRouteStation();
         mvc.perform( MockMvcRequestBuilders.get("/routestations")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -34,7 +34,7 @@ public class RouteStationControllerTest {
 
     @Test
     public void getRouteStationById() throws Exception {
-        RouteStation routeStation = createRouteStation();
+        RouteStation routeStation = newRouteStation();
         mvc.perform( MockMvcRequestBuilders
                 .get("/routestations/{id}", routeStation.getId())
                 .accept(MediaType.APPLICATION_JSON))
@@ -60,46 +60,35 @@ public class RouteStationControllerTest {
     }
 
     @Test
-    public RouteStation createRouteStation() throws Exception {
-        MvcResult result1 = mvc.perform( MockMvcRequestBuilders
-                .post("/routes")
-                .content(asJsonString(new Route("A-B", "Bus")))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        String json1 = result1.getResponse().getContentAsString();
-        Route route = new ObjectMapper().readValue(json1, Route.class);
-
-        MvcResult result2 = mvc.perform( MockMvcRequestBuilders
-                .post("/stations")
-                .content(asJsonString(new Station("Ilidza")))
-                .contentType(MediaType.APPLICATION_JSON)
-                .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andReturn();
-        String json2 = result2.getResponse().getContentAsString();
-        Station station = new ObjectMapper().readValue(json2, Station.class);
-
-        String url = "/routestations?route=7&station=3";// + route.getId() + "&station=" + station.getId();
-        MvcResult result = mvc.perform( MockMvcRequestBuilders
+    public void createRouteStation() throws Exception {
+        Route route = newRoute();
+        Station station = newStation();
+        String url = "/routestations?route=" + route.getId() + "&station=" + station.getId();
+        mvc.perform( MockMvcRequestBuilders
                 .post(url)
                 .content(asJsonString(new RouteStation(route, station)))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").exists())
-                //.andExpect(jsonPath("$.route_id").value(route.getId()))
-                //.andExpect(jsonPath("$.station_id").value(station.getId()))
-                .andReturn();
+                .andExpect(jsonPath("$.route.id").value(route.getId()))
+                .andExpect(jsonPath("$.station.id").value(station.getId()));
+    }
 
-        String json = result.getResponse().getContentAsString();
-        return new ObjectMapper().readValue(json, RouteStation.class);
+    @Test
+    public void createRouteStationBadRequest() throws Exception {
+        String url = "/routestations?route=abc&station=abc";
+        mvc.perform( MockMvcRequestBuilders
+                .post(url)
+                .content(asJsonString(new RouteStation(null, null)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isBadRequest());
     }
 
     @Test
     public RouteStation deleteRouteStation() throws Exception {
-        RouteStation routeStation = createRouteStation();
+        RouteStation routeStation = newRouteStation();
         mvc.perform( MockMvcRequestBuilders.delete("/routestations/{id}", routeStation.getId()) )
                 .andExpect(status().isOk());
         return routeStation;
@@ -108,8 +97,50 @@ public class RouteStationControllerTest {
     @Test
     public void deleteRouteStationNoValue() throws Exception {
         RouteStation routeStation = deleteRouteStation();
-        mvc.perform( MockMvcRequestBuilders.delete("/routeStations/{id}", routeStation.getId()) )
+        mvc.perform( MockMvcRequestBuilders.delete("/routestations/{id}", routeStation.getId()) )
                 .andExpect(status().isInternalServerError());
+    }
+
+    public RouteStation newRouteStation() throws Exception {
+        Route route = newRoute();
+        Station station = newStation();
+        String url = "/routestations?route=" + route.getId() + "&station=" + station.getId();
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
+                .post(url)
+                .content(asJsonString(new RouteStation(route, station)))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, RouteStation.class);
+    }
+
+    public Route newRoute() throws Exception {
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
+                .post("/routes")
+                .content(asJsonString(new Route("A-B", "Bus")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, Route.class);
+    }
+
+    public Station newStation() throws Exception {
+        MvcResult result = mvc.perform( MockMvcRequestBuilders
+                .post("/stations")
+                .content(asJsonString(new Station("Ilidza")))
+                .contentType(MediaType.APPLICATION_JSON)
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andReturn();
+
+        String json = result.getResponse().getContentAsString();
+        return new ObjectMapper().readValue(json, Station.class);
     }
 
     public static String asJsonString(final Object obj) {
@@ -119,5 +150,5 @@ public class RouteStationControllerTest {
             throw new RuntimeException(e);
         }
     }
-*/
+
 }
