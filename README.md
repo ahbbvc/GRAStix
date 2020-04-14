@@ -10,7 +10,7 @@ Online prodaja karata za gradski prevoz
 
 ### Preduslovi
 
-* Java verzija 13/14
+* Java verzija 8+
 * Samo jedan korisnik može biti povezan na bazu
 * Potrebno je pokrenuti sve servise prije pokretanja aplikacije i testova u ticket-service
 
