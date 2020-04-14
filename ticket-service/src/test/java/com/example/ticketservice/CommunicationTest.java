@@ -28,7 +28,38 @@ public class CommunicationTest {
     @Autowired
     private MockMvc mvc;
 
+    /*
+   U bazama drugi mikroservisa ima:
+   Rute:
+   {
+       "id": 3,
+       "routeName": "A-B",
+       "transportType": "Tram",
+       "user": null
+   },
+   {
+       "id": 9,
+       "routeName": "A-B",
+       "transportType": "Bus",
+       "user": null
+   }
 
+   User :
+   {
+       "id": 11,
+       "firstName": "Naida",
+       "lastName": "Hanjalic",
+       "birthDate": "1998-02-22T00:00:00.000+0000",
+       "email": "nhanjalic@mail.com",
+       "password": "password111",
+       "cardNumber": "123456789",
+       "cvv": "123",
+       "expiryDate": "2020-03-28T00:17:13.417+0000",
+       "status": "student"
+   }
+
+
+    */
     @Test
     public void findSTicketById() throws Exception{
         mvc.perform(MockMvcRequestBuilders.get("/single_tickets/2")

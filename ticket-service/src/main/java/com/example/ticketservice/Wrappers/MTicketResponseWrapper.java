@@ -1,4 +1,7 @@
-package com.example.ticketservice.Model;
+package com.example.ticketservice.Wrappers;
+
+import com.example.ticketservice.Model.Route;
+import com.example.ticketservice.Model.User;
 
 import java.util.List;
 

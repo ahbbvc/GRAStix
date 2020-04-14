@@ -1,29 +1,18 @@
 package com.example.ticketservice;
 
 
-import com.example.ticketservice.Controller.STicketController;
-import com.example.ticketservice.Exeption.ExeptionHandler;
-import com.example.ticketservice.Model.STicketResponseWraper;
-import com.example.ticketservice.Model.SingleTicket;
-import com.example.ticketservice.Service.STicketService;
+import com.example.ticketservice.Wrappers.STicketResponseWraper;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.json.JSONObject;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import java.util.Arrays;
-import java.util.List;
-
-import static org.mockito.BDDMockito.given;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -38,6 +27,38 @@ public class STicketControllerTest {
 
     static Integer id ;
 
+    /*
+   U bazama drugi mikroservisa ima:
+   Rute:
+   {
+       "id": 3,
+       "routeName": "A-B",
+       "transportType": "Tram",
+       "user": null
+   },
+   {
+       "id": 9,
+       "routeName": "A-B",
+       "transportType": "Bus",
+       "user": null
+   }
+
+   User :
+   {
+       "id": 11,
+       "firstName": "Naida",
+       "lastName": "Hanjalic",
+       "birthDate": "1998-02-22T00:00:00.000+0000",
+       "email": "nhanjalic@mail.com",
+       "password": "password111",
+       "cardNumber": "123456789",
+       "cvv": "123",
+       "expiryDate": "2020-03-28T00:17:13.417+0000",
+       "status": "student"
+   }
+
+
+    */
     @Test
     @Order(0)
     public void createSTicket() throws Exception{
@@ -70,6 +91,13 @@ public class STicketControllerTest {
                 .andExpect(jsonPath("$.userId", is(11)))
                 .andExpect(jsonPath("$.routeId", is(3)));
     }
+    @Test
+    @Order(1)
+    public void findSTicketByIdNotFound() throws Exception{
+        mvc.perform(MockMvcRequestBuilders.get("/single_tickets/1000" )
+                .accept(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
 
     @Test
     @Order(1)
@@ -81,11 +109,26 @@ public class STicketControllerTest {
     }
 
     @Test
+    @Order(1)
+    void validateSTicketNotFound() throws Exception{
+        mvc.perform(put("/single_tickets/validate/1000")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     @Order(4)
     void deleteSTicket() throws Exception{
         mvc.perform(delete("/single_tickets/" + id)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
+    }
+    @Test
+    @Order(4)
+    void deleteSTicketNotFound() throws Exception{
+        mvc.perform(delete("/single_tickets/1000")
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isNotFound());
     }
 
 
@@ -97,63 +140,6 @@ public class STicketControllerTest {
                 .andExpect(status().isOk());
 
     }
-    /*
-    @Test
-    public void findSTicketById() throws Exception{
-        SingleTicket st = new SingleTicket(1, 1);
-        st.setId(1);
-        given(sTicketController.findById(st.getId())).willReturn(st);
-        String url = "/single_tickets/" + st.getId();
-        mvc.perform(get(url).contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.id", is(st.getId())))
-                .andExpect(jsonPath("$.userId", is(st.getUserId())));
-    }*/
-   /* @Test
-    public void addSTicket() throws Exception{
-        JSONObject jo = new JSONObject();
-        jo.put("userId", 1);
-        jo.put("routeId", 1);
-        mvc.perform(post("/single_tickets")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(String.valueOf(jo)))
-                .andExpect(status().isOk());
-
-    }*/
-  /*  @Test
-    void deleteSTicket() throws Exception{
-        SingleTicket st = new SingleTicket(1, 1);
-        st.setId(1);
-        given(sTicketController.findById(st.getId())).willReturn(st);
-        mvc.perform(delete("/single_tickets/1")
-                    .contentType(MediaType.APPLICATION_JSON))
-                    .andExpect(status().isOk());
-    }
-
-    @Test
-    void validateSTicket() throws Exception{
-        SingleTicket st = new SingleTicket(1, 1);
-        st.setId(1);
-        given(sTicketController.findById(st.getId())).willReturn(st);
-        mvc.perform(put("/single_tickets/validate/1")
-                .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk());
-    }
-    @Test
-    void newTicketParameterMissingError() throws Exception{
-        JSONObject jo = new JSONObject();
-        jo.put("userId", 1);
-        mvc.perform(post("/single_tickets")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(String.valueOf(jo)))
-                .andExpect(status().is4xxClientError());
-    }
-    @Test
-    public void findSTicketByIdError() throws Exception{
-        given(sTicketController.findById(1)).willReturn(null);
-        mvc.perform(get("/single_ticktets/1").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().is4xxClientError());
-    }*/
 
 }
 
