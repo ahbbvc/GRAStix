@@ -31,14 +31,9 @@ public class CommunicationTest {
     /*
    U bazama drugi mikroservisa ima:
    Rute:
+
    {
-       "id": 3,
-       "routeName": "A-B",
-       "transportType": "Tram",
-       "user": null
-   },
-   {
-       "id": 9,
+       "id": 1,
        "routeName": "A-B",
        "transportType": "Bus",
        "user": null
@@ -60,26 +55,18 @@ public class CommunicationTest {
 
 
     */
-    @Test
-    public void findSTicketById() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/single_tickets/2")
-        .accept(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.userId", is(1)))
-                .andExpect(jsonPath("$.routeId", is(2)));
-    }
     @Order(1)
     @Test
     public void getUserSTickets() throws Exception{
-        mvc.perform(MockMvcRequestBuilders.get("/single_tickets?user_id=9")
+        mvc.perform(MockMvcRequestBuilders.get("/single_tickets?user_id=11")
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[0].user.id", is(9)))
-                .andExpect(jsonPath("$[0].user.firstName", is("First")))
-                .andExpect(jsonPath("$[0].user.lastName", is("User")))
-                .andExpect(jsonPath("$[0].route.id", is(3)))
+                .andExpect(jsonPath("$[0].user.id", is(11)))
+                .andExpect(jsonPath("$[0].user.firstName", is("Naida")))
+                .andExpect(jsonPath("$[0].user.lastName", is("Hanjalic")))
+                .andExpect(jsonPath("$[0].route.id", is(1)))
                 .andExpect(jsonPath("$[0].route.routeName", is("A-B")))
-                .andExpect(jsonPath("$[0].route.transportType", is("Tram")));
+                .andExpect(jsonPath("$[0].route.transportType", is("Bus")));
 
     }
     @Order(1)
@@ -91,17 +78,17 @@ public class CommunicationTest {
                 .andExpect(jsonPath("$[0].user.id", is(11)))
                 .andExpect(jsonPath("$[0].user.firstName", is("Naida")))
                 .andExpect(jsonPath("$[0].user.lastName", is("Hanjalic")))
-                .andExpect(jsonPath("$[0].routes[0].id", is(3)))
+                .andExpect(jsonPath("$[0].routes[0].id", is(1)))
                 .andExpect(jsonPath("$[0].routes[0].routeName", is("A-B")))
-                .andExpect(jsonPath("$[0].routes[0].transportType", is("Tram")))
-                .andExpect(jsonPath("$[0].month", is("April")));
+                .andExpect(jsonPath("$[0].routes[0].transportType", is("Bus")))
+                .andExpect(jsonPath("$[0].month", is("May")));
 
     }
 
     @Order(0)
     @Test
     public void createSTicket() throws Exception{
-        String s = "{\"userId\" : 11 , \"routeId\" : 3}";
+        String s = "{\"userId\" : 11 , \"routeId\" : 1}";
         mvc.perform(MockMvcRequestBuilders.post("/single_tickets")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(s))
@@ -109,15 +96,15 @@ public class CommunicationTest {
                 .andExpect(jsonPath("$.user.id", is(11)))
                 .andExpect(jsonPath("$.user.firstName", is("Naida")))
                 .andExpect(jsonPath("$.user.lastName", is("Hanjalic")))
-                .andExpect(jsonPath("$.route.id", is(3)))
+                .andExpect(jsonPath("$.route.id", is(1)))
                 .andExpect(jsonPath("$.route.routeName", is("A-B")))
-                .andExpect(jsonPath("$.route.transportType", is("Tram")));
+                .andExpect(jsonPath("$.route.transportType", is("Bus")));
 
     }
     @Order(0)
     @Test
     public void createMTicket() throws Exception{
-        String s = "{\"userId\" : 11 , \"routes\" : [3,9], \"month\" : \"May\" }";
+        String s = "{\"userId\" : 11 , \"routes\" : [1], \"month\" : \"May\" }";
         mvc.perform(MockMvcRequestBuilders.post("/monthly_tickets")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(s))
@@ -126,12 +113,9 @@ public class CommunicationTest {
                 .andExpect(jsonPath("$.user.id", is(11)))
                 .andExpect(jsonPath("$.user.firstName", is("Naida")))
                 .andExpect(jsonPath("$.user.lastName", is("Hanjalic")))
-                .andExpect(jsonPath("$.routes[0].id", is(3)))
+                .andExpect(jsonPath("$.routes[0].id", is(1)))
                 .andExpect(jsonPath("$.routes[0].routeName", is("A-B")))
-                .andExpect(jsonPath("$.routes[0].transportType", is("Tram")))
-                .andExpect(jsonPath("$.routes[1].id", is(9)))
-                .andExpect(jsonPath("$.routes[1].routeName", is("A-B")))
-                .andExpect(jsonPath("$.routes[1].transportType", is("Bus")));
+                .andExpect(jsonPath("$.routes[0].transportType", is("Bus")));
 
     }
 }

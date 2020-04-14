@@ -31,17 +31,12 @@ public class MTicketControllerTest {
     U bazama drugi mikroservisa ima:
     Rute:
     {
-        "id": 3,
-        "routeName": "A-B",
-        "transportType": "Tram",
-        "user": null
-    },
-    {
-        "id": 9,
+        "id": 1,
         "routeName": "A-B",
         "transportType": "Bus",
         "user": null
-    }
+    },
+
 
     User :
     {
@@ -63,7 +58,7 @@ public class MTicketControllerTest {
     @Order(0)
     @Test
     public void createMTicket() throws Exception{
-        String s = "{\"userId\" : 11 , \"routes\" : [3,9], \"month\" : \"June\" }";
+        String s = "{\"userId\" : 11 , \"routes\" : [1], \"month\" : \"June\" }";
         MvcResult response = mvc.perform(MockMvcRequestBuilders.post("/monthly_tickets")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(s))
@@ -72,12 +67,9 @@ public class MTicketControllerTest {
                 .andExpect(jsonPath("$.user.id", is(11)))
                 .andExpect(jsonPath("$.user.firstName", is("Naida")))
                 .andExpect(jsonPath("$.user.lastName", is("Hanjalic")))
-                .andExpect(jsonPath("$.routes[0].id", is(3)))
+                .andExpect(jsonPath("$.routes[0].id", is(1)))
                 .andExpect(jsonPath("$.routes[0].routeName", is("A-B")))
-                .andExpect(jsonPath("$.routes[0].transportType", is("Tram")))
-                .andExpect(jsonPath("$.routes[1].id", is(9)))
-                .andExpect(jsonPath("$.routes[1].routeName", is("A-B")))
-                .andExpect(jsonPath("$.routes[1].transportType", is("Bus")))
+                .andExpect(jsonPath("$.routes[0].transportType", is("Bus")))
                 .andReturn();
         String object = response.getResponse().getContentAsString();
         MTicketResponseWrapper mt = objectMapper.readValue(object, MTicketResponseWrapper.class);
@@ -91,8 +83,7 @@ public class MTicketControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId", is(11)))
-                .andExpect(jsonPath("$.routes[0].route_id", is(3)))
-                .andExpect(jsonPath("$.routes[1].route_id", is(9)))
+                .andExpect(jsonPath("$.routes[0].route_id", is(1)))
                 .andExpect(jsonPath("$.month", is("June")));
     }
 

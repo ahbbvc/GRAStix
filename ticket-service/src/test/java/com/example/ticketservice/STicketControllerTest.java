@@ -31,17 +31,11 @@ public class STicketControllerTest {
    U bazama drugi mikroservisa ima:
    Rute:
    {
-       "id": 3,
-       "routeName": "A-B",
-       "transportType": "Tram",
-       "user": null
-   },
-   {
-       "id": 9,
+       "id": 1,
        "routeName": "A-B",
        "transportType": "Bus",
        "user": null
-   }
+   },
 
    User :
    {
@@ -63,7 +57,7 @@ public class STicketControllerTest {
     @Order(0)
     public void createSTicket() throws Exception{
 
-        String s = "{\"userId\" : 11 , \"routeId\" : 3}";
+        String s = "{\"userId\" : 11 , \"routeId\" : 1}";
         MvcResult response =  mvc.perform(post("/single_tickets")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(s))
@@ -71,9 +65,9 @@ public class STicketControllerTest {
                 .andExpect(jsonPath("$.user.id", is(11)))
                 .andExpect(jsonPath("$.user.firstName", is("Naida")))
                 .andExpect(jsonPath("$.user.lastName", is("Hanjalic")))
-                .andExpect(jsonPath("$.route.id", is(3)))
+                .andExpect(jsonPath("$.route.id", is(1)))
                 .andExpect(jsonPath("$.route.routeName", is("A-B")))
-                .andExpect(jsonPath("$.route.transportType", is("Tram")))
+                .andExpect(jsonPath("$.route.transportType", is("Bus")))
                 .andReturn();
         String object = response.getResponse().getContentAsString();
         STicketResponseWraper st = objectMapper.readValue(object, STicketResponseWraper.class);
@@ -89,7 +83,7 @@ public class STicketControllerTest {
                 .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.userId", is(11)))
-                .andExpect(jsonPath("$.routeId", is(3)));
+                .andExpect(jsonPath("$.routeId", is(1)));
     }
     @Test
     @Order(1)
