@@ -40,4 +40,5 @@ public class User {
     public void setRoutes(List<Route> routes) {
         this.routes = routes;
     }
+
 }

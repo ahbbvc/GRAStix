@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class RouteStation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -63,4 +64,5 @@ public class RouteStation {
     public void setTimeTables(List<TimeTable> timeTables) {
         this.timeTables = timeTables;
     }
+
 }

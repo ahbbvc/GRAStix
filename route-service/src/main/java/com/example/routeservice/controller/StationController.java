@@ -33,7 +33,7 @@ public class StationController {
     }
 
     @PutMapping("/{id}")
-    Station updateRoute(@PathVariable Integer id, @Valid @RequestBody Station data) {
+    Station updateStation(@PathVariable Integer id, @Valid @RequestBody Station data) {
         return stationService.updateStation(id, data.getStationName());
     }
 

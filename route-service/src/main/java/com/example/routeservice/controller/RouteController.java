@@ -1,7 +1,6 @@
 package com.example.routeservice.controller;
 
 import com.example.routeservice.model.Route;
-import com.example.routeservice.model.User;
 import com.example.routeservice.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -14,9 +13,8 @@ import java.util.List;
 @RequestMapping("/routes")
 public class RouteController {
 
-    @Autowired
-    private RestTemplate restTemplate;
-
+    //@Autowired
+    //private RestTemplate restTemplate;
     private final RouteService routeService;
 
     RouteController(RouteService routeService) {
@@ -40,7 +38,8 @@ public class RouteController {
 
     @PostMapping("")
     Route createRoute(@Valid @RequestBody Route data) {
-        // Hardkodiran userid
+        // Testirana komunikacija sa mikroservisima
+        // Dodavanje korisnika ce biti naknadno implementirano kroz osiguravanje sigurnosti
         //Integer userId = 9;
         //User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
         return routeService.createRoute(data.getRouteName(), data.getTransportType());

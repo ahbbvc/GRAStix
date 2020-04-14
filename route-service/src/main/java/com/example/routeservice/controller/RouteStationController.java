@@ -1,7 +1,6 @@
 package com.example.routeservice.controller;
 
 import com.example.routeservice.model.RouteStation;
-import com.example.routeservice.model.Station;
 import com.example.routeservice.service.RouteStationService;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,7 +20,7 @@ public class RouteStationController {
     List<RouteStation> getAllRouteStations() {return routeStationService.findAll(); }
 
     @GetMapping("/{id}")
-    RouteStation getRouteStationById(Integer id) {
+    RouteStation getRouteStationById(@PathVariable Integer id) {
         return routeStationService.findById(id);
     }
 
