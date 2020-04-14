@@ -10,15 +10,15 @@ Online prodaja karata za gradski prevoz
 
 ### Preduslovi
 
-Java verzija 13/14 <br>
-Samo jedan korisnik može biti povezan na bazu <br>
-Potrebno je pokrenuti sve servise za pokretanje aplikacije i testova u ticket-service
+* Java verzija 13/14
+* Samo jedan korisnik može biti povezan na bazu
+* Potrebno je pokrenuti sve servise za pokretanje aplikacije i testova u ticket-service
 
 ### Pokretanje aplikacije
 
 Izvršiti komandu: ```mvn spring-boot:run``` u folderu servisa
 
-Prvo pokrenuti eureka-server <br>
+Prvo pokrenuti eureka-server
 
 ### Pokretanje testova
 
