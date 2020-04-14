@@ -1,6 +1,6 @@
-# GRAStix
+# 🎫 GRAStix 
 
-Online prodaja karata za gradski prevoz
+Online prodaja karata za gradski prevoz 
 
 ### Servisi
 
