@@ -1,0 +1,17 @@
+syntax = "proto3";
+option java_multiple_files = true;
+package org.example.grpc;
+
+message SystemEventsRequest{
+    string timeStamp =1;
+    string microservice =2;
+    string action =3;
+    string resurs =4;
+    string response=5;
+}
+message SystemEventResponse{
+    string succ = 1;
+}
+service SystemEventsService{
+    rpc add(SystemEventsRequest) returns (SystemEventResponse);
+}
