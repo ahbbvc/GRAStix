@@ -2,9 +2,7 @@ package com.example.ticketservice;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.HelloRequest;
-import org.example.grpc.HelloResponse;
-import org.example.grpc.HelloServiceGrpc;
+import org.example.grpc.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -27,13 +25,15 @@ public class TicketServiceApplication {
 	}
 	public static void main(String[] args) {
 		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
-
-		HelloServiceGrpc.HelloServiceBlockingStub stub = HelloServiceGrpc.newBlockingStub(channel);
-		HelloResponse helloResponse = stub.hello(HelloRequest.newBuilder()
-				.setFirstName("Baeldung")
-				.setLastName("gRPC")
+		SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
+		SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
+				.setMicroservice("ticket-service")
+				.setAction("GET")
+				.setResponse("OK")
+				.setResurs("SingleTicket")
+				.setTimeStamp("SAd")
 				.build());
-		System.out.println(helloResponse);
+		System.out.println(systemEventResponse);
 		channel.shutdown();
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}

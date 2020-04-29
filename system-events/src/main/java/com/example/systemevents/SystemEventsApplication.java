@@ -14,7 +14,8 @@ public class SystemEventsApplication {
 		SpringApplication.run(SystemEventsApplication.class, args);
 		Server server = ServerBuilder
 				.forPort(8080)
-				.addService(new Ex()).build();
+				.addService(new SystemEventsImpl())
+				.build();
 
 		server.start();
 		server.awaitTermination();
