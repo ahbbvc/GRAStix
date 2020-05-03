@@ -1,23 +1,35 @@
 package com.example.routeservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 import javax.persistence.*;
+import javax.validation.constraints.Future;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
 public class TimeTable {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column
-    @JsonFormat(pattern="dd-M-yyyy hh:mm:ss")
+    @NotNull(message = "Time of arrival cannot be null")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonDeserialize(using = CustomJsonDeserializer.class)
+    @Future(message = "Time of arrival must be in the future")
     private Date timeOfArrival;
 
     @Column
-    @JsonFormat(pattern="dd-M-yyyy hh:mm:ss")
+    @NotNull(message = "Time of departure cannot be null")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonDeserialize(using = CustomJsonDeserializer.class)
+    @Future(message = "Time of departure must be in the future")
     private Date timeOfDeparture;
+
+    private boolean regular;
 
     @ManyToOne
     @JoinColumn(name = "routeStation_id")
@@ -26,9 +38,10 @@ public class TimeTable {
     public TimeTable() {
     }
 
-    public TimeTable(Date timeOfArrival, Date timeOfDeparture) {
+    public TimeTable(Date timeOfArrival, Date timeOfDeparture, boolean regular) {
         this.timeOfArrival = timeOfArrival;
         this.timeOfDeparture = timeOfDeparture;
+        this.regular = regular;
     }
 
     public Integer getId() {
@@ -39,8 +52,12 @@ public class TimeTable {
         return timeOfArrival;
     }
 
-    public Date getTimeofDeparture() {
+    public Date getTimeOfDeparture() {
         return timeOfDeparture;
+    }
+
+    public boolean isRegular() {
+        return regular;
     }
 
     public RouteStation getRouteStation() {
@@ -59,7 +76,12 @@ public class TimeTable {
         this.timeOfDeparture = timeOfDeparture;
     }
 
+    public void setRegular(boolean regular) {
+        this.regular = regular;
+    }
+
     public void setRouteStation(RouteStation routeStation) {
         this.routeStation = routeStation;
     }
+
 }

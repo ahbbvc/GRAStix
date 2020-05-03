@@ -2,7 +2,6 @@ package com.example.routeservice.service;
 
 import com.example.routeservice.model.Route;
 import com.example.routeservice.repository.RouteRepository;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +32,17 @@ public class RouteService {
         return routeRepository.save(newRoute);
     }
 
+    public Route updateRoute(Integer id, String routeName, String transportType) {
+        Route route = routeRepository.findById(id).orElseThrow();
+        route.setId(id);
+        route.setRouteName(routeName);
+        route.setTransportType(transportType);
+        return routeRepository.save(route);
+    }
+
     public void deleteById(Integer id) {
+        Route route = routeRepository.findById(id).orElseThrow();
         routeRepository.deleteById(id);
     }
+
 }

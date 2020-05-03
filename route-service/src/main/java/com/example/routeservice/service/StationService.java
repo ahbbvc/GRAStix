@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class StationService {
+
     private final StationRepository stationRepository;
 
     public StationService(StationRepository stationRepository) {
@@ -27,7 +28,15 @@ public class StationService {
         return stationRepository.save(newStation);
     }
 
+    public Station updateStation(Integer id, String stationName) {
+        Station station = stationRepository.findById(id).orElseThrow();
+        station.setStationName(stationName);
+        return stationRepository.save(station);
+    }
+
     public void deleteById(Integer id) {
+        Station station = stationRepository.findById(id).orElseThrow();
         stationRepository.deleteById(id);
     }
+
 }

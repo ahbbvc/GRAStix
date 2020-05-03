@@ -1,22 +1,44 @@
 package com.example.ticketservice;
 
-import com.example.ticketservice.Repository.MTicketRepository;
-import com.example.ticketservice.Repository.MTicketRouteRepository;
-import com.example.ticketservice.Repository.STicketRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.boot.CommandLineRunner;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
+import org.example.grpc.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
+import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 
 @SpringBootApplication
+@EnableEurekaClient
 public class TicketServiceApplication {
-	private static final Logger log = LoggerFactory.getLogger(TicketServiceApplication.class);
+
+
+
+
+	@Bean
+	@LoadBalanced
+	public RestTemplate getRestTemplate() {
+		return new RestTemplate();
+	}
 	public static void main(String[] args) {
+		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
+		SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
+		SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
+				.setMicroservice("ticket-service")
+				.setAction("GET")
+				.setResponse("OK")
+				.setResurs("SingleTicket")
+				.setTimeStamp("SAd")
+				.build());
+		System.out.println(systemEventResponse);
+		channel.shutdown();
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}
+
+
 	/*@Bean
 	public CommandLineRunner demo(STicketRepository srepository, MTicketRepository mrepository, MTicketRouteRepository mrrepository) {
 		return (args) -> {
@@ -39,3 +61,15 @@ public class TicketServiceApplication {
 		};
 	}*/
 }
+/*@RestController
+class ServiceInstanceRestController {
+
+	@Autowired
+	private DiscoveryClient discoveryClient;
+
+	@RequestMapping("/service-instances/{applicationName}")
+	public List<ServiceInstance> serviceInstancesByApplicationName(
+			@PathVariable String applicationName) {
+		return this.discoveryClient.getInstances(applicationName);
+	}
+}*/

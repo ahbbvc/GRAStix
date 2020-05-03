@@ -2,15 +2,19 @@ package com.example.routeservice.controller;
 
 import com.example.routeservice.model.Route;
 import com.example.routeservice.service.RouteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import javax.validation.Valid;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/routes")
 public class RouteController {
 
+    //@Autowired
+    //private RestTemplate restTemplate;
     private final RouteService routeService;
 
     RouteController(RouteService routeService) {
@@ -33,8 +37,17 @@ public class RouteController {
     }
 
     @PostMapping("")
-    Route createRoute(@RequestBody Route data) {
+    Route createRoute(@Valid @RequestBody Route data) {
+        // Testirana komunikacija sa mikroservisima
+        // Dodavanje korisnika ce biti naknadno implementirano kroz osiguravanje sigurnosti
+        //Integer userId = 9;
+        //User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
         return routeService.createRoute(data.getRouteName(), data.getTransportType());
+    }
+
+    @PutMapping("/{id}")
+    Route updateRoute(@PathVariable Integer id, @Valid @RequestBody Route data) {
+        return routeService.updateRoute(id, data.getRouteName(), data.getTransportType());
     }
 
     @DeleteMapping("/{id}")

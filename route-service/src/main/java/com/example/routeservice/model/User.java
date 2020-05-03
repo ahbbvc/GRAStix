@@ -15,10 +15,14 @@ public class User {
     private Integer id;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Route> routes;
 
     public User() {
+    }
+
+    public User(Integer id) {
+        this.id = id;
     }
 
     public Integer getId() {
@@ -27,6 +31,14 @@ public class User {
 
     public List<Route> getRoutes() {
         return routes;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setRoutes(List<Route> routes) {
+        this.routes = routes;
     }
 
 }

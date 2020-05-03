@@ -13,8 +13,10 @@ import java.util.List;
 public class RouteStationService {
 
     private final RouteStationRepository routeStationRepository;
+
     @Autowired
     private RouteService routeService;
+
     @Autowired
     private StationService stationService;
 
@@ -41,6 +43,8 @@ public class RouteStationService {
     }
 
     public void deleteById(Integer id) {
+        RouteStation routeStation = routeStationRepository.findById(id).orElseThrow();
         routeStationRepository.deleteById(id);
     }
+
 }

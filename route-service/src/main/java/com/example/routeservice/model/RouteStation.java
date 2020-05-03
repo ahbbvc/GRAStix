@@ -8,6 +8,7 @@ import java.util.List;
 
 @Entity
 public class RouteStation {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -21,7 +22,7 @@ public class RouteStation {
     private Station station;
 
     @JsonIgnore
-    @OneToMany(mappedBy = "routeStation")
+    @OneToMany(mappedBy = "routeStation", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<TimeTable> timeTables = new ArrayList<>();
 
     public RouteStation() {
@@ -64,7 +65,4 @@ public class RouteStation {
         this.timeTables = timeTables;
     }
 
-    public void addTimeTable(TimeTable timeTable) {
-        this.timeTables.add(timeTable);
-    }
 }
