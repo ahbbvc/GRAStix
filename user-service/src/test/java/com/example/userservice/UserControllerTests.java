@@ -47,23 +47,6 @@ public class UserControllerTests {
     }
 
     @Test
-    public void findAllUsers_ShouldReturnOkWithResults() throws Exception {
-        List<User> expected = Arrays.asList(
-                new User("First", "User", new Date(), "email@email.com", "password", "123456",
-                        "123", new Date(), ""),
-                new User("Second", "User", new Date(), "second@user.com", "pass1234", "987654321",
-                        "789", new Date(), "Student"));
-
-        given(userService.findAllUsers()).willReturn(new ResponseEntity<>(expected, HttpStatus.OK));
-
-        mvc.perform(get("/user").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].firstName", is("First")))
-                .andExpect(jsonPath("$[1].firstName", is("Second")));
-    }
-
-    @Test
     public void findUserById_ShouldReturnOkWithResult() throws Exception {
         User expected = new User("First", "User", new Date(), "email@email.com", "password", "123456",
                         "123", new Date(), "");
