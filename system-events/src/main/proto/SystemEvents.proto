@@ -1,0 +1,20 @@
+syntax = "proto3";
+option java_multiple_files = true;
+option java_package = "com.example.grpc";
+
+message SystemEventsRequest {
+  string timeStamp = 1;
+  string microservice = 2;
+  string action = 3;  // create, delete, get, update
+  string resource = 4;
+  string response = 5;  // success, error
+  //string user = 6;
+}
+
+message SystemEventsResponse {
+  string responseMessage = 1;
+}
+
+service SystemEventsService {
+  rpc getAction(SystemEventsRequest) returns (SystemEventsResponse);
+}
