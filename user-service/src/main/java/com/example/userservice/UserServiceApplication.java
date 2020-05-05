@@ -2,9 +2,6 @@ package com.example.userservice;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.SystemEventResponse;
-import org.example.grpc.SystemEventsRequest;
-import org.example.grpc.SystemEventsServiceGrpc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;
