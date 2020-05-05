@@ -1,8 +1,6 @@
 package com.example.ticketservice;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.*;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -15,16 +13,13 @@ import org.springframework.web.client.RestTemplate;
 @EnableEurekaClient
 public class TicketServiceApplication {
 
-
-
-
 	@Bean
 	@LoadBalanced
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
 	public static void main(String[] args) {
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
+	/*	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
 		SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
 		SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
 				.setMicroservice("ticket-service")
@@ -34,7 +29,7 @@ public class TicketServiceApplication {
 				.setTimeStamp("SAd")
 				.build());
 		System.out.println(systemEventResponse);
-		channel.shutdown();
+		channel.shutdown();*/
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}
 

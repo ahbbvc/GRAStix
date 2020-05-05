@@ -3,9 +3,7 @@ package com.example.ticketservice.Controller;
 import com.example.ticketservice.Model.*;
 import com.example.ticketservice.Service.STicketService;
 import com.example.ticketservice.Wrappers.STicketResponseWraper;
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
-import org.example.grpc.*;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -25,19 +23,19 @@ public class STicketController {
         this.sTicketService= sTicketService;
         this.restTemplate = restTemplate;
     }
-    ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
+  /*  ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
     
-    SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
+    SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);*/
 
     @GetMapping("/single_tickets")
     public List<SingleTicket> AllSTickets(){
-        SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
+        /*SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
                 .setMicroservice("ticket-service")
                 .setAction("GET")
                 .setResponse("OK")
                 .setResurs("SingleTicket")
                 .setTimeStamp("SAd")
-                .build());
+                .build());*/
         return sTicketService.findAll();
     }
 
