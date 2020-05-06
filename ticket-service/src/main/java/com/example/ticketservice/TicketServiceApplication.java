@@ -1,6 +1,11 @@
 package com.example.ticketservice;
 
 
+import com.example.grpc.SystemEventsRequest;
+import com.example.grpc.SystemEventsResponse;
+import com.example.grpc.SystemEventsServiceGrpc;
+import io.grpc.ManagedChannel;
+import io.grpc.ManagedChannelBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -19,13 +24,13 @@ public class TicketServiceApplication {
 		return new RestTemplate();
 	}
 	public static void main(String[] args) {
-	/*	ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",8080 ).usePlaintext().build();
+		/*ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090 ).usePlaintext().build();
 		SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
-		SystemEventResponse systemEventResponse = stub1.add(SystemEventsRequest.newBuilder()
+		SystemEventsResponse systemEventResponse = stub1.getAction(SystemEventsRequest.newBuilder()
 				.setMicroservice("ticket-service")
 				.setAction("GET")
 				.setResponse("OK")
-				.setResurs("SingleTicket")
+				.setResource("SingleTicket")
 				.setTimeStamp("SAd")
 				.build());
 		System.out.println(systemEventResponse);
