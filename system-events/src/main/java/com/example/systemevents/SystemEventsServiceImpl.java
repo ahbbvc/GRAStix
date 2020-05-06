@@ -15,6 +15,7 @@ public class SystemEventsServiceImpl extends SystemEventsServiceGrpc.SystemEvent
                 .build();
 
         responseObserver.onNext(response);
+        System.out.println(response);
         responseObserver.onCompleted();
     }
 }
