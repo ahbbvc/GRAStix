@@ -1,6 +1,7 @@
 package com.example.routeservice.controller;
 
 import com.example.routeservice.model.Route;
+import com.example.routeservice.service.GrpcClientService;
 import com.example.routeservice.service.RouteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +17,11 @@ public class RouteController {
     //@Autowired
     //private RestTemplate restTemplate;
     private final RouteService routeService;
+    private final GrpcClientService grpcClientService;
 
-    RouteController(RouteService routeService) {
+    RouteController(RouteService routeService, GrpcClientService grpcClientService) {
         this.routeService = routeService;
+        this.grpcClientService = grpcClientService;
     }
 
     @GetMapping("")
@@ -28,6 +31,7 @@ public class RouteController {
 
     @GetMapping("/{id}")
     Route getRouteById(@PathVariable Integer id) {
+        grpcClientService.setAction("GET", "route", "200");
         return routeService.findById(id);
     }
 
