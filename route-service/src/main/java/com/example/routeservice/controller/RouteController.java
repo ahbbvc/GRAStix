@@ -17,11 +17,9 @@ public class RouteController {
     //@Autowired
     //private RestTemplate restTemplate;
     private final RouteService routeService;
-    private final GrpcClientService grpcClientService;
 
-    RouteController(RouteService routeService, GrpcClientService grpcClientService) {
+    RouteController(RouteService routeService) {
         this.routeService = routeService;
-        this.grpcClientService = grpcClientService;
     }
 
     @GetMapping("")
@@ -31,7 +29,6 @@ public class RouteController {
 
     @GetMapping("/{id}")
     Route getRouteById(@PathVariable Integer id) {
-        grpcClientService.setAction("GET", "route", "200");
         return routeService.findById(id);
     }
 
