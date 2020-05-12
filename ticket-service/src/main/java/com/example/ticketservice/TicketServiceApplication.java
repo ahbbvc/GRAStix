@@ -23,53 +23,9 @@ public class TicketServiceApplication {
 	public RestTemplate getRestTemplate() {
 		return new RestTemplate();
 	}
+
 	public static void main(String[] args) {
-		/*ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost",9090 ).usePlaintext().build();
-		SystemEventsServiceGrpc.SystemEventsServiceBlockingStub stub1= SystemEventsServiceGrpc.newBlockingStub(channel);
-		SystemEventsResponse systemEventResponse = stub1.getAction(SystemEventsRequest.newBuilder()
-				.setMicroservice("ticket-service")
-				.setAction("GET")
-				.setResponse("OK")
-				.setResource("SingleTicket")
-				.setTimeStamp("SAd")
-				.build());
-		System.out.println(systemEventResponse);
-		channel.shutdown();*/
 		SpringApplication.run(TicketServiceApplication.class, args);
 	}
-
-
-	/*@Bean
-	public CommandLineRunner demo(STicketRepository srepository, MTicketRepository mrepository, MTicketRouteRepository mrrepository) {
-		return (args) -> {
-
-		//	SingleTicket st1 = new SingleTicket(1, 1 );
-		//	srepository.save(st1);
-
-			/*MonthlyTicket mt1 = new MonthlyTicket(2 , "March");
-			MTicketRoute mr1 = new MTicketRoute(1,mt1 );
-			MTicketRoute mr2 = new MTicketRoute(2, mt1);
-			List<MTicketRoute> mTicketRoutes = new ArrayList<MTicketRoute>();
-			mTicketRoutes.add(mr1);
-			mTicketRoutes.add(mr2);
-			mt1.setRoutes(mTicketRoutes);
-
-			mrepository.save(mt1);
-			mrrepository.save(mr1);
-			mrrepository.save(mr2);
-
-		};
-	}*/
 }
-/*@RestController
-class ServiceInstanceRestController {
 
-	@Autowired
-	private DiscoveryClient discoveryClient;
-
-	@RequestMapping("/service-instances/{applicationName}")
-	public List<ServiceInstance> serviceInstancesByApplicationName(
-			@PathVariable String applicationName) {
-		return this.discoveryClient.getInstances(applicationName);
-	}
-}*/
