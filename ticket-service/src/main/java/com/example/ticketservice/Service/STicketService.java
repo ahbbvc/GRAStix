@@ -27,14 +27,14 @@ public class STicketService {
     }
     public List<SingleTicket> findAll(){
         List<SingleTicket> st=  sTicketRepository.findAll();
-        Timestamp time = new Timestamp(System.currentTimeMillis());
+        /*Timestamp time = new Timestamp(System.currentTimeMillis());
         SystemEventsResponse systemEventResponse = stub1.getAction(SystemEventsRequest.newBuilder()
                 .setMicroservice("ticket-service")
                 .setAction("GET")
                 .setResponse("OK")
                 .setResource("SingleTicket")
                 .setTimeStamp(time.toString())
-                .build());
+                .build());*/
         return st;
     }
     public SingleTicket newSTicket(SingleTicket st){

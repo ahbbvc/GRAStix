@@ -1,14 +1,10 @@
 package com.example.ticketservice.Controller;
 
-import com.example.grpc.SystemEventsRequest;
-import com.example.grpc.SystemEventsResponse;
-import com.example.grpc.SystemEventsServiceGrpc;
+
 import com.example.ticketservice.Model.*;
 import com.example.ticketservice.Service.STicketService;
 import com.example.ticketservice.Wrappers.STicketResponseWraper;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
