@@ -1,7 +1,7 @@
 package com.example.userservice;
 
-import io.grpc.ManagedChannel;
-import io.grpc.ManagedChannelBuilder;
+//import io.grpc.ManagedChannel;
+//import io.grpc.ManagedChannelBuilder;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.ServiceInstance;

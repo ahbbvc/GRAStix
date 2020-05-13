@@ -57,4 +57,9 @@ public class UserService {
         this._userRepository.deleteById(id);
         return new ResponseEntity("User successfully deleted.", HttpStatus.OK);
     }
+
+    public ResponseEntity<User> findUserByEmil(String email) {
+        User user =this._userRepository.findByEmail(email);
+        return new ResponseEntity(user, HttpStatus.OK);
+    }
 }
