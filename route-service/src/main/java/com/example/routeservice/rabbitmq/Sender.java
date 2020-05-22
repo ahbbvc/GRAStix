@@ -1,18 +1,15 @@
 package com.example.routeservice.rabbitmq;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
-@Component
+
 public class Sender {
     @Autowired
-    private RabbitTemplate rabbitTemplate;
-
-    static final String exchange = "route-queue";
+    private AmqpTemplate rabbitTemplate;
 
     public void send(Integer routeId) {
-        rabbitTemplate.convertAndSend(exchange, routeId.toString());
+        rabbitTemplate.convertAndSend(RabbitMQConfig.queueName, routeId.toString());
         System.out.println("Message sent with routeId = " + routeId);
     }
 }
