@@ -1,45 +1,45 @@
 package com.example.ticketservice.RabbitMQ;
 
 import com.example.ticketservice.Model.SingleTicket;
-import com.example.ticketservice.Service.STicketService;
+import com.example.ticketservice.Repository.STicketRepository;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RabbitListener(queues = "route-queue")
 public class Receiver {
     @Autowired
-    private RabbitTemplate rabbitTemplate;
+    private AmqpTemplate rabbitTemplate;
 
     @Autowired
-    private STicketService sTicketService;
-
-    private String topicExchangeName = "ticket-exchange";
+    private STicketRepository sTicketRepository;
 
     @RabbitHandler
     public void receive(String message) {
-        try {
             Integer routeId = Integer.parseInt(message);
-            System.out.println("Consuming Message = " + routeId);
-            List<SingleTicket> singleTickets = sTicketService.findSticketsByRoute(routeId);
-
-            for(int i=0; i<singleTickets.size(); i++) {
-                Integer singleTicketId = singleTickets.get(i).getId();
-                ResponseEntity<Object> obj = sTicketService.deleteSTicket(singleTicketId);
-                if(obj.getStatusCode() == HttpStatus.OK)
-                    rabbitTemplate.convertAndSend(topicExchangeName, "Ok " + singleTicketId);
-                else {
-                    rabbitTemplate.convertAndSend(topicExchangeName, "Error " + singleTicketId);
-                }
+            System.out.println("Received message = " + routeId);
+            List<SingleTicket> singleTickets = sTicketRepository.findByRouteId(routeId);
+            List<SingleTicket> deletedTickets = new ArrayList<>();
+        try {
+            for(SingleTicket st : singleTickets) {
+                Integer singleTicketId = st.getId();
+                deletedTickets.add(sTicketRepository.findById(singleTicketId).orElseThrow());
+                sTicketRepository.deleteById(singleTicketId);
             }
 
-        } catch (Exception e) {
+            rabbitTemplate.convertAndSend(RabbitMQConfig.queueName, "Ok " + routeId);
+            System.out.println("Sent message with status: Ok " + routeId);
 
+        } catch (Exception e) {
+            for(SingleTicket st : deletedTickets) {
+                sTicketRepository.save(st);
+            }
+            rabbitTemplate.convertAndSend(RabbitMQConfig.queueName, "Error " + routeId);
+            System.out.println("Sent message with status: Error " + routeId);
         }
     }
 

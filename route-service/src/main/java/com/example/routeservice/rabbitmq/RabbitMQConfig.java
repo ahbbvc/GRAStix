@@ -1,4 +1,4 @@
-package com.example.ticketservice.RabbitMQ;
+package com.example.routeservice.rabbitmq;
 
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class RabbitMQConfig {
-    static final String exchangeName = "ticket-exchange";
+    static final String exchangeName = "route-exchange";
 
-    static final String queueName = "ticket-queue";
+    static final String queueName = "route-queue";
 
-    static final String routingKey = "ticket";
+    static final String routingKey = "route";
 
     @Bean
     Queue queue() {
@@ -37,5 +37,10 @@ public class RabbitMQConfig {
     @Bean
     public Receiver receiver() {
         return new Receiver();
+    }
+
+    @Bean
+    public Sender sender() {
+        return new Sender();
     }
 }

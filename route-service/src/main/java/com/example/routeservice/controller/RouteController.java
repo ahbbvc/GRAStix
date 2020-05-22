@@ -53,7 +53,7 @@ public class RouteController {
 
     @DeleteMapping("/{id}")
     void deleteRoute(@PathVariable Integer id) {
-        routeService.deleteById(id);
+        //routeService.deleteById(id);
         sender.send(id);
     }
 
