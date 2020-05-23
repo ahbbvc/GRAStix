@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { Component } from 'react'
 import './App.css';
-import SingleTicket from './Components/MyTickets'
-import MyTickets from './Components/MyTickets';
+import CenteredTabs from './components/main/CenteredTabs'
+import MenuAppBar from './components/main/MenuAppBar'
+import AdminPanel from './components/admin/AdminPanel';
 
-function App() {
-  return (
-    <div className="App">
-      <h1>GrasTix</h1>
-    </div>
-  );
+
+class App extends Component {
+  render() {
+    return (
+        <div>
+          <MenuAppBar></MenuAppBar>
+          {/* <AdminPanel /> */}
+        </div>
+    );
+  }
 }
-
 export default App;
