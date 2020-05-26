@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.*;
 
@@ -22,14 +23,18 @@ public class UserServiceTests {
     @MockBean
     private UserRepository userRepository;
 
+    @MockBean
+    private PasswordEncoder pwEncoder;
+
     private ValidationService validationService;
     private UserService userService;
     private JFixture fixture;
 
     UserServiceTests() {
         userRepository = mock(UserRepository.class);
+        pwEncoder = mock(PasswordEncoder.class);
         validationService = new ValidationService();
-        userService = new UserService(userRepository, validationService);
+        userService = new UserService(userRepository, validationService, pwEncoder);
         fixture = new JFixture();
     }
 
@@ -70,6 +75,7 @@ public class UserServiceTests {
         User expected = new User("First", "User", new Date(), "email@email.com", "password", "123456",
                 "123", new Date(), "");
 
+        given(pwEncoder.encode("password")).willReturn("password");
         given(userRepository.save(expected)).willReturn(expected);
 
         ResponseEntity<User> actual = null;
@@ -86,6 +92,7 @@ public class UserServiceTests {
         User expected = new User("First", "User", new Date(), "email@email.com", "password", "123456",
                 "123", new Date(), "");
 
+        given(pwEncoder.encode("password")).willReturn("password");
         given(userRepository.save(expected)).willReturn(expected);
         given(userRepository.findById(anyInt())).willReturn(Optional.of(expected));
 

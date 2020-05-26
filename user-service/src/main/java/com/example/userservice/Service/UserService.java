@@ -4,8 +4,10 @@ import com.example.userservice.Entity.User;
 import com.example.userservice.ExceptionHandling.CustomExceptions.InvalidRequestException;
 import com.example.userservice.ExceptionHandling.CustomExceptions.UserNotFoundException;
 import com.example.userservice.Repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,12 +15,16 @@ import java.util.Optional;
 
 @Service
 public class UserService {
+    @Autowired
+    private final PasswordEncoder passwordEncoder;
+
     private final UserRepository _userRepository;
     private final ValidationService _validationService;
 
-    public UserService(UserRepository userRepository, ValidationService _validationService) {
+    public UserService(UserRepository userRepository, ValidationService _validationService, PasswordEncoder pwEncoder) {
         this._userRepository = userRepository;
         this._validationService = _validationService;
+        this.passwordEncoder = pwEncoder;
     }
 
     public ResponseEntity<List<User>> findAllUsers() {
@@ -35,6 +41,8 @@ public class UserService {
 
     public ResponseEntity<User> saveUser(User user) throws InvalidRequestException {
         this._validationService.validateUserProperties(user);
+
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
 
         User newUser = this._userRepository.save(user);
         return new ResponseEntity(newUser, HttpStatus.OK);
