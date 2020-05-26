@@ -33,7 +33,6 @@ class CreateRoute extends Component {
         alertVisible: true,
         alertColor: "success",
       });
-      this.props.createdRoute.bind(this, true);
     });
   };
 

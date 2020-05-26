@@ -7,6 +7,7 @@ import DeleteRoute from "./DeleteRoute";
 import DeleteStation from "./DeleteStation";
 import CreateStation from "./CreateStation";
 import AddToRoute from "./AddToRoute";
+import CreateTimeTable from "./CreateTimeTable";
 
 class AdminPanel extends Component {
   state = {
@@ -50,12 +51,20 @@ class AdminPanel extends Component {
         ) : null}
         {this.state.activeTab === "link-2" ? (
           <div className="flex-main-container-admin">
-            <CreateStation />
-            <DeleteStation />
-            <AddToRoute />
+            <div>
+              <CreateStation />
+              <DeleteStation />
+            </div>
+            <div>
+              <AddToRoute />
+            </div>
           </div>
         ) : null}
-        {this.state.activeTab === "link-3" ? <div></div> : null}
+        {this.state.activeTab === "link-3" ? (
+          <div>
+            <CreateTimeTable />
+          </div>
+        ) : null}
       </div>
     );
   }

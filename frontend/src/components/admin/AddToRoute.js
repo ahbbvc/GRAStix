@@ -79,21 +79,23 @@ class AddToRoute extends Component {
         <Card className="card-admin">
           <Card.Body>
             <Card.Title>Add to route</Card.Title>
-            <Typeahead
-              className="typeahead-admin"
-              id="basic-example"
-              onChange={(selectedStation) => this.setState({ selectedStation })}
-              placeholder="Choose a station..."
-              options={this.state.stations}
-            />
-            <Typeahead
-              className="typeahead-admin"
-              id="basic-example"
-              onChange={(selectedRoute) => this.setState({ selectedRoute })}
-              placeholder="Choose a route..."
-              options={this.state.routes}
-            />
             <Form>
+              <Typeahead
+                className="typeahead-admin"
+                id="basic-example"
+                onChange={(selectedStation) =>
+                  this.setState({ selectedStation })
+                }
+                placeholder="Choose a station..."
+                options={this.state.stations}
+              />
+              <Typeahead
+                className="typeahead-admin"
+                id="basic-example"
+                onChange={(selectedRoute) => this.setState({ selectedRoute })}
+                placeholder="Choose a route..."
+                options={this.state.routes}
+              />
               <Button className="button-admin" onClick={this.handleSubmit}>
                 Add
               </Button>
