@@ -1,0 +1,32 @@
+.flex-container-admin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-main-container-admin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.card-admin {
+  width: 500px;
+  margin: 10px;
+}
+
+.alert-admin {
+  width: 500px;
+  margin: 10px;
+}
+
+.button-admin {
+  margin-top: 16px;
+}
+
+.typeahead-admin {
+  margin: 10px 0px 0px 0px;
+}
