@@ -1,11 +1,9 @@
 package com.example.routeservice.controller;
 
 import com.example.routeservice.model.Route;
-import com.example.routeservice.service.GrpcClientService;
+import com.example.routeservice.rabbitmq.Sender;
 import com.example.routeservice.service.RouteService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,9 +15,11 @@ public class RouteController {
     //@Autowired
     //private RestTemplate restTemplate;
     private final RouteService routeService;
+    private final Sender sender;
 
-    RouteController(RouteService routeService) {
+    RouteController(RouteService routeService, Sender sender) {
         this.routeService = routeService;
+        this.sender = sender;
     }
 
     @GetMapping("")
@@ -53,7 +53,8 @@ public class RouteController {
 
     @DeleteMapping("/{id}")
     void deleteRoute(@PathVariable Integer id) {
-        routeService.deleteById(id);
+        //routeService.deleteById(id);
+        sender.send(id);
     }
 
 }
