@@ -5,6 +5,9 @@ import com.example.ticketservice.Model.*;
 import com.example.ticketservice.Service.STicketService;
 import com.example.ticketservice.Wrappers.STicketResponseWraper;
 
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -33,12 +36,17 @@ public class STicketController {
     }
 
     @PostMapping("/single_tickets")
-    public STicketResponseWraper newSTicket(@Validated @RequestBody SingleTicket st) throws Exception{
-            User u = restTemplate.getForObject("http://user-service/user/" + st.getUserId(), User.class);
+    public STicketResponseWraper newSTicket(@Validated @RequestBody SingleTicket st,  @RequestHeader("authorization")String token) throws Exception{
 
-            Route r = restTemplate.getForObject("http://route-service/routes/" + st.getRouteId(), Route.class);
-            SingleTicket st2 = sTicketService.newSTicket(st);
-            return new STicketResponseWraper(st2.getId(), u, r, st2.getValidated(), st2.getTime());
+        HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", token);
+        HttpEntity<String> entity = new HttpEntity<String>("parameters",headers);
+
+        ResponseEntity<User> u  = restTemplate.exchange("http://user-service/user/" + st.getUserId(), HttpMethod.GET,  entity ,User.class);
+        ResponseEntity<Route> r = restTemplate.exchange("http://route-service/routes/" + st.getRouteId(),HttpMethod.GET,entity, Route.class);
+
+        SingleTicket st2 = sTicketService.newSTicket(st);
+        return new STicketResponseWraper(st2.getId(), u.getBody(), r.getBody(), st2.getValidated(), st2.getTime());
     }
     @GetMapping("/single_tickets/{id}")
     public ResponseEntity<SingleTicket> STicketById(@PathVariable Integer id) throws  Exception{
@@ -50,13 +58,17 @@ public class STicketController {
     }
 
     @GetMapping(value = "/single_tickets", params = "user_id")
-    public List<STicketResponseWraper> UserSTickets(@RequestParam("user_id") Integer userId){
+    public List<STicketResponseWraper> UserSTickets(@RequestParam("user_id") Integer userId, @RequestHeader("authorization")String token){
         List<SingleTicket> stickets =  sTicketService.findUserSTickets(userId);
         List<STicketResponseWraper> sts =  new ArrayList<STicketResponseWraper>();
-        User u  = restTemplate.getForObject("http://user-service/user/" + userId , User.class);
+        HttpHeaders headers = new HttpHeaders();
+
+        headers.add("Authorization", token);
+        HttpEntity<String> entity = new HttpEntity<String>("parameters",headers);
+        ResponseEntity<User> u  = restTemplate.exchange("http://user-service/user/" + userId, HttpMethod.GET,  entity ,User.class);
         for (SingleTicket st : stickets){
-            Route r = restTemplate.getForObject("http://route-service/routes/" + st.getRouteId(), Route.class);
-            sts.add(new STicketResponseWraper(st.getId(), u, r, st.getValidated(), st.getTime()));
+            ResponseEntity<Route> r = restTemplate.exchange("http://route-service/routes/" + st.getRouteId(),HttpMethod.GET,entity, Route.class);
+            sts.add(new STicketResponseWraper(st.getId(), u.getBody(), r.getBody(), st.getValidated(), st.getTime()));
         }
         return  sts;
     }

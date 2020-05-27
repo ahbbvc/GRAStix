@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/GRAStix.iml" filepath="$PROJECT_DIR$/.idea/GRAStix.iml" />
       <module fileurl="file://$PROJECT_DIR$/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/api-gateway/api-gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/authentication-service/authentication-service.iml" filepath="$PROJECT_DIR$/authentication-service/authentication-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/eureka-server/eureka-server.iml" filepath="$PROJECT_DIR$/eureka-server/eureka-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/route-service/route-service.iml" filepath="$PROJECT_DIR$/route-service/route-service.iml" />
       <module fileurl="file://$PROJECT_DIR$/system-events/system-events.iml" filepath="$PROJECT_DIR$/system-events/system-events.iml" />

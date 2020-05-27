@@ -62,8 +62,8 @@ public class ValidationService {
 
         if(user.getStatus() != null &&
            !user.getStatus().isEmpty() &&
-           !user.getStatus().toLowerCase().matches("^(student|penzioner|radnik)?$")) {
-            invalidProperties.add("Status should be equal to one of the following: Student, Penzioner, Radnik");
+           !user.getStatus().toLowerCase().matches("^(student|penzioner|radnik|admin)?$")) {
+            invalidProperties.add("Status should be equal to one of the following: Student, Penzioner, Radnik, Admin");
         }
 
         String result = nullProperties.size() > 0 ?

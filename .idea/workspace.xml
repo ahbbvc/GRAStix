@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_stephenc_jcip_jcip_annotations_1_0_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__com_nimbusds_nimbus_jose_jwt_7_8_1.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcpkix_jdk15on_1_56.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_bouncycastle_bcprov_jdk15on_1_56.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_oauth2_resource_server_2_3_0_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_6_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_cloud_spring_cloud_starter_netflix_eureka_client_2_2_0_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_oauth_boot_spring_security_oauth2_autoconfigure_2_0_1_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_jwt_1_0_9_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_oauth2_core_5_2_2_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_oauth2_jose_5_2_2_RELEASE.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_security_spring_security_oauth2_resource_server_5_2_2_RELEASE.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/OAuth2Config.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/OAuth2Config.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/WebSecurityConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/WebSecurityConfigurer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/model/MyUserPrincipal.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/model/MyUserPrincipal.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/model/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/RouteServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/RouteServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/interceptor/RouteServiceInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/interceptor/RouteServiceInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/route-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Controller/STicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Controller/STicketController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/ResourceServerConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/Service/ValidationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/Service/ValidationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/UserServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1bpTA6h2Bd2KlDGKzZijKCRVzAe" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../oauth-microservices/1x" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.example.apigateway" />
+      <recent name="com.example.routeservice" />
+      <recent name="com.example.userservice" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.ApiGatewayApplication">
+    <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.apigateway.ApiGatewayApplication" />
+      <module name="api-gateway" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.apigateway.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AuthenticationServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.authenticationservice.AuthenticationServiceApplication" />
+      <module name="authentication-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.authenticationservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="EurekaServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.eurekaserver.EurekaServerApplication" />
+      <module name="eureka-server" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.eurekaserver.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RouteServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.routeservice.RouteServiceApplication" />
+      <module name="route-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.routeservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.userservice.UserServiceApplication" />
+      <module name="user-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.example.userservice.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.ApiGatewayApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.AuthenticationServiceApplication" />
+        <item itemvalue="Application.EurekaServerApplication" />
+        <item itemvalue="Application.RouteServiceApplication" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="" />
+      <created>1589327889034</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589327889034</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="280" y="4" key="#Project_Structure" timestamp="1589327964957">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="280" y="4" key="#Project_Structure/0.0.1600.860@0.0.1600.860" timestamp="1589327964957" />
+    <state x="205" y="136" key="#com.intellij.ide.util.MemberChooser" timestamp="1589359684751">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="205" y="136" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1589359684751" />
+    <state x="580" y="185" key="FileChooserDialogImpl" timestamp="1589909996074">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
+    <state width="1557" height="284" key="GridCell.Tab.0.bottom" timestamp="1590573391969">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="284" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590573391969" />
+    <state width="1557" height="284" key="GridCell.Tab.0.center" timestamp="1590573391969">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="284" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1590573391969" />
+    <state width="1557" height="284" key="GridCell.Tab.0.left" timestamp="1590573391969">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="284" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1590573391969" />
+    <state width="1557" height="284" key="GridCell.Tab.0.right" timestamp="1590573391969">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="284" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1590573391969" />
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1590532239863">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590532239863" />
+    <state width="1557" height="250" key="GridCell.Tab.1.center" timestamp="1590532239863">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="250" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1590532239863" />
+    <state width="1557" height="250" key="GridCell.Tab.1.left" timestamp="1590532239863">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="250" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1590532239863" />
+    <state width="1557" height="250" key="GridCell.Tab.1.right" timestamp="1590532239863">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state width="1557" height="250" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1590532239863" />
+    <state x="330" y="85" key="Maven.ArtifactSearchDialog" timestamp="1589973178511">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="330" y="85" key="Maven.ArtifactSearchDialog/0.0.1600.860@0.0.1600.860" timestamp="1589973178511" />
+  </component>
+</project>
