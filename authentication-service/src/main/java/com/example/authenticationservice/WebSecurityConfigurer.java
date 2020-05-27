@@ -26,6 +26,7 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception{
         PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
         auth.userDetailsService(customUserDetails).passwordEncoder(encoder);
+
     }
 
     /*@Bean

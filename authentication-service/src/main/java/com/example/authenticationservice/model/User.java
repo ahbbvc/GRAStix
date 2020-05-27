@@ -8,6 +8,7 @@ public class User {
 
     @Column(nullable = false)
     private String password;
+    private String status;
     public User(){
 
     }
@@ -26,5 +27,13 @@ public class User {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

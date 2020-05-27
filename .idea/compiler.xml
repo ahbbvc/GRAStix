@@ -8,14 +8,16 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-server" />
         <module name="route-service" />
+        <module name="api-gateway" />
         <module name="ticket-service" />
         <module name="user-service" />
-        <module name="api-gateway" />
+        <module name="authentication-service" />
         <module name="system-events" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="api-gateway" target="1.8" />
+      <module name="authentication-service" target="1.8" />
       <module name="eureka-server" target="1.8" />
       <module name="route-service" target="10" />
       <module name="system-events" target="1.8" />
@@ -26,6 +28,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="api-gateway" options="-parameters" />
+      <module name="authentication-service" options="-parameters" />
       <module name="eureka-server" options="-parameters" />
       <module name="route-service" options="-parameters" />
       <module name="system-events" options="-parameters" />
