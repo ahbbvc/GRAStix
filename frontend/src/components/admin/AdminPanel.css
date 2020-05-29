@@ -1,0 +1,70 @@
+.flex-container-admin {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.flex-main-container-admin {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.flex-row-admin {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.card-admin {
+  width: 500px;
+  margin: 10px;
+}
+
+.card-large-admin {
+  margin: 10px;
+  width: 560px;
+}
+
+.card-mult-admin {
+  margin-top: 20px;
+}
+
+.alert-admin {
+  width: 500px;
+  margin: 10px;
+}
+
+.button-admin {
+  margin-top: 16px;
+}
+
+.typeahead-admin {
+  margin-bottom: 10px;
+}
+
+.half-admin {
+  width: 50%;
+}
+
+.label-admin {
+  margin-top: 4px;
+}
+
+.checkbox-admin {
+  margin-right: 10px;
+}
+
+.scrollable-admin {
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.datepicker-admin {
+  border: 1px solid #ced4da;
+  height: calc(1.5em + 0.75rem + 2px);
+  width: 100%;
+}
