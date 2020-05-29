@@ -5,6 +5,7 @@ import axios from "axios";
 import "./AdminPanel.css";
 
 class DeleteStation extends Component {
+  cons;
   state = {
     stations: [],
     alertVisible: false,
@@ -14,23 +15,35 @@ class DeleteStation extends Component {
   };
 
   componentDidMount() {
+    this.fetchStations();
+  }
+
+  componentDidUpdate() {
+    if (this.props.newStation) {
+      this.fetchStations();
+      this.props.markCreated("newStation", false);
+    }
+  }
+
+  fetchStations = () => {
     axios.get("http://localhost:8083/stations").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
     });
-  }
+  };
 
   handleDelete = (e) => {
     let id = this.state.selected[0].id;
-    axios.delete("http://localhost:8083/stations/" + id).then(
+    axios.delete("http://localhost:8083/stations/" + id).then(() => {
       this.setState({
         stations: this.state.stations.filter((station) => station.id !== id),
         alertMessage: "Success. Station is deleted.",
         alertVisible: true,
         alertColor: "success",
-      })
-    );
+      });
+      this.props.markCreated("newStation", true);
+    });
   };
 
   handleSubmit = (e) => {
@@ -41,7 +54,6 @@ class DeleteStation extends Component {
   };
 
   validate = (e) => {
-    console.log(this.state.selected);
     if (this.state.selected === "" || this.state.selected.length === 0) {
       this.setState({
         alertMessage: "Error! Station is not selected.",
@@ -58,7 +70,7 @@ class DeleteStation extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{ marginTop: "20px" }}>
         <Alert
           className="alert-admin"
           variant={this.state.alertColor}
@@ -71,16 +83,17 @@ class DeleteStation extends Component {
         <Card className="card-admin">
           <Card.Body>
             <Card.Title>Delete station</Card.Title>
-            <Typeahead
-              id="basic-example"
-              onChange={(selected) => this.setState({ selected })}
-              placeholder="Choose a station..."
-              options={this.state.stations}
-            />
             <Form>
-              <Button className="button-admin" onClick={this.handleSubmit}>
-                Delete
-              </Button>
+              <Form.Group>
+                <Form.Label>Station</Form.Label>
+                <Typeahead
+                  id="basic-example"
+                  onChange={(selected) => this.setState({ selected })}
+                  placeholder="Choose a station..."
+                  options={this.state.stations}
+                />
+              </Form.Group>
+              <Button onClick={this.handleSubmit}>Delete</Button>
             </Form>
           </Card.Body>
         </Card>

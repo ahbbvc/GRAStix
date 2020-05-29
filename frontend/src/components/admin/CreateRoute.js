@@ -11,6 +11,10 @@ class CreateRoute extends Component {
     alertColor: "",
   };
 
+  componentDidMount() {
+    this.setState({ transportType: "Bus" });
+  }
+
   handleChangeSelect = (e) => {
     this.setState({ transportType: e.target.value });
   };
@@ -33,6 +37,7 @@ class CreateRoute extends Component {
         alertVisible: true,
         alertColor: "success",
       });
+      this.props.markCreated("newRoute", true);
     });
   };
 

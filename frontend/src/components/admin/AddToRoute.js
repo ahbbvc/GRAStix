@@ -16,6 +16,19 @@ class AddToRoute extends Component {
   };
 
   componentDidMount() {
+    this.fetchData();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.newRoute !== this.props.newRoute ||
+      prevProps.newStation !== this.props.newStation
+    ) {
+      this.fetchData();
+    }
+  }
+
+  fetchData = () => {
     axios.get("http://localhost:8083/routes").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
@@ -27,7 +40,7 @@ class AddToRoute extends Component {
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
     });
-  }
+  };
 
   Add = (e) => {
     let stationId = this.state.selectedStation[0].id;
@@ -57,7 +70,30 @@ class AddToRoute extends Component {
   };
 
   validate = (e) => {
-    return true;
+    let s = "";
+    let isError = false;
+    if (
+      this.state.selectedStation === "" ||
+      this.state.selectedStation.length === 0
+    ) {
+      s += "Station is not selected.";
+      isError = true;
+    }
+    if (
+      this.state.selectedRoute === "" ||
+      this.state.selectedRoute.length === 0
+    ) {
+      s += " Route is not selected.";
+      isError = true;
+    }
+    if (isError) {
+      this.setState({
+        alertMessage: "Error! " + s,
+        alertColor: "danger",
+        alertVisible: true,
+      });
+      return false;
+    } else return true;
   };
 
   toggle = () => {
@@ -78,27 +114,29 @@ class AddToRoute extends Component {
         </Alert>
         <Card className="card-admin">
           <Card.Body>
-            <Card.Title>Add to route</Card.Title>
+            <Card.Title>Add station to route</Card.Title>
             <Form>
-              <Typeahead
-                className="typeahead-admin"
-                id="basic-example"
-                onChange={(selectedStation) =>
-                  this.setState({ selectedStation })
-                }
-                placeholder="Choose a station..."
-                options={this.state.stations}
-              />
-              <Typeahead
-                className="typeahead-admin"
-                id="basic-example"
-                onChange={(selectedRoute) => this.setState({ selectedRoute })}
-                placeholder="Choose a route..."
-                options={this.state.routes}
-              />
-              <Button className="button-admin" onClick={this.handleSubmit}>
-                Add
-              </Button>
+              <Form.Group>
+                <Form.Label>Station</Form.Label>
+                <Typeahead
+                  className="typeahead-admin"
+                  id="basic-example"
+                  onChange={(selectedStation) =>
+                    this.setState({ selectedStation })
+                  }
+                  placeholder="Choose a station..."
+                  options={this.state.stations}
+                />
+                <Form.Label>Route</Form.Label>
+                <Typeahead
+                  className="typeahead-admin"
+                  id="basic-example"
+                  onChange={(selectedRoute) => this.setState({ selectedRoute })}
+                  placeholder="Choose a route..."
+                  options={this.state.routes}
+                />
+              </Form.Group>
+              <Button onClick={this.handleSubmit}>Add</Button>
             </Form>
           </Card.Body>
         </Card>

@@ -14,12 +14,23 @@ class DeleteRoute extends Component {
   };
 
   componentDidMount() {
+    this.fetchRoutes();
+  }
+
+  componentDidUpdate() {
+    if (this.props.newRoute) {
+      this.fetchRoutes();
+      this.props.markCreated("newRoute", false);
+    }
+  }
+
+  fetchRoutes = () => {
     axios.get("http://localhost:8083/routes").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
     });
-  }
+  };
 
   handleDelete = (e) => {
     let id = this.state.selected[0].id;
@@ -70,16 +81,17 @@ class DeleteRoute extends Component {
         <Card className="card-admin">
           <Card.Body>
             <Card.Title>Delete route</Card.Title>
-            <Typeahead
-              id="basic-example"
-              onChange={(selected) => this.setState({ selected })}
-              placeholder="Choose a route..."
-              options={this.state.routes}
-            />
             <Form>
-              <Button className="button-admin" onClick={this.handleSubmit}>
-                Delete
-              </Button>
+              <Form.Group>
+                <Form.Label>Route</Form.Label>
+                <Typeahead
+                  id="basic-example"
+                  onChange={(selected) => this.setState({ selected })}
+                  placeholder="Choose a route..."
+                  options={this.state.routes}
+                />
+              </Form.Group>
+              <Button onClick={this.handleSubmit}>Delete</Button>
             </Form>
           </Card.Body>
         </Card>
