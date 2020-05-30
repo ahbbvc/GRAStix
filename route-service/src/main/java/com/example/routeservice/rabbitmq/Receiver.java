@@ -16,16 +16,18 @@ public class Receiver {
 
     @RabbitHandler
     public void receive(String message) {
-        String status = message.split(" ")[0];
-        Integer routeId = parseInt(message.split(" ")[1]);
-        System.out.println("Received message with status: " + message);
+        try {
+            String status = message.split(" ")[0];
+            Integer routeId = parseInt(message.split(" ")[1]);
+            System.out.println("Received message with status: " + message);
 
-        if(status.equals("Ok")) {
-            routeRepository.deleteById(routeId);
+            if(status.equals("Ok")) {
+                routeRepository.deleteById(routeId);
+            }
+        } catch (Exception e) {
+            System.out.println("Error! " + e);
         }
-        else if(status == "Error") {
 
-        }
     }
 
 }
