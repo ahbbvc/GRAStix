@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class RouteControllerTest {
-
+/*
     @Autowired
     private MockMvc mvc;
 
@@ -159,5 +159,5 @@ public class RouteControllerTest {
             throw new RuntimeException(e);
         }
     }
-
+*/
 }
