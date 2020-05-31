@@ -34,13 +34,19 @@ public class UserService {
         return new ResponseEntity(user.get(), HttpStatus.OK);
     }
 
-    public ResponseEntity<User> saveUser(User user) throws InvalidRequestException {
-        this._validationService.validateUserProperties(user);
-        BCryptPasswordEncoder bCryptPasswordEncoder =
-                new BCryptPasswordEncoder(10);
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        User newUser = this._userRepository.save(user);
-        return new ResponseEntity(newUser, HttpStatus.OK);
+    public ResponseEntity<User> saveUser(User user) throws InvalidRequestException, UserNotFoundException {
+        try {
+            findUserByEmail(user.getEmail());
+            return new ResponseEntity("User already exists.", HttpStatus.CONFLICT);
+        }
+        catch(UserNotFoundException e) {
+            this._validationService.validateUserProperties(user);
+            BCryptPasswordEncoder bCryptPasswordEncoder =
+                    new BCryptPasswordEncoder(10);
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            User newUser = this._userRepository.save(user);
+            return new ResponseEntity(newUser, HttpStatus.OK);
+        }
     }
 
     public ResponseEntity<User> updateExistingUser(Integer id, User user) throws InvalidRequestException, UserNotFoundException {
@@ -61,8 +67,9 @@ public class UserService {
         return new ResponseEntity("User successfully deleted.", HttpStatus.OK);
     }
 
-    public ResponseEntity<User> findUserByEmil(String email) {
-        User user =this._userRepository.findByEmail(email);
+    public ResponseEntity<User> findUserByEmail(String email) throws UserNotFoundException {
+        Optional<User> user = this._userRepository.findByEmail(email);
+        this._validationService.validateObject(user);
         return new ResponseEntity(user, HttpStatus.OK);
     }
 }
