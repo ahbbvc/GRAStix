@@ -7,7 +7,7 @@ import DeleteRoute from "./DeleteRoute";
 import DeleteStation from "./DeleteStation";
 import CreateStation from "./CreateStation";
 import AddToRoute from "./AddToRoute";
-import CreateTimetable from "./CreateTimetable";
+import CreateTimetable from "./CreateTimeTable";
 import DeleteTimetable from "./DeleteTimetable";
 
 class AdminPanel extends Component {
