@@ -8,10 +8,10 @@
         <outputRelativeToContentRoot value="true" />
         <module name="eureka-server" />
         <module name="route-service" />
-        <module name="api-gateway" />
         <module name="ticket-service" />
         <module name="user-service" />
         <module name="authentication-service" />
+        <module name="api-gateway" />
         <module name="system-events" />
       </profile>
     </annotationProcessing>
@@ -22,7 +22,7 @@
       <module name="route-service" target="10" />
       <module name="system-events" target="1.8" />
       <module name="ticket-service" target="10" />
-      <module name="user-service" target="1.8" />
+      <module name="user-service" target="10" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">

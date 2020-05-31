@@ -13,12 +13,15 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/routes/**").hasAuthority("ROLE_ADMIN")
-                .antMatchers("/authentication/**").permitAll()
+                .antMatchers(HttpMethod.DELETE, "/routes/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers( "/routes/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+                .antMatchers( "/tickets/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
+                .antMatchers(HttpMethod.POST, "/users/user/add").permitAll()
+                .antMatchers( "/users/**").hasAnyAuthority("ROLE_ADMIN","ROLE_USER")
                 .antMatchers("/**").permitAll();
     }
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
-        // do not require a resource id in AccessToken.
         resources.resourceId(null);
     }
 }
