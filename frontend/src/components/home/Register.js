@@ -52,10 +52,9 @@ class Register extends Component {
                 alertVisible: true,
                 alertColor: "success",
             });
-            //   this.props.markCreated("newRoute", true);
         }).catch((error) => {
             this.setState({
-                alertMessage: "There was an error while processing request. " + error.response.data,
+                alertMessage: "There was an error while processing request. " + error.response?.data,
                 alertVisible: true,
                 alertColor: "danger",
             });
