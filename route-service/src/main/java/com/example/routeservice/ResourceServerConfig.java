@@ -10,10 +10,11 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public  void configure(HttpSecurity http) throws Exception{
-        http
+        http    //.authorizeRequests().anyRequest().permitAll();
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST).hasAuthority("ROLE_ADMIN")
-                .antMatchers("/**").permitAll();
+                .antMatchers(HttpMethod.POST, "/**").hasAuthority("ROLE_ADMIN")
+                .antMatchers(HttpMethod.DELETE, "/**").hasAuthority("ROLE_ADMIN")
+                .anyRequest().permitAll();
     }
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
