@@ -72,10 +72,10 @@ class MyTickets extends Component {
      
     render(){
         
-        if(this.state.isLoaded===false){
+      /*  if(this.state.isLoaded===false){
                 return (<div>Loading ...</div>)
         }
-        else{
+        else{*/
         return (
             
             <div >
@@ -88,7 +88,7 @@ class MyTickets extends Component {
             </div>
             </div>
         );
-        }
+       // }
     }
 }
 
