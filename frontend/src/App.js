@@ -5,6 +5,7 @@ import "./App.css";
 import "./cosmo.css";
 import Header from "./components/main/Header";
 import AdminPanel from "./components/admin/AdminPanel";
+import Tickets from "./components/tickets/Tickets";
 import HomePage from "./components/home/HomePage";
 
 class App extends Component {
@@ -15,6 +16,7 @@ class App extends Component {
         <Router>
           <Route exact path="/" component={HomePage}/>
           <Route path="/admin" component={AdminPanel} />
+          <Route path="/tickets" component={Tickets}/>
         </Router>
       </div>
     );

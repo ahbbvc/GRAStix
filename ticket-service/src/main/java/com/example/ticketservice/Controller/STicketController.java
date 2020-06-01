@@ -19,6 +19,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class STicketController {
     private final STicketService sTicketService;
     final RestTemplate restTemplate;
@@ -27,7 +28,6 @@ public class STicketController {
         this.sTicketService= sTicketService;
         this.restTemplate = restTemplate;
     }
-
 
     @GetMapping("/single_tickets")
     public List<SingleTicket> AllSTickets(){

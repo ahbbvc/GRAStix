@@ -20,25 +20,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_xml_bind_jaxb_api_2_3_1.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_springframework_boot_spring_boot_starter_security_2_2_5_RELEASE.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ApiGatewayApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ResourceServerConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway/ResourceServerConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/ResourceServerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/RouteServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/src/main/java/com/example/routeservice/RouteServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/route-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/route-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/ResourceServerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/TicketServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/TicketServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/ResourceServerConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/UserServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/userservice/UserServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/admin/AdminPanel.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/admin/AdminPanel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyTickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Controller/STicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Controller/STicketController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -79,7 +69,7 @@
       <recent name="C:\Users\Naida\Desktop\GRAStix\api-gateway\src\main\java\com\example\apigateway" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.UserServiceApplication">
+  <component name="RunManager" selected="Application.SystemEventsApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apigateway.ApiGatewayApplication" />
       <module name="api-gateway" />
@@ -119,12 +109,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.ticketservice.TicketServiceApplication" />
-      <module name="ticket-service" />
+    <configuration name="SystemEventsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.systemevents.SystemEventsApplication" />
+      <module name="system-events" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.ticketservice.*" />
+          <option name="PATTERN" value="com.example.systemevents.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -147,11 +137,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TicketServiceApplication" />
-        <item itemvalue="Application.AuthenticationServiceApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
-        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.RouteServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.SystemEventsApplication" />
+        <item itemvalue="Application.AuthenticationServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -193,38 +183,38 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
-    <state width="1557" height="276" key="GridCell.Tab.0.bottom" timestamp="1590951088022">
+    <state width="1557" height="276" key="GridCell.Tab.0.bottom" timestamp="1591037830272">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590951088022" />
-    <state width="1557" height="276" key="GridCell.Tab.0.center" timestamp="1590951088022">
+    <state width="1557" height="276" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591037830272" />
+    <state width="1557" height="276" key="GridCell.Tab.0.center" timestamp="1591037830272">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1590951088022" />
-    <state width="1557" height="276" key="GridCell.Tab.0.left" timestamp="1590951088022">
+    <state width="1557" height="276" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591037830272" />
+    <state width="1557" height="276" key="GridCell.Tab.0.left" timestamp="1591037830272">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1590951088022" />
-    <state width="1557" height="276" key="GridCell.Tab.0.right" timestamp="1590951088022">
+    <state width="1557" height="276" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591037830272" />
+    <state width="1557" height="276" key="GridCell.Tab.0.right" timestamp="1591037830272">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1590951088022" />
-    <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1590950589855">
+    <state width="1557" height="276" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591037830272" />
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1590965578889">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590950589855" />
-    <state width="1557" height="250" key="GridCell.Tab.1.center" timestamp="1590950589855">
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1590965578889" />
+    <state width="1557" height="250" key="GridCell.Tab.1.center" timestamp="1590965578889">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1590950589855" />
-    <state width="1557" height="250" key="GridCell.Tab.1.left" timestamp="1590950589855">
+    <state width="1557" height="250" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1590965578889" />
+    <state width="1557" height="250" key="GridCell.Tab.1.left" timestamp="1590965578889">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1590950589855" />
-    <state width="1557" height="250" key="GridCell.Tab.1.right" timestamp="1590950589855">
+    <state width="1557" height="250" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1590965578889" />
+    <state width="1557" height="250" key="GridCell.Tab.1.right" timestamp="1590965578889">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1590950589855" />
+    <state width="1557" height="250" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1590965578889" />
     <state x="330" y="85" key="Maven.ArtifactSearchDialog" timestamp="1589973178511">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
