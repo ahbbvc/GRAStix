@@ -14,7 +14,6 @@ class Register extends Component {
             firstName: "",
             lastName: "",
             email: "",
-            password: "",
             birthDate: new Date(),
             password: "",
             confirmPassword: "",
@@ -44,9 +43,8 @@ class Register extends Component {
     };
 
     handleRegister = () => {
-        console.log(this.state.form);
         this.setState({ alertVisible: false });
-        axios.post("http://localhost:8081/user/add", this.state.form).then(() => {
+        axios.post("http://localhost:8762/users/user/add", this.state.form).then(() => {
             this.setState({
                 alertMessage: "Registration is successful, you can now login.",
                 alertVisible: true,
@@ -149,7 +147,7 @@ class Register extends Component {
                                 ></DatePicker>
                             </Form.Group>
 
-                            <Form.Group controlId="email">
+                            <Form.Group controlId="registerEmail">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"
@@ -159,7 +157,7 @@ class Register extends Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="password">
+                            <Form.Group controlId="registerPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control
                                     type="password"

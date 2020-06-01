@@ -33,17 +33,17 @@ class Login extends Component {
         }
     };
 
-    handleLogin = (e) => {
-        console.log(this.state);
-        this.toggle();
-        // axios.post("http://localhost:8083/routes", this.state).then(() => {
-        //     this.setState({
-        //         alertMessage: "Success. Route is created.",
-        //         alertVisible: true,
-        //         alertColor: "success",
-        //     });
-        //     this.props.markCreated("newRoute", true);
-        // });
+    handleLogin = () => {
+        this.setState({ alertVisible: false });
+        axios.post("http://localhost:8762/login", this.state).then((response) => {
+            this.props.markLogin(response, this.state.email);
+        }).catch((error) => {
+            this.setState({
+                alertMessage: "There was an error while processing request.",
+                alertVisible: true,
+                alertColor: "danger",
+            });
+        });
     };
 
     loginHasError = () => {
@@ -68,7 +68,7 @@ class Login extends Component {
                     <Card.Body>
                         <Card.Title>Login</Card.Title>
                         <Form>
-                            <Form.Group controlId="email">
+                            <Form.Group controlId="loginEmail">
                                 <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"
@@ -77,7 +77,7 @@ class Login extends Component {
                                 />
                             </Form.Group>
 
-                            <Form.Group controlId="password">
+                            <Form.Group controlId="loginPassword">
                                 <Form.Label>Password</Form.Label>
                                 <Form.Control
                                     type="password"
