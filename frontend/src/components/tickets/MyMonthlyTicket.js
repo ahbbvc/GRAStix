@@ -1,14 +1,13 @@
-
 import React, { Component } from 'react'
-import { ListGroup } from 'react-bootstrap';
-export class MySingleTicket extends Component {
+import {ListGroup} from "react-bootstrap"
+export class MyMonthlyTicket extends Component {
     constructor(props){
         super(props);
         
     }
  
     render() {
-        let validated = this.props.singleTicket.validated;
+        let validated = this.props.monthlyTicket.validated;
         let button;
         if(validated){
                  button =<button type="button" className="btn btn-outline-primary"> Validate</button>
@@ -18,8 +17,8 @@ export class MySingleTicket extends Component {
         }
         return (
             <ListGroup.Item>
-                <div>Route : {this.props.singleTicket.route.routeName}</div>
-                <div> Transport type : {this.props.singleTicket.route.transportType}</div>
+                <div>Route : {this.props.monthlyTicket.route_name}</div>
+                <div> Transport type : {this.props.monthlyTicket.transport_type}</div>
                 {button}
 
             </ListGroup.Item>
@@ -27,5 +26,4 @@ export class MySingleTicket extends Component {
     }
 }
 
-export default MySingleTicket
-
+export default MyMonthlyTicket
