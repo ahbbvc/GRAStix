@@ -14,6 +14,7 @@ import io.grpc.ManagedChannelBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -48,7 +49,7 @@ public class UserController {
         return this._userService.findUserById(id);
     }
     @PostMapping("/add")
-    ResponseEntity<User> addNewUser(@RequestBody User user) throws InvalidRequestException {
+    ResponseEntity<User> addNewUser(@RequestBody User user) throws InvalidRequestException, UserNotFoundException {
         return _userService.saveUser(user);
     }
 
@@ -63,8 +64,8 @@ public class UserController {
     }
 
     @GetMapping(value ="", params = "email")
-    public ResponseEntity<User> UserByMail(@RequestParam("email") String email){
-        return this._userService.findUserByEmil(email);
+    public ResponseEntity<User> UserByMail(@RequestParam("email") String email) throws UserNotFoundException {
+        return this._userService.findUserByEmail(email);
     }
 
 

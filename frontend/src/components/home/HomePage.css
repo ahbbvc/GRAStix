@@ -1,0 +1,22 @@
+.home-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.card-home {
+    width: 500px;
+    margin: 10px;
+}
+
+.home-button {
+    float: right;
+}
+
+.home-datepicker {
+    border: 1px solid #ced4da;
+    height: calc(1.5em + 0.75rem + 2px);
+    width: 100%;
+}
