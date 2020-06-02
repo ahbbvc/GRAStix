@@ -38,8 +38,7 @@ public class UserService {
         try {
             findUserByEmail(user.getEmail());
             return new ResponseEntity("User already exists.", HttpStatus.CONFLICT);
-        }
-        catch(UserNotFoundException e) {
+        } catch (UserNotFoundException e) {
             this._validationService.validateUserProperties(user);
             BCryptPasswordEncoder bCryptPasswordEncoder =
                     new BCryptPasswordEncoder(10);

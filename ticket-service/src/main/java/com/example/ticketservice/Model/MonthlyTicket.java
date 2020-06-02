@@ -21,31 +21,35 @@ public class MonthlyTicket {
     @OneToMany(mappedBy = "mticket", cascade = CascadeType.PERSIST)
     private List<MTicketRoute> routes;
     @NotNull(message = "Month can not be null")
-    @Column (nullable = false)
+    @Column(nullable = false)
     private String month;
 
     @Column(nullable = false)
     private Boolean validated;
 
-    public MonthlyTicket(){
+    public MonthlyTicket() {
 
     }
-    public MonthlyTicket(Integer userId , String month ){
-        this.month= month;
-        this.validated= false;
-        this.userId=userId;
+
+    public MonthlyTicket(Integer userId, String month) {
+        this.month = month;
+        this.validated = false;
+        this.userId = userId;
 
     }
-    public MonthlyTicket(Integer userId , String month , List<MTicketRoute> routes){
-        this.month= month;
-        this.validated= false;
-        this.userId=userId;
+
+    public MonthlyTicket(Integer userId, String month, List<MTicketRoute> routes) {
+        this.month = month;
+        this.validated = false;
+        this.userId = userId;
         this.routes = routes;
 
     }
+
     public Boolean getValidated() {
         return validated;
     }
+
     public void setId(Integer id) {
         this.id = id;
     }

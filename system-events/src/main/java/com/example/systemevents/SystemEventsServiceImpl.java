@@ -9,7 +9,7 @@ import io.grpc.stub.StreamObserver;
 import net.devh.boot.grpc.server.service.GrpcService;
 
 @GrpcService
-public class SystemEventsServiceImpl extends SystemEventsServiceGrpc.SystemEventsServiceImplBase  {
+public class SystemEventsServiceImpl extends SystemEventsServiceGrpc.SystemEventsServiceImplBase {
 
     private final EventRepository repository;
 

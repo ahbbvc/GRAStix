@@ -34,6 +34,7 @@ class Login extends Component {
     };
 
     handleLogin = () => {
+
         this.setState({ alertVisible: false });
         axios.post("http://localhost:8762/login", this.state).then((response) => {
             this.props.markLogin(response, this.state.email);

@@ -40,13 +40,13 @@ class CreateTimetable extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8083/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
     });
 
-    axios.get("http://localhost:8083/stations").then((res) => {
+    axios.get("http://localhost:8762/routes/stations").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
@@ -62,17 +62,17 @@ class CreateTimetable extends Component {
     let stationId = this.state.selectedStation[0].id;
     let routeId = this.state.selectedRoute[0].id;
 
-    const firstRequest = axios.post("http://localhost:8083/timetables", {
+    const firstRequest = axios.post("http://localhost:8762/routes/timetables", {
       timeOfArrival: json1,
       timeOfDeparture: json2,
       regular: this.state.regular,
     });
 
     const secondRequest = axios.post(
-      "http://localhost:8083/routestations?route=" +
-        routeId +
-        "&station=" +
-        stationId
+      "http://localhost:8762/routes/routestations?route=" +
+      routeId +
+      "&station=" +
+      stationId
     );
     try {
       const [firstResponse, secondResponse] = await Promise.all([
@@ -81,10 +81,10 @@ class CreateTimetable extends Component {
       ]);
       await axios
         .post(
-          "http://localhost:8083/timetables/addtimetable?timetable=" +
-            firstResponse.data.id +
-            "&routestation=" +
-            secondResponse.data.id
+          "http://localhost:8762/routes/timetables/addtimetable?timetable=" +
+          firstResponse.data.id +
+          "&routestation=" +
+          secondResponse.data.id
         )
         .then(
           this.setState({

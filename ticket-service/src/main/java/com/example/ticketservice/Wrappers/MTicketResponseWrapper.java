@@ -12,7 +12,7 @@ public class MTicketResponseWrapper {
     private Boolean validated;
     private String month;
 
-    public MTicketResponseWrapper(Integer id,User user, List<Route> routes, Boolean validated, String month) {
+    public MTicketResponseWrapper(Integer id, User user, List<Route> routes, Boolean validated, String month) {
         this.id = id;
         this.user = user;
         this.routes = routes;

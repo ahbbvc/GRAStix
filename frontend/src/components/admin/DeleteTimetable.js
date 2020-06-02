@@ -22,7 +22,7 @@ class DeleteTimetable extends Component {
   };
 
   fetchData() {
-    axios.get("http://localhost:8083/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
@@ -35,7 +35,7 @@ class DeleteTimetable extends Component {
 
   async fetchTimetables() {
     try {
-      const response = await axios.get("http://localhost:8083/timetables");
+      const response = await axios.get("http://localhost:8762/routes/timetables");
 
       let data = response.data;
       this.setState({
@@ -106,11 +106,11 @@ class DeleteTimetable extends Component {
               <Button onClick={this.search}>Search</Button>
               {this.state.showTimetables
                 ? this.state.timetables.map((item) => (
-                    <Timetable
-                      data={item}
-                      updateTimetables={this.updateTimetables}
-                    ></Timetable>
-                  ))
+                  <Timetable
+                    data={item}
+                    updateTimetables={this.updateTimetables}
+                  ></Timetable>
+                ))
                 : null}
             </div>
           </Card.Body>

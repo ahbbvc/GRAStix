@@ -14,9 +14,9 @@ public class SingleTicket {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-   /* @ManyToOne
-    @JoinColumn(name= "user_id")*/
-   @NotNull(message = "User cannot be null")
+    /* @ManyToOne
+     @JoinColumn(name= "user_id")*/
+    @NotNull(message = "User cannot be null")
     private Integer userId;
 
     /*@ManyToOne
@@ -28,18 +28,19 @@ public class SingleTicket {
     @Column(nullable = false)
     private Timestamp time;
 
-    @Column (nullable = false)
+    @Column(nullable = false)
     private Boolean validated;
 
-    public SingleTicket(){
+    public SingleTicket() {
         this.time = new Timestamp(System.currentTimeMillis());
-        this.validated= false;
+        this.validated = false;
     }
-    public SingleTicket(Integer userId, Integer routeId ){
-        this.userId= userId;
-        this.routeId=routeId;
+
+    public SingleTicket(Integer userId, Integer routeId) {
+        this.userId = userId;
+        this.routeId = routeId;
         this.time = new Timestamp(System.currentTimeMillis());
-        this.validated= false;
+        this.validated = false;
     }
 
     public Integer getId() {
@@ -53,6 +54,7 @@ public class SingleTicket {
     public void setValidated(Boolean validated) {
         this.validated = validated;
     }
+
     public Boolean getValidated() {
         return validated;
     }

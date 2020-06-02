@@ -3,9 +3,10 @@ package com.example.apigateway.Model;
 public class Login {
     private String email;
     private String password;
-    public Login(String email, String password){
-        this.email=email;
-        this.password=password;
+
+    public Login(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
     public String getEmail() {

@@ -23,7 +23,7 @@ class CreateStation extends Component {
   };
 
   handlePost = (e) => {
-    axios.post("http://localhost:8083/stations", this.state).then(() => {
+    axios.post("http://localhost:8762/routes/stations", this.state).then(() => {
       this.setState({
         alertMessage: "Success. Station is created.",
         alertVisible: true,

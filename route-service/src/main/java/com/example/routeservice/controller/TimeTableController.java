@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:3000")
 @RestController
 @RequestMapping("/timetables")
 public class TimeTableController {
@@ -32,7 +31,7 @@ public class TimeTableController {
 
     @PostMapping("")
     TimeTable createTimeTable(@Valid @RequestBody TimeTable data, BindingResult result) throws InvalidTimeTableException {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             throw new InvalidTimeTableException("Invalid date format");
         }
         return timeTableService.createTimeTable(data.getTimeOfArrival(), data.getTimeOfDeparture(), data.isRegular());
@@ -45,7 +44,7 @@ public class TimeTableController {
 
     @PutMapping("/{id}")
     TimeTable updateTimeTable(@PathVariable Integer id, @Valid @RequestBody TimeTable data, BindingResult result) throws InvalidTimeTableException {
-        if(result.hasErrors()) {
+        if (result.hasErrors()) {
             throw new InvalidTimeTableException("Invalid date format");
         }
         return timeTableService.updateTimeTable(id, data.getTimeOfArrival(), data.getTimeOfDeparture(), data.isRegular());

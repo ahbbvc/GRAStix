@@ -14,11 +14,10 @@ public class MyUserPrincipal implements UserDetails {
 
     public MyUserPrincipal(User user) {
         this.user = user;
-        if(user.getStatus().equals("admin")){
-            role="ROLE_ADMIN";
-        }
-        else{
-            role="ROLE_USER";
+        if (user.getStatus().equals("admin")) {
+            role = "ROLE_ADMIN";
+        } else {
+            role = "ROLE_USER";
         }
     }
 

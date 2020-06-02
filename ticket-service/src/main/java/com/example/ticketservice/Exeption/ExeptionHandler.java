@@ -28,11 +28,12 @@ import java.util.List;
 @ControllerAdvice
 public class ExeptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler({TicketNotFoundException.class})
-    private ResponseEntity<ApiError> handleTicketNotFoundException(TicketNotFoundException e){
+    private ResponseEntity<ApiError> handleTicketNotFoundException(TicketNotFoundException e) {
         ApiError apiError = new ApiError(HttpStatus.NOT_FOUND, e.getMessage());
         return new ResponseEntity<ApiError>(apiError, HttpStatus.NOT_FOUND);
     }
-   @Override
+
+    @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
             MethodArgumentNotValidException ex,
             HttpHeaders headers,
@@ -51,6 +52,7 @@ public class ExeptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(
                 ex, apiError, headers, apiError.getStatus(), request);
     }
+
     @Override
     protected ResponseEntity<Object> handleBindException(final BindException ex, final HttpHeaders headers, final HttpStatus status, final WebRequest request) {
         final List<String> errors = new ArrayList<String>();
@@ -87,14 +89,14 @@ public class ExeptionHandler extends ResponseEntityExceptionHandler {
     }
 
 
-    @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+    @ExceptionHandler({MethodArgumentTypeMismatchException.class})
     public ResponseEntity<Object> handleMethodArgumentTypeMismatch(final MethodArgumentTypeMismatchException ex, final WebRequest request) {
         final String error = ex.getName() + " should be of type " + ex.getRequiredType().getName();
         final ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
 
-    @ExceptionHandler({ ConstraintViolationException.class })
+    @ExceptionHandler({ConstraintViolationException.class})
     public ResponseEntity<Object> handleConstraintViolation(final ConstraintViolationException ex, final WebRequest request) {
         final List<String> errors = new ArrayList<String>();
         for (final ConstraintViolation<?> violation : ex.getConstraintViolations()) {
@@ -140,8 +142,9 @@ public class ExeptionHandler extends ResponseEntityExceptionHandler {
         final ApiError apiError = new ApiError(HttpStatus.UNSUPPORTED_MEDIA_TYPE, ex.getLocalizedMessage(), builder.substring(0, builder.length() - 2));
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
     }
+
     // 500
-    @ExceptionHandler({ Exception.class })
+    @ExceptionHandler({Exception.class})
     public ResponseEntity<Object> handleAll(final Exception ex, final WebRequest request) {
         final ApiError apiError = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR, ex.getLocalizedMessage(), "error occurred");
         return new ResponseEntity<Object>(apiError, new HttpHeaders(), apiError.getStatus());
