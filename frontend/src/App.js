@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Link, Redirect } from "react-router-dom";
+import { GuardProvider, GuardedRoute } from 'react-router-guards';
 import "./App.css";
 //import "bootstrap/dist/css/bootstrap.min.css";
 import "./cosmo.css";
@@ -8,15 +9,32 @@ import AdminPanel from "./components/admin/AdminPanel";
 import Tickets from "./components/tickets/Tickets";
 import HomePage from "./components/home/HomePage";
 
+const requireLogin = (to, from, next) => {
+  if (to.meta.auth) {
+    if (!!sessionStorage.getItem('access_token')) {
+      next();
+    } else {
+      next.redirect('/');
+    }
+  } else {
+    next.redirect('/');
+  }
+}
+
 class App extends Component {
   render() {
     return (
       <div>
         <Header></Header>
         <Router>
-          <Route exact path="/" component={HomePage}/>
-          <Route path="/admin" component={AdminPanel} />
-          <Route path="/tickets" component={Tickets}/>
+          <Route exact path="/" component={HomePage} />
+          <GuardProvider guards={[requireLogin]}>
+            <GuardedRoute path="/admin" component={AdminPanel} meta={{ auth: true }} />
+            <GuardedRoute path="/tickets" component={Tickets} meta={{ auth: true }} />
+          </GuardProvider>
+          <Route path="*" component={HomePage}>
+            <Redirect to="/" />
+          </Route>
         </Router>
       </div>
     );
