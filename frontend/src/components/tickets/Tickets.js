@@ -6,6 +6,7 @@ import { Link } from "react-router-dom"
 import MyTickets from './MyTickets'
 import SingleTicket from './SingleTicket'
 import MonthlyTicket from './MonthlyTicket'
+import "./Tickets.css";
 
 export class Tickets extends Component {
     state ={

@@ -1,25 +1,29 @@
 import React, { Component } from 'react'
-import {ListGroup} from "react-bootstrap"
+import {ListGroup, Card, ListGroupItem} from "react-bootstrap"
 export class MyMonthlyTicket extends Component {
     constructor(props){
         super(props);
-        
     }
- 
+    
+    list = this.props.monthlyTicket.routes.map((route)=>(
+        <ListGroupItem >
+            <div> Route: {route.routeName}</div>
+            <div> Transport type: {route.transportType}</div>
+        </ListGroupItem>
+    ));
     render() {
-        let validated = this.props.monthlyTicket.validated;
-        let button;
-        if(validated){
-                 button =<button type="button" className="btn btn-outline-primary"> Validate</button>
-        }
-        else {
-            button =<button type="button" className="btn btn-outline-secondary"> Validated </button>
-        }
+        
+        
         return (
             <ListGroup.Item>
-                <div>Route : {this.props.monthlyTicket.route_name}</div>
-                <div> Transport type : {this.props.monthlyTicket.transport_type}</div>
-                {button}
+                <Card.Title>{this.props.monthlyTicket.month}</Card.Title>
+                <Card>
+                    <Card.Header>Routes</Card.Header>
+                    <ListGroup>
+                         {this.list}
+                    </ListGroup>
+                
+                </Card>
 
             </ListGroup.Item>
         )

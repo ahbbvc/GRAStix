@@ -5,6 +5,7 @@ import com.example.apigateway.Model.Login;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -14,6 +15,7 @@ import java.util.Arrays;
 import java.util.Base64;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 public class ApiGatewayController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login){
