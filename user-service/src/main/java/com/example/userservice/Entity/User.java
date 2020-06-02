@@ -1,7 +1,5 @@
 package com.example.userservice.Entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
 import java.util.Date;
 
@@ -32,7 +30,8 @@ public class User {
     private Date expiryDate;
     private String status;
 
-    public User() {}
+    public User() {
+    }
 
     public User(String firstName, String lastName, Date birthDate, String email, String password, String cardNumber,
                 String cvv, Date expiryDate, String status) {

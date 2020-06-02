@@ -1,0 +1,16 @@
+.container-center{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  #qrc{
+      
+    justify-content: center;
+  }
+.card-ticket{
+    width: '18rem'
+  }
+  

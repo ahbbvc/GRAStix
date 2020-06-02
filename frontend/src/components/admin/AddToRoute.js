@@ -29,13 +29,13 @@ class AddToRoute extends Component {
   }
 
   fetchData = () => {
-    axios.get("http://localhost:8083/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
     });
 
-    axios.get("http://localhost:8083/stations").then((res) => {
+    axios.get("http://localhost:8762/routes/stations").then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
@@ -48,10 +48,10 @@ class AddToRoute extends Component {
 
     axios
       .post(
-        "http://localhost:8083/routestations?route=" +
-          routeId +
-          "&station=" +
-          stationId
+        "http://localhost:8762/routes/routestations?route=" +
+        routeId +
+        "&station=" +
+        stationId
       )
       .then(
         this.setState({

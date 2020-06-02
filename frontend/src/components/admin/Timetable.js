@@ -15,7 +15,7 @@ class Timetable extends Component {
 
   handleDelete = () => {
     axios
-      .delete("http://localhost:8083/timetables/" + this.props.data.id)
+      .delete("http://localhost:8762/routes/timetables/" + this.props.data.id)
       .then(() => {
         this.props.updateTimetables(this.props.data.id);
         this.setState({

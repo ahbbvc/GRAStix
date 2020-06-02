@@ -31,7 +31,7 @@ class CreateRoute extends Component {
   };
 
   handlePost = (e) => {
-    axios.post("http://localhost:8083/routes", this.state).then(() => {
+    axios.post("http://localhost:8762/routes/routes", this.state).then(() => {
       this.setState({
         alertMessage: "Success. Route is created.",
         alertVisible: true,

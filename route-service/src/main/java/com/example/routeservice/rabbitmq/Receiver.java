@@ -1,6 +1,5 @@
 package com.example.routeservice.rabbitmq;
 
-import com.example.routeservice.model.Route;
 import com.example.routeservice.repository.RouteRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -21,7 +20,7 @@ public class Receiver {
             Integer routeId = parseInt(message.split(" ")[1]);
             System.out.println("Received message with status: " + message);
 
-            if(status.equals("Ok")) {
+            if (status.equals("Ok")) {
                 routeRepository.deleteById(routeId);
             }
         } catch (Exception e) {

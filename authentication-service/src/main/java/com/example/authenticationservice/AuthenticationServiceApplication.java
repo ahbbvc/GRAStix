@@ -22,22 +22,21 @@ import java.util.Map;
 @EnableAuthorizationServer
 @EnableEurekaClient
 public class AuthenticationServiceApplication {
-	@Bean
-	@LoadBalanced
-	public RestTemplate getRestTemplate() {
-		return new RestTemplate();
-	}
+    @Bean
+    @LoadBalanced
+    public RestTemplate getRestTemplate() {
+        return new RestTemplate();
+    }
 
-	@GetMapping(value={"/user"}, produces="application/json")
-	public Map<String, Object> user(OAuth2Authentication user)
-	{
-		Map<String, Object> userInfo = new HashMap<>();
-		userInfo.put("user", user.getUserAuthentication().getPrincipal());
-		userInfo.put("authorities", AuthorityUtils.authorityListToSet(user.getUserAuthentication().getAuthorities()));
-		return userInfo;
-	}
+    @GetMapping(value = {"/user"}, produces = "application/json")
+    public Map<String, Object> user(OAuth2Authentication user) {
+        Map<String, Object> userInfo = new HashMap<>();
+        userInfo.put("user", user.getUserAuthentication().getPrincipal());
+        userInfo.put("authorities", AuthorityUtils.authorityListToSet(user.getUserAuthentication().getAuthorities()));
+        return userInfo;
+    }
 
-	public static void main(String[] args) {
-		SpringApplication.run(AuthenticationServiceApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AuthenticationServiceApplication.class, args);
+    }
 }

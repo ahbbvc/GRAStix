@@ -20,12 +20,12 @@ public class Receiver {
 
     @RabbitHandler
     public void receive(String message) {
-            Integer routeId = Integer.parseInt(message);
-            System.out.println("Received message = " + routeId);
-            List<SingleTicket> singleTickets = sTicketRepository.findByRouteId(routeId);
-            List<SingleTicket> deletedTickets = new ArrayList<>();
+        Integer routeId = Integer.parseInt(message);
+        System.out.println("Received message = " + routeId);
+        List<SingleTicket> singleTickets = sTicketRepository.findByRouteId(routeId);
+        List<SingleTicket> deletedTickets = new ArrayList<>();
         try {
-            for(SingleTicket st : singleTickets) {
+            for (SingleTicket st : singleTickets) {
                 Integer singleTicketId = st.getId();
                 deletedTickets.add(sTicketRepository.findById(singleTicketId).orElseThrow());
                 sTicketRepository.deleteById(singleTicketId);
@@ -35,7 +35,7 @@ public class Receiver {
             System.out.println("Sent message with status: Ok " + routeId);
 
         } catch (Exception e) {
-            for(SingleTicket st : deletedTickets) {
+            for (SingleTicket st : deletedTickets) {
                 sTicketRepository.save(st);
             }
             rabbitTemplate.convertAndSend(RabbitMQConfig.queueName, "Error " + routeId);

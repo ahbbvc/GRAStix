@@ -1,9 +1,6 @@
 package com.example.ticketservice.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import javax.persistence.*;
-import java.util.List;
 
 
 public class Route {
@@ -17,7 +14,7 @@ public class Route {
     public Route() {
     }
 
-    public Route(Integer id, String routeName, String transportType ) {
+    public Route(Integer id, String routeName, String transportType) {
         this.id = id;
         this.routeName = routeName;
         this.transportType = transportType;
@@ -35,7 +32,6 @@ public class Route {
     public String getTransportType() {
         return transportType;
     }
-
 
 
     public void setId(Integer id) {

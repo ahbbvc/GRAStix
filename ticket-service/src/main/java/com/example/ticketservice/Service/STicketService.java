@@ -18,45 +18,52 @@ public class STicketService {
     public STicketService(STicketRepository sTicketRepository) {
         this.sTicketRepository = sTicketRepository;
     }
-    public List<SingleTicket> findAll(){
+
+    public List<SingleTicket> findAll() {
         return sTicketRepository.findAll();
     }
-    public SingleTicket newSTicket(SingleTicket st){
+
+    public SingleTicket newSTicket(SingleTicket st) {
         return sTicketRepository.save(st);
     }
-    public ResponseEntity<SingleTicket> findById(Integer id) throws TicketNotFoundException{
+
+    public ResponseEntity<SingleTicket> findById(Integer id) throws TicketNotFoundException {
         try {
             Optional<SingleTicket> st = sTicketRepository.findById(id);
             return new ResponseEntity<SingleTicket>(st.get(), HttpStatus.OK);
-        }
-        catch(Exception e){
+        } catch (Exception e) {
             throw new TicketNotFoundException("Single ticket", id);
         }
 
     }
-    public ResponseEntity<Object> deleteSTicket(Integer id) throws TicketNotFoundException{
+
+    public ResponseEntity<Object> deleteSTicket(Integer id) throws TicketNotFoundException {
         try {
             ResponseEntity<SingleTicket> st = findById(id);
             sTicketRepository.deleteById(id);
             return new ResponseEntity<>("{\"message\" : \"Single ticket deleted\"}", HttpStatus.OK);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             throw e;
         }
 
     }
-    public List<SingleTicket> findUserSTickets(Integer userId){
+
+    public List<SingleTicket> findUserSTickets(Integer userId) {
         return sTicketRepository.findByUserId(userId);
     }
-    public List<SingleTicket> findSticketsByRoute (Integer routeId){
+
+    public List<SingleTicket> findSticketsByRoute(Integer routeId) {
         return sTicketRepository.findByRouteId(routeId);
     }
-    public List<SingleTicket> findValidatedTickets (Boolean validated){
+
+    public List<SingleTicket> findValidatedTickets(Boolean validated) {
         return sTicketRepository.findByValidated(validated);
     }
-    public List<SingleTicket> findValidatedUserSTickets(Integer user_id, Boolean validated){
+
+    public List<SingleTicket> findValidatedUserSTickets(Integer user_id, Boolean validated) {
         return sTicketRepository.findByUserIdAndValidated(user_id, validated);
     }
+
     public Optional<SingleTicket> validateSTicket(Integer id) throws TicketNotFoundException {
         try {
             ResponseEntity<SingleTicket> st = findById(id);
@@ -65,9 +72,7 @@ public class STicketService {
                         singleTicket.setValidated(Boolean.TRUE);
                         return sTicketRepository.save(singleTicket);
                     });
-        }
-        catch (Exception e)
-        {
+        } catch (Exception e) {
             throw e;
         }
     }

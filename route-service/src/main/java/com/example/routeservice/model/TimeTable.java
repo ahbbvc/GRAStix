@@ -17,14 +17,14 @@ public class TimeTable {
 
     @Column
     @NotNull(message = "Time of arrival cannot be null")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ssZ")
     @JsonDeserialize(using = CustomJsonDeserializer.class)
     @Future(message = "Time of arrival must be in the future")
     private Date timeOfArrival;
 
     @Column
     @NotNull(message = "Time of departure cannot be null")
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern="dd-MM-yyyy HH:mm:ssZ")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ssZ")
     @JsonDeserialize(using = CustomJsonDeserializer.class)
     @Future(message = "Time of departure must be in the future")
     private Date timeOfDeparture;
