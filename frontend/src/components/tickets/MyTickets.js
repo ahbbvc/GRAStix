@@ -1,74 +1,20 @@
 
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Nav } from "react-bootstrap"
+import { Link } from "react-router-dom"
 import MySingleTickets from './MySingleTickets'
-import MyMonthlyTickets from './MyMonthlyTickets';
+import MyMonthlyTickets from './MyMonthlyTickets'
 
 class MyTickets extends Component {
     state={
-        singleTickets:
-        [
-            {
-                id:1,
-                route :{
-                routeName: "Ilidža-Vijećnica",
-                transportType: "Tram"},
-                validated: true
-            },
-            {
-                id:2,
-                route :{
-                routeName: "Ilidža-Hrasnica",
-                transportType: "Bus"
-                },
-                validated: false
-            },
-            {
-                id:3,
-                route :{
-                routeName: "Skenderija-Dobrinja",
-                transportType: "Bus"
-                },
-                validated: false
-            }   
-        ],
-        monthlyTickets:
-        [
-            {
-                id:1,
-                route_name: "Ilidža-Vijećnica",
-                transport_type: "Tram",
-                validated: true
-            },
-            {
-                id:2,
-                route_name: "Ilidža-Hrasnica",
-                transport_type: "Bus",
-                validated: false
-            },
-            {
-                id:3,
-                route_name: "Skenderija-Dobrinja",
-                transport_type: "Bus",
-                validated: false
-            } 
-         
-        ],
-        isLoaded : false  
+        userId: 9,
+        isLoaded : false,  
+        activeTab: ""
     }
-    componentDidMount() {
-        fetch("http://localhost:8762/tickets/single_tickets?user_id=9")
-          .then(res => res.json())
-          .then(
-            (result) => {
-                console.log(result)
-              this.setState({
-                singleTickets: result,
-                isLoaded :true
-              });
-              console.log(this.state.singleTickets)
-            })
-      }
     
+    onSelect = (selectedKey) => {
+        this.setState({ activeTab: selectedKey });
+    };
      
     render(){
         
@@ -77,14 +23,27 @@ class MyTickets extends Component {
         }
         else{*/
         return (
-            
-            <div >
+            <div>
             <h1>MyTickets</h1>
-            <div className="row">
-                <MySingleTickets singleTickets={this.state.singleTickets}/>
-            
-            
-                <MyMonthlyTickets monthlyTickets={this.state.monthlyTickets}/>
+            <Nav className="justify-content-center" variant ="tabs" defaultActiveKey="/mytickets/single_tickets"onSelect={this.onSelect} >
+                    <Nav.Item>
+                        <Nav.Link as={Link} to="/tickets/mytickets/single_tickets" eventKey="link-1"> My Single Tickets</Nav.Link> 
+                    </Nav.Item>
+                    <Nav.Item>
+                        <Nav.Link as={Link} to ="/tickets/single_ticket/monthly_tickets" eventKey="link-2">My Monthly Ticket</Nav.Link>
+                    </Nav.Item> 
+                </Nav>
+            <div >
+            {this.state.activeTab === "link-1" ? (
+                    <div className="container-center">
+                        <MySingleTickets/>
+                    </div>
+                ): null }
+            {this.state.activeTab === "link-2" ? (
+                    <div className="container-center">
+                        <MyMonthlyTickets/>
+                    </div>
+                ): null }
             </div>
             </div>
         );
