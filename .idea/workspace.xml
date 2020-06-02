@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/WebSecurityConfigurer.java" beforeDir="false" afterPath="$PROJECT_DIR$/authentication-service/src/main/java/com/example/authenticationservice/WebSecurityConfigurer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +61,7 @@
       <recent name="C:\Users\Naida\Desktop\GRAStix\api-gateway\src\main\java\com\example\apigateway" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ApiGatewayApplication">
+  <component name="RunManager" selected="Application.TicketServiceApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apigateway.ApiGatewayApplication" />
       <module name="api-gateway" />
@@ -103,12 +101,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="SystemEventsApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.systemevents.SystemEventsApplication" />
-      <module name="system-events" />
+    <configuration name="TicketServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.ticketservice.TicketServiceApplication" />
+      <module name="ticket-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.systemevents.*" />
+          <option name="PATTERN" value="com.example.ticketservice.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -131,11 +129,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.TicketServiceApplication" />
+        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.AuthenticationServiceApplication" />
         <item itemvalue="Application.EurekaServerApplication" />
-        <item itemvalue="Application.SystemEventsApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -177,38 +175,38 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
-    <state width="1557" height="250" key="GridCell.Tab.0.bottom" timestamp="1591085626437">
+    <state width="1557" height="276" key="GridCell.Tab.0.bottom" timestamp="1591096907398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591085626437" />
-    <state width="1557" height="250" key="GridCell.Tab.0.center" timestamp="1591085626437">
+    <state width="1557" height="276" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591096907398" />
+    <state width="1557" height="276" key="GridCell.Tab.0.center" timestamp="1591096907398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591085626437" />
-    <state width="1557" height="250" key="GridCell.Tab.0.left" timestamp="1591085626437">
+    <state width="1557" height="276" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591096907398" />
+    <state width="1557" height="276" key="GridCell.Tab.0.left" timestamp="1591096907398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591085626437" />
-    <state width="1557" height="250" key="GridCell.Tab.0.right" timestamp="1591085626437">
+    <state width="1557" height="276" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591096907398" />
+    <state width="1557" height="276" key="GridCell.Tab.0.right" timestamp="1591096907398">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591085626437" />
-    <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1591085626171">
+    <state width="1557" height="276" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591096907398" />
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1591091525100">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591085626171" />
-    <state width="1557" height="250" key="GridCell.Tab.1.center" timestamp="1591085626171">
+    <state width="1557" height="250" key="GridCell.Tab.1.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591091525100" />
+    <state width="1557" height="250" key="GridCell.Tab.1.center" timestamp="1591091525100">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1591085626171" />
-    <state width="1557" height="250" key="GridCell.Tab.1.left" timestamp="1591085626171">
+    <state width="1557" height="250" key="GridCell.Tab.1.center/0.0.1600.860@0.0.1600.860" timestamp="1591091525100" />
+    <state width="1557" height="250" key="GridCell.Tab.1.left" timestamp="1591091525100">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1591085626171" />
-    <state width="1557" height="250" key="GridCell.Tab.1.right" timestamp="1591085626171">
+    <state width="1557" height="250" key="GridCell.Tab.1.left/0.0.1600.860@0.0.1600.860" timestamp="1591091525100" />
+    <state width="1557" height="250" key="GridCell.Tab.1.right" timestamp="1591091525100">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="250" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1591085626171" />
+    <state width="1557" height="250" key="GridCell.Tab.1.right/0.0.1600.860@0.0.1600.860" timestamp="1591091525100" />
     <state x="330" y="85" key="Maven.ArtifactSearchDialog" timestamp="1589973178511">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
