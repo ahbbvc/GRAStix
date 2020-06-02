@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -14,7 +15,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomUserDetails customUserDetails;
-
+    @Bean
+    public PasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
     @Override
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -23,13 +27,9 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        PasswordEncoder encoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-        auth.userDetailsService(customUserDetails).passwordEncoder(encoder);
+        auth.userDetailsService(customUserDetails).passwordEncoder(encoder());
 
     }
 
-   /*@Bean
-    public PasswordEncoder encoder() {
-        return new BCryptPasswordEncoder(11);
-    }*/
+
 }

@@ -41,7 +41,7 @@ public class UserService {
         } catch (UserNotFoundException e) {
             this._validationService.validateUserProperties(user);
             BCryptPasswordEncoder bCryptPasswordEncoder =
-                    new BCryptPasswordEncoder(10);
+                    new BCryptPasswordEncoder();
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             User newUser = this._userRepository.save(user);
             return new ResponseEntity(newUser, HttpStatus.OK);
