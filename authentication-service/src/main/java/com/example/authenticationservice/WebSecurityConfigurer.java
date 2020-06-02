@@ -16,7 +16,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-@Order(-1)
+
 @Configuration
 public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
     @Autowired
@@ -33,12 +33,12 @@ public class WebSecurityConfigurer extends WebSecurityConfigurerAdapter {
 
     }
 
-    @Override
+   /* @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, "/**").permitAll();
-    }
+    }*/
 
    /*@Bean
     public PasswordEncoder encoder() {
