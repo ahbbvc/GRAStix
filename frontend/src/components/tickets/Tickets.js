@@ -20,7 +20,7 @@ export class Tickets extends Component {
     render() {
         return (
             <div>
-                <Nav className="justify-content-center" variant ="tabs" defaultActiveKey="/mytickets"onSelect={this.onSelect} >
+                <Nav className="justify-content-center" variant ="tabs" onSelect={this.onSelect} >
                     <Nav.Item>
                         <Nav.Link as={Link} to="/tickets/mytickets" eventKey="link-1">My Tickets</Nav.Link> 
                     </Nav.Item>

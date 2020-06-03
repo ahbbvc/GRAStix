@@ -24,7 +24,7 @@ class MyTickets extends Component {
         else{*/
         return (
             <div>
-            <Nav className="justify-content-center" variant ="tabs" defaultActiveKey="/mytickets/single_tickets"onSelect={this.onSelect} >
+            <Nav className="justify-content-center" variant ="tabs" onSelect={this.onSelect} >
                     <Nav.Item>
                         <Nav.Link as={Link} to="/tickets/mytickets/single_tickets" eventKey="link-1"> My Single Tickets</Nav.Link> 
                     </Nav.Item>

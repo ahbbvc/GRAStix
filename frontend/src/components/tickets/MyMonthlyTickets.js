@@ -4,43 +4,7 @@ import MyMonthlyicket from "./MyMonthlyTicket"
 import axios from "axios"
 export class MyMonthlyTickets extends Component {
     state={
-        monthlyTickets:
-        [
-            {
-                id:1,
-                month: "June",
-                routes:[
-                    {
-                        id:1,
-                        routeName: "Ilidža-Vijećnica",
-                        transportType: "Tram",
-                    },
-                    {
-                        id:2,
-                        routeName: "Ilidža-Hrasnica",
-                        transportType: "Bus",
-                    }
-
-                ]
-            },
-            {
-                id:2,
-                month: "June",
-                routes:[
-                    {
-                        id:1,
-                        routeName: "Ilidža-Vijećnica",
-                        transportType: "Tram",
-                    },
-                    {
-                        id:3,
-                        routeName: "Skenderija-Dobrinja",
-                        transportType: "Bus",
-                    }
-
-                ]
-            }
-        ],
+        monthlyTickets:[],
         isLoaded: false,
         alertVisible: false,
         alertMessage: "",
@@ -48,11 +12,15 @@ export class MyMonthlyTickets extends Component {
         
     }
     componentDidMount() {
-        axios.get("http://localhost:8762/tickets/monthly_tickets?user_id=11")
+        axios.get("http://localhost:8762/tickets/monthly_tickets?user_id=" + sessionStorage.getItem('userId'), {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        })
           .then((result) => {
                 console.log(result)
               this.setState({
-                monthlyTickets: result,
+                monthlyTickets: result.data,
                 isLoaded :true
               });
               console.log(this.state.singleTickets)

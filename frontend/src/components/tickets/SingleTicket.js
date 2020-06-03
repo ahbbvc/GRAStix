@@ -22,7 +22,11 @@ export class SingleTicket extends Component {
     
     }
     componentDidMount() {
-        axios.get("http://localhost:8762/routes/routes").then((res) => {
+        axios.get("http://localhost:8762/routes/routes", {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        }).then((res) => {
             var jsonString=res.data.filter(route => route.transportType===this.state.transportType);
             var allroutes = res.data;
             jsonString.map((x) => (x["label"] = x["routeName"]));
@@ -37,7 +41,11 @@ export class SingleTicket extends Component {
                 alertColor: "danger",
             });
         });
-        axios.get("http://localhost:8762/routes/routestations").then((res) => {
+        axios.get("http://localhost:8762/routes/routestations", {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            }
+        }).then((res) => {
             var allstations =res.data;
             this.setState({ allstations: allstations });
          }).catch((error) => {
@@ -90,8 +98,12 @@ export class SingleTicket extends Component {
     }
     handleSubmit=()=>{
         axios.post("http://localhost:8762/tickets/single_tickets",{
-            userId: 11,
+            userId: sessionStorage.getItem('userId'),
             routeId: this.state.selectedRoute.id
+        }, {
+            headers: {
+                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+            }
         }).then(() => {
             this.setState({
                 alertMessage: "Single ticket bought",

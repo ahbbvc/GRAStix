@@ -24,6 +24,7 @@ class HomePage extends Component {
             }
         ).then((response) => {
             this.setState({ user: response.data });
+            sessionStorage.setItem('userId', response.data.id)
             sessionStorage.setItem('access_token', this.state.accessToken);
             if (this.state.user.status === 'admin') this.props.history.push('/admin');
             else this.props.history.push('/tickets');
