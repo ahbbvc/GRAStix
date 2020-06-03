@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import QRCode from 'qrcode.react'
 import MySingleTicket from './MySingleTicket'
-import { Card, Form, Button, ListGroup } from "react-bootstrap";
+import { Card, Alert,  ListGroup } from "react-bootstrap";
+import axios from "axios"
 class MySingleTickets extends Component {
     state={
         singleTickets:
@@ -31,7 +32,10 @@ class MySingleTickets extends Component {
             } 
         ],
             selectedTicketId :null ,   
-             isLoaded : false,   
+             isLoaded : false,  
+             alertVisible: false,
+             alertMessage: "",
+             alertColor: "" 
     }
     selectTicket(id) {
         this.setState({
@@ -40,20 +44,26 @@ class MySingleTickets extends Component {
         console.log(this.state.selectedTicketId)
       }
     componentDidMount() {
-        fetch("http://localhost:8762/tickets/single_tickets?user_id=9")
-          .then(res => res.json())
-          .then(
-            (result) => {
+        axios.get("http://localhost:8762/tickets/single_tickets?user_id=9")
+          .then((result) => {
               this.setState({
                 singleTickets: result,
                 isLoaded :true
               });
               console.log(this.state.singleTickets)
-            })
+            }).catch((error) => {
+                this.setState({
+                    alertMessage: "There was an error while processing request. " +  error.message,
+                    alertVisible: true,
+                    alertColor: "danger",
+                });
+            });
       }
     
 
-   
+    toggle = () => {
+        this.setState({ alertVisible: !this.state.alertVisible });
+      };
     render(){
         const downloadQR = () => {
             const canvas = document.getElementById("qrc");
@@ -95,6 +105,16 @@ class MySingleTickets extends Component {
                 <MySingleTicket key={sticket.id} singleTicket={sticket} select = {this.selectTicket.bind(this)}/>
             ));
             return (
+                <div>
+                    <Alert
+                    className="alert-ticket"
+                    variant={this.state.alertColor}
+                    dismissible
+                    show={this.state.alertVisible}
+                    onClose={this.toggle}>
+                    {this.state.alertMessage}
+                </Alert>
+                
                <div className="row">
                    <Card className="card-ticket">
                        <Card.Header>My Single Tickets</Card.Header>
@@ -105,7 +125,7 @@ class MySingleTickets extends Component {
                    <div>
                        {qr}
                     </div>
-
+                </div>
                </div>
             )
         

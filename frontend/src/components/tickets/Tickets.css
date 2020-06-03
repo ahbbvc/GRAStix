@@ -10,7 +10,77 @@
       
     justify-content: center;
   }
-.card-ticket{
-    width: '18rem'
+  .card-ticket {
+    width: 500px;
+    margin: 10px;
   }
+  .flex-container-ticket {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-content:center;
+  }
+  
+  .flex-main-container-ticket {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    margin-top: 20px;
+  }
+  
+  .flex-row-ticket {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+  }
+  
+  
+  .card-large-ticket {
+    margin: 10px;
+    width: 560px;
+  }
+  
+  .card-mult-ticket {
+    margin-top: 20px;
+  }
+  
+  .alert-ticket{
+    width: 500px;
+    margin: 10px;
+  }
+  
+  .button-ticket {
+    margin-top: 16px;
+  }
+  
+  .typeahead-ticket {
+    margin-bottom: 10px;
+  }
+  
+  .half-ticket {
+    width: 50%;
+  }
+  
+  .label-ticket {
+    margin-top: 4px;
+  }
+  
+  .checkbox-ticket {
+    margin-right: 10px;
+  }
+  
+  .scrollable-ticket {
+    height: 80vh;
+    overflow-y: auto;
+  }
+  
+  .datepicker-ticket {
+    border: 1px solid #ced4da;
+    height: calc(1.5em + 0.75rem + 2px);
+    width: 100%;
+  }
+  
+  
   

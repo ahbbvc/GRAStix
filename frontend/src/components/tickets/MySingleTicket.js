@@ -1,23 +1,37 @@
 
 import React, { Component } from 'react'
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup, Button, Alert } from 'react-bootstrap'
+import axios from "axios"
+
 export class MySingleTicket extends Component {
     constructor(props){
         super(props);
+        this.state = {
+            alertVisible: false,
+            alertMessage: "",
+            alertColor: ""
+        }
         
     }
+    toggle = () => {
+        this.setState({ alertVisible: !this.state.alertVisible });
+      };
+  
     validate=()=>{
-        fetch("http://localhost:8762/tickets/single_tickets/validate/" + this.props.singleTicket.id, {method:'PUT'})
-        .then(res => res.json())
-        .then(
-          (result) => {
-              console.log(result)
-           /* this.setState({
-              singleTickets: result,
-              isLoaded :true
+        axios.put("http://localhost:8762/tickets/single_tickets/validate/" + this.props.singleTicket.id)
+        .then((result) => {
+            this.setState({
+                alertMessage: "Ticket validated",
+                alertVisible: true,
+                alertColor: "success",
             });
-            console.log(this.state.singleTickets)*/
-          })
+          }).catch((error) => {
+            this.setState({
+                alertMessage: "There was an error while processing request. " +  error.message,
+                alertVisible: true,
+                alertColor: "danger",
+            });
+        });
     }
     render() {
         let validated = this.props.singleTicket.validated;
@@ -30,12 +44,22 @@ export class MySingleTicket extends Component {
         }
         var selectTicket  =   this.props.select;
         return (
+            <div>
+            <Alert
+                    className="alert-ticket"
+                    variant={this.state.alertColor}
+                    dismissible
+                    show={this.state.alertVisible}
+                    onClose={this.toggle}>
+                    {this.state.alertMessage}
+            </Alert>
             <ListGroup.Item action onClick={() => selectTicket(this.props.singleTicket.id)}>
                 <div>Route : {this.props.singleTicket.route.routeName}</div>
                 <div> Transport type : {this.props.singleTicket.route.transportType}</div>
                 {button}
 
             </ListGroup.Item>
+            </div>
         )
     }
 }

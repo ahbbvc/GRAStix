@@ -34,17 +34,17 @@ export class Tickets extends Component {
                     
                 </Nav>
                 {this.state.activeTab === "link-1" ? (
-                    <div>
+                    <div className="flex-main-container-ticket">
                         <MyTickets/>
                     </div>
                 ): null }
                 {this.state.activeTab === "link-2" ? (
-                    <div>
+                    <div className="flex-main-container-ticket">
                         <SingleTicket/>
                     </div>
                 ): null }
                 {this.state.activeTab === "link-3" ? (
-                    <div>
+                    <div className="flex-main-container-ticket">
                         <MonthlyTicket/>
                     </div>
                 ): null }
