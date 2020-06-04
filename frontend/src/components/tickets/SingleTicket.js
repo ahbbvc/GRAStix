@@ -24,7 +24,7 @@ export class SingleTicket extends Component {
     componentDidMount() {
         axios.get("http://localhost:8762/routes/routes", {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         }).then((res) => {
             var jsonString=res.data.filter(route => route.transportType===this.state.transportType);
@@ -43,7 +43,7 @@ export class SingleTicket extends Component {
         });
         axios.get("http://localhost:8762/routes/routestations", {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         }).then((res) => {
             var allstations =res.data;
@@ -98,11 +98,11 @@ export class SingleTicket extends Component {
     }
     handleSubmit=()=>{
         axios.post("http://localhost:8762/tickets/single_tickets",{
-            userId: sessionStorage.getItem('userId'),
+            userId: localStorage.getItem('userId'),
             routeId: this.state.selectedRoute.id
         }, {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         }).then(() => {
             this.setState({

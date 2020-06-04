@@ -19,7 +19,7 @@ export class MonthlyTicket extends Component {
     componentDidMount() {
         axios.get("http://localhost:8762/routes/routes", {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         }).then((res) => {
           console.log(res);
@@ -58,12 +58,12 @@ export class MonthlyTicket extends Component {
       }
     handlePost(){
         axios.post("http://localhost:8762/tickets/monthly_tickets",{
-            userId: sessionStorage.getItem('userId'),
+            userId: localStorage.getItem('userId'),
             routes: this.state.selectedRoutes,
             month: this.state.month
         }, {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         }).then(() => {
             this.setState({

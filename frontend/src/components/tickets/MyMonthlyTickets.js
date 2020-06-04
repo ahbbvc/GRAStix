@@ -12,9 +12,9 @@ export class MyMonthlyTickets extends Component {
         
     }
     componentDidMount() {
-        axios.get("http://localhost:8762/tickets/monthly_tickets?user_id=" + sessionStorage.getItem('userId'), {
+        axios.get("http://localhost:8762/tickets/monthly_tickets?user_id=" + localStorage.getItem('userId'), {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         })
           .then((result) => {

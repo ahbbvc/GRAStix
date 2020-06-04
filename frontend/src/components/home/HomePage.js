@@ -24,9 +24,12 @@ class HomePage extends Component {
             }
         ).then((response) => {
             this.setState({ user: response.data });
-            sessionStorage.setItem('userId', response.data.id)
-            sessionStorage.setItem('access_token', this.state.accessToken);
-            if (this.state.user.status === 'admin') this.props.history.push('/admin');
+            localStorage.setItem('userId', response.data.id)
+            localStorage.setItem('access_token', this.state.accessToken);
+            if (this.state.user.status === 'admin') {
+                this.props.history.push('/admin');
+                localStorage.setItem('isUserAdmin', true);
+            }
             else this.props.history.push('/tickets');
         }).catch((error) => {
             this.setState({
