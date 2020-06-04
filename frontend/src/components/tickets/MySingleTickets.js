@@ -19,9 +19,9 @@ class MySingleTickets extends Component {
         console.log(this.state.selectedTicketId)
       }
     componentDidMount() {
-        axios.get("http://localhost:8762/tickets/single_tickets?user_id=" +sessionStorage.getItem('userId'), {
+        axios.get("http://localhost:8762/tickets/single_tickets?user_id=" +localStorage.getItem('userId'), {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         })
           .then((result) => {

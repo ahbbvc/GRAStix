@@ -11,15 +11,23 @@ import HomePage from "./components/home/HomePage";
 
 const requireLogin = (to, from, next) => {
   if (to.meta.auth) {
-    if (!!sessionStorage.getItem('access_token')) {
+    if (!!localStorage.getItem('access_token')) {
+
+      if (to.meta.isAdmin && !localStorage.getItem('isUserAdmin')) {
+        next.redirect('/');
+      }
+
       next();
+
     } else {
       next.redirect('/');
     }
+
   } else {
     next.redirect('/');
   }
 }
+
 
 class App extends Component {
   render() {
@@ -29,12 +37,9 @@ class App extends Component {
         <Router>
           <Route exact path="/" component={HomePage} />
           <GuardProvider guards={[requireLogin]}>
-            <GuardedRoute path="/admin" component={AdminPanel} meta={{ auth: true }} />
-            <GuardedRoute path="/tickets" component={Tickets} meta={{ auth: true }} />
+            <GuardedRoute path="/admin" component={AdminPanel} meta={{ auth: true, isAdmin: true }} />
+            <GuardedRoute path="/tickets" component={Tickets} meta={{ auth: true, isAdmin: false }} />
           </GuardProvider>
-          <Route path="*" component={HomePage}>
-            <Redirect to="/" />
-          </Route>
         </Router>
       </div>
     );

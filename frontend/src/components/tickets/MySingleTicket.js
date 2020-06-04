@@ -20,7 +20,7 @@ export class MySingleTicket extends Component {
     validate=()=>{
         axios.put("http://localhost:8762/tickets/single_tickets/validate/" + this.props.singleTicket.id,{}, {
             headers: {
-                'Authorization': `Bearer ${sessionStorage.getItem('access_token')}`
+                'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             }
         })
         .then((result) => {
