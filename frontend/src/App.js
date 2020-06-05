@@ -16,6 +16,14 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   )} />
 )
 
+const PrivateAdminRoute = ({ component: Component, ...rest }) => (
+  <Route {...rest} render={(props) => (
+    (!!localStorage.getItem('access_token') && localStorage.getItem('isUserAdmin')) == "true" 
+      ? <Component {...props} />
+      : <Redirect to='/tickets' />
+  )} />
+)
+
 class App extends Component {
   render() {
     return (
@@ -23,7 +31,7 @@ class App extends Component {
         <Header></Header>
         <Router>
           <Route exact path="/" component={HomePage} />
-            <PrivateRoute path="/admin" component={AdminPanel}/>
+            <PrivateAdminRoute path="/admin" component={AdminPanel}/>
             <PrivateRoute path="/tickets" component={Tickets}/>
         </Router>
       </div>
