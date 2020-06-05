@@ -1,22 +1,43 @@
 import React, { Component } from 'react'
 import QRCode from 'qrcode.react'
 import MySingleTicket from './MySingleTicket'
-import { Card, Alert,  ListGroup } from "react-bootstrap";
+import { Card, Alert, Button, ListGroup } from "react-bootstrap";
 import axios from "axios"
+import jsPDF from "jspdf"
+import logo from "./logo.png"
 class MySingleTickets extends Component {
     state={
         singleTickets:[],
-        selectedTicketId :null ,   
+        selectedTicket :null ,   
         isLoaded : false,  
         alertVisible: false,
         alertMessage: "",
         alertColor: "" 
     }
-    selectTicket(id) {
+    selectTicket(ticket) {
         this.setState({
-            selectedTicketId: id
+            selectedTicket: ticket
         })
-        console.log(this.state.selectedTicketId)
+      }
+      printDocument = () => {
+        const canvas = document.getElementById('qrc');
+        
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new jsPDF();
+            pdf.addImage(imgData, 'JPEG', 150, 20);
+            pdf.text("First name : " + this.state.selectedTicket.user.firstName ,10, 30);
+            pdf.text("Last name : " + this.state.selectedTicket.user.lastName, 10, 40);
+            pdf.text("Route: "+this.state.selectedTicket.route.routeName + "  " +this.state.selectedTicket.route.transportType, 10, 50)
+            var time = new Date(this.state.selectedTicket.time);
+            pdf.text("Time of purchase :" + time.toUTCString(), 10,60 )
+            pdf.text("QR code", 165,70)
+            var img = new Image();
+            img.src = logo;
+            pdf.addImage(img, 'png', 0,0)
+            pdf.output('dataurlnewwindow');
+            //pdf.save("download.pdf");
+        
+        
       }
     componentDidMount() {
         axios.get("http://localhost:8762/tickets/single_tickets?user_id=" +localStorage.getItem('userId'), {
@@ -58,7 +79,7 @@ class MySingleTickets extends Component {
     render(){
         
         let qr;
-        if(this.state.selectedTicketId===null){
+        if(this.state.selectedTicket===null){
             qr=<div></div>
         }
         else{
@@ -68,13 +89,13 @@ class MySingleTickets extends Component {
                     <div className="container-center">
                     <QRCode
                         id="qrc"
-                        value={"http://localhost:8762/tickets/single_tickets/"+this.state.selectedTicketId}
-                        size={100}
+                        value={"http://localhost:8762/tickets/single_tickets/"+this.state.selectedTicket.id}
+                        size={180}
                     includeMargin={true}
                     />
                 
                 </div>
-                <a onClick={this.downloadQR} className="container-center"> Download QR </a>
+                <Button onClick={this.printDocument}>Get PDF</Button>
                 </Card>
         }
        /* if(this.state.isLoaded===false){
@@ -102,9 +123,10 @@ class MySingleTickets extends Component {
                             {list}
                         </ListGroup>
                    </Card>
-                   <div>
-                       {qr}
-                    </div>
+                   
+                </div>
+                <div>
+                    {qr}
                 </div>
                </div>
             )

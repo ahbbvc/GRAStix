@@ -20,15 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/home/HomePage.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/home/HomePage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyTickets.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/Tickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/Tickets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,6 +61,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -69,7 +73,7 @@
       <recent name="C:\Users\Naida\Desktop\GRAStix\api-gateway\src\main\java\com\example\apigateway" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RouteServiceApplication">
+  <component name="RunManager" selected="Application.ApiGatewayApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apigateway.ApiGatewayApplication" />
       <module name="api-gateway" />
@@ -137,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TicketServiceApplication" />
-        <item itemvalue="Application.RouteServiceApplication" />
-        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.AuthenticationServiceApplication" />
+        <item itemvalue="Application.RouteServiceApplication" />
+        <item itemvalue="Application.TicketServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -183,22 +187,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
-    <state width="1557" height="276" key="GridCell.Tab.0.bottom" timestamp="1591149595054">
+    <state width="1557" height="325" key="GridCell.Tab.0.bottom" timestamp="1591394199121">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591149595054" />
-    <state width="1557" height="276" key="GridCell.Tab.0.center" timestamp="1591149595054">
+    <state width="1557" height="325" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591394199121" />
+    <state width="1557" height="325" key="GridCell.Tab.0.center" timestamp="1591394199120">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591149595054" />
-    <state width="1557" height="276" key="GridCell.Tab.0.left" timestamp="1591149595054">
+    <state width="1557" height="325" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
+    <state width="1557" height="325" key="GridCell.Tab.0.left" timestamp="1591394199120">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591149595054" />
-    <state width="1557" height="276" key="GridCell.Tab.0.right" timestamp="1591149595054">
+    <state width="1557" height="325" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
+    <state width="1557" height="325" key="GridCell.Tab.0.right" timestamp="1591394199120">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="276" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591149595054" />
+    <state width="1557" height="325" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
     <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1591149595045">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -219,5 +223,13 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="330" y="85" key="Maven.ArtifactSearchDialog/0.0.1600.860@0.0.1600.860" timestamp="1589973178511" />
+    <state x="301" y="75" key="SettingsEditor" timestamp="1591378698673">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="301" y="75" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1591378698673" />
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1591378691562">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="463" y="180" width="672" height="678" key="search.everywhere.popup/0.0.1600.860@0.0.1600.860" timestamp="1591378691562" />
   </component>
 </project>

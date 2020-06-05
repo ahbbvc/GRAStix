@@ -5,6 +5,7 @@ import com.example.grpc.SystemEventsResponse;
 import com.example.grpc.SystemEventsServiceGrpc;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.Timestamp;
 
+@Component
 public class TicketServiceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
@@ -45,7 +47,7 @@ public class TicketServiceInterceptor implements HandlerInterceptor {
 
         SystemEventsResponse response = stub.getAction(SystemEventsRequest.newBuilder()
                 .setTimeStamp(timestamp.toString())
-                .setMicroservice("route-service")
+                .setMicroservice("ticket-service")
                 .setAction(action)
                 .setResource(resource)
                 .setResponse(actionResponse)
