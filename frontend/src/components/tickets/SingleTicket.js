@@ -17,7 +17,8 @@ export class SingleTicket extends Component {
             transportType:"Bus",
             alertVisible: false,
             alertMessage: "",
-            alertColor: ""
+            alertColor: "",
+            price :""
         }
     
     }
@@ -90,7 +91,8 @@ export class SingleTicket extends Component {
     handleRouteChange = (e) =>{
         var selectedRoute = e[0]
         this.setState({
-            selectedRoute: selectedRoute
+            selectedRoute: selectedRoute,
+            price : "3 KM"
         },
             this.loadStations
         )
@@ -158,6 +160,10 @@ export class SingleTicket extends Component {
                            <Form.Group>
                            <Form.Label>To</Form.Label>
                            <Typeahead className="typehead-ticket" id="stationB-select" onChange={(selectedStationB) => this.setState({ selectedStationB }) } placeholder="Choose station" options={this.state.stations}></Typeahead>
+                           </Form.Group>
+                           <Form.Group>
+                               <Form.Label>Price: </Form.Label>
+                               <Form.Control placeholder={this.state.price} type ="text" readOnly/>
                            </Form.Group>
                            <Button onClick={this.handleSubmit}>Buy Ticket</Button>
                         </Form>

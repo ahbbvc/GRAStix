@@ -57,7 +57,7 @@ export class MySingleTicket extends Component {
                     onClose={this.toggle}>
                     {this.state.alertMessage}
             </Alert>
-            <ListGroup.Item action onClick={() => selectTicket(this.props.singleTicket.id)}>
+            <ListGroup.Item action onClick={() => selectTicket(this.props.singleTicket)}>
                 <div>Route : {this.props.singleTicket.route.routeName}</div>
                 <div> Transport type : {this.props.singleTicket.route.transportType}</div>
                 {button}

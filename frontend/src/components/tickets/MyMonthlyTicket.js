@@ -13,9 +13,9 @@ export class MyMonthlyTicket extends Component {
     ));
     render() {
         
-        
+        var selectTicket  =   this.props.select;
         return (
-            <ListGroup.Item>
+            <ListGroup.Item action onClick={() => selectTicket(this.props.monthlyTicket)}> 
                 <Card.Title>{this.props.monthlyTicket.month}</Card.Title>
                 <Card>
                     <Card.Header>Routes</Card.Header>

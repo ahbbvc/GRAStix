@@ -14,6 +14,8 @@ export class MonthlyTicket extends Component {
             alertVisible: false,
             alertMessage: "",
             alertColor: "",
+            price: 0,
+            rnames: ""
         }
     }
     componentDidMount() {
@@ -46,13 +48,17 @@ export class MonthlyTicket extends Component {
     handleChange= (e) => {
         var options = e.target.options;
         var value = this.state.selectedRoutes;
+        var label=""
         for (var i = 0, l = options.length; i < l; i++) {
           if (options[i].selected) {
             value.push(options[i].value);
+            label = options[i].label + " "
           }
         }
         this.setState({
-            selectedRoutes: value
+            selectedRoutes: value,
+            price: this.state.price +10,
+            rnames: this.state.rnames + label
         })
         console.log(this.state.selectedRoutes)
       }
@@ -88,7 +94,7 @@ export class MonthlyTicket extends Component {
       
     render() {   
        let  options = this.state.routes.map((route)=>(
-            <option value={route.id} key={route.id}> {route.routeName}</option>
+            <option value={route.id} key={route.id} label ={route.routeName}/>
         ));
         return (
             
@@ -121,6 +127,15 @@ export class MonthlyTicket extends Component {
                             {options}
                         </Form.Control>
                         </Form.Group>
+                        <Form.Group>
+                               <Form.Label>Routes</Form.Label>
+                               <Form.Control placeholder={this.state.rnames} type ="text" readOnly/>
+                           </Form.Group>
+                        <Form.Group>
+                               <Form.Label>Price</Form.Label>
+                               <Form.Control placeholder={this.state.price + " KM"} type ="text" readOnly/>
+                           </Form.Group>
+
                         <Button onClick={this.handleSubmit}>Buy Ticket</Button>
                          </Form>
                     </Card.Body>
