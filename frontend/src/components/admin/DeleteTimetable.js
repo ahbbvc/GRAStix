@@ -5,6 +5,10 @@ import axios from "axios";
 import "./AdminPanel.css";
 import Timetable from "./Timetable";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class DeleteTimetable extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +26,7 @@ class DeleteTimetable extends Component {
   };
 
   fetchData() {
-    axios.get("http://localhost:8762/routes/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
@@ -35,17 +39,25 @@ class DeleteTimetable extends Component {
 
   async fetchTimetables() {
     try {
-      const response = await axios.get("http://localhost:8762/routes/timetables");
-
+      const response = await axios.get("http://localhost:8762/routes/timetables", config);
       let data = response.data;
       this.setState({
         timetables: [
           ...data.filter(
             (item) =>
-              item.routeStation.route.id === this.state.selectedRoute[0].id
+              (item.routeStation !== null && (item.routeStation.route.id === this.state.selectedRoute[0].id))
           ),
         ],
       });
+
+      if (this.state.timetables.length === 0) {
+        this.setState({
+          alertMessage: "Selected route has no timetables.",
+          alertColor: "info",
+          alertVisible: true,
+        });
+      }
+
     } catch (error) {
       this.setState({
         alertMessage: "Error! Please try again.",

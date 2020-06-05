@@ -3,6 +3,10 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class CreateRoute extends Component {
   state = {
     route: { routeName: "", transportType: "Bus" },
@@ -31,7 +35,7 @@ class CreateRoute extends Component {
   };
 
   handlePost = (e) => {
-    axios.post("http://localhost:8762/routes/routes", this.state).then(() => {
+    axios.post("http://localhost:8762/routes/routes", this.state, config).then(() => {
       this.setState({
         alertMessage: "Success. Route is created.",
         alertVisible: true,

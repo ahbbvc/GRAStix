@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import { Card, Alert, Form, Button, Col } from "react-bootstrap";
 import axios from "axios";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class Timetable extends Component {
   constructor(props) {
     super(props);
@@ -15,7 +19,7 @@ class Timetable extends Component {
 
   handleDelete = () => {
     axios
-      .delete("http://localhost:8762/routes/timetables/" + this.props.data.id)
+      .delete("http://localhost:8762/routes/timetables/" + this.props.data.id, config, {})
       .then(() => {
         this.props.updateTimetables(this.props.data.id);
         this.setState({

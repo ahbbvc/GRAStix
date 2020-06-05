@@ -4,6 +4,10 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class AddToRoute extends Component {
   state = {
     routes: [],
@@ -29,13 +33,13 @@ class AddToRoute extends Component {
   }
 
   fetchData = () => {
-    axios.get("http://localhost:8762/routes/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
     });
 
-    axios.get("http://localhost:8762/routes/stations").then((res) => {
+    axios.get("http://localhost:8762/routes/stations", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
@@ -52,7 +56,7 @@ class AddToRoute extends Component {
         routeId +
         "&station=" +
         stationId
-      )
+        , config)
       .then(
         this.setState({
           alertMessage: "Success. Station is added to route.",
