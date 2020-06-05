@@ -26,6 +26,7 @@ class HomePage extends Component {
             this.setState({ user: response.data });
             localStorage.setItem('userId', response.data.id)
             localStorage.setItem('access_token', this.state.accessToken);
+            localStorage.setItem('isUserAdmin', this.state.user.status === 'admin');
             if (this.state.user.status === 'admin') this.props.history.push('/admin');
             else this.props.history.push('/tickets');
         }).catch((error) => {
