@@ -36,6 +36,7 @@
 .alert-admin {
   width: 500px;
   margin: 10px;
+  white-space: pre-wrap;
 }
 
 .button-admin {

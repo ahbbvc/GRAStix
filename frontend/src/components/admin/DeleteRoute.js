@@ -2,11 +2,14 @@ import React, { Component } from "react";
 import { Card, Form, Button, Alert } from "react-bootstrap";
 import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
+import SockJsClient from "react-stomp";
 import "./AdminPanel.css";
 
 const config = {
   headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
+
+const token = localStorage.getItem("access_token");
 
 class DeleteRoute extends Component {
   state = {
@@ -38,14 +41,7 @@ class DeleteRoute extends Component {
 
   handleDelete = (e) => {
     let id = this.state.selected[0].id;
-    axios.delete("http://localhost:8762/routes/routes/" + id, config, {}).then(
-      this.setState({
-        routes: this.state.routes.filter((route) => route.id !== id),
-        alertMessage: "Success. Route is deleted.",
-        alertVisible: true,
-        alertColor: "success",
-      })
-    );
+    axios.delete("http://localhost:8762/routes/routes/" + id, config, {});
   };
 
   handleSubmit = (e) => {
@@ -53,6 +49,18 @@ class DeleteRoute extends Component {
       this.handleDelete();
       e.preventDefault();
     }
+  };
+
+  showMessage = (msg) => {
+    if (msg.split(".")[0] === "Success") {
+      this.fetchRoutes();
+    }
+
+    this.setState({
+      alertMessage: this.state.alertMessage + "\n" + msg,
+      alertColor: "success",
+      alertVisible: true,
+    });
   };
 
   validate = (e) => {
@@ -67,7 +75,7 @@ class DeleteRoute extends Component {
   };
 
   toggle = () => {
-    this.setState({ alertVisible: !this.state.alertVisible });
+    this.setState({ alertVisible: !this.state.alertVisible, alertMessage: "" });
   };
 
   render() {
@@ -82,6 +90,14 @@ class DeleteRoute extends Component {
         >
           {this.state.alertMessage}
         </Alert>
+
+        <div>
+          <SockJsClient
+            url={"http://localhost:8083/socket"}
+            topics={["/topic/notification"]}
+            onMessage={this.showMessage}
+          />
+        </div>
         <Card className="card-admin">
           <Card.Body>
             <Card.Title>Delete route</Card.Title>

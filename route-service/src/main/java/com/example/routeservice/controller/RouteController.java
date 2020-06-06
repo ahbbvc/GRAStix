@@ -3,6 +3,8 @@ package com.example.routeservice.controller;
 import com.example.routeservice.model.Route;
 import com.example.routeservice.rabbitmq.Sender;
 import com.example.routeservice.service.RouteService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -50,5 +52,4 @@ public class RouteController {
         //routeService.deleteById(id);
         sender.send(id);
     }
-
 }
