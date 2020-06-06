@@ -19,20 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" afterDir="false" />
-    </list>
+    <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -187,22 +174,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
-    <state width="1557" height="325" key="GridCell.Tab.0.bottom" timestamp="1591394199121">
+    <state width="1557" height="325" key="GridCell.Tab.0.bottom" timestamp="1591394769866">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591394199121" />
-    <state width="1557" height="325" key="GridCell.Tab.0.center" timestamp="1591394199120">
+    <state width="1557" height="325" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591394769866" />
+    <state width="1557" height="325" key="GridCell.Tab.0.center" timestamp="1591394769865">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
-    <state width="1557" height="325" key="GridCell.Tab.0.left" timestamp="1591394199120">
+    <state width="1557" height="325" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591394769865" />
+    <state width="1557" height="325" key="GridCell.Tab.0.left" timestamp="1591394769865">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
-    <state width="1557" height="325" key="GridCell.Tab.0.right" timestamp="1591394199120">
+    <state width="1557" height="325" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591394769865" />
+    <state width="1557" height="325" key="GridCell.Tab.0.right" timestamp="1591394769866">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
+    <state width="1557" height="325" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591394769866" />
     <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1591149595045">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
