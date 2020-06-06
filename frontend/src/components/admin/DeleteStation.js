@@ -4,6 +4,10 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class DeleteStation extends Component {
   cons;
   state = {
@@ -26,7 +30,7 @@ class DeleteStation extends Component {
   }
 
   fetchStations = () => {
-    axios.get("http://localhost:8762/routes/stations").then((res) => {
+    axios.get("http://localhost:8762/routes/stations", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
@@ -35,7 +39,7 @@ class DeleteStation extends Component {
 
   handleDelete = (e) => {
     let id = this.state.selected[0].id;
-    axios.delete("http://localhost:8762/routes/stations/" + id).then(() => {
+    axios.delete("http://localhost:8762/routes/stations/" + id, config, {}).then(() => {
       this.setState({
         stations: this.state.stations.filter((station) => station.id !== id),
         alertMessage: "Success. Station is deleted.",

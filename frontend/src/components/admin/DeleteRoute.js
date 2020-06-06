@@ -4,6 +4,10 @@ import { Typeahead } from "react-bootstrap-typeahead";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class DeleteRoute extends Component {
   state = {
     routes: [],
@@ -25,7 +29,7 @@ class DeleteRoute extends Component {
   }
 
   fetchRoutes = () => {
-    axios.get("http://localhost:8762/routes/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
@@ -34,7 +38,7 @@ class DeleteRoute extends Component {
 
   handleDelete = (e) => {
     let id = this.state.selected[0].id;
-    axios.delete("http://localhost:8762/routes/routes/" + id).then(
+    axios.delete("http://localhost:8762/routes/routes/" + id, config, {}).then(
       this.setState({
         routes: this.state.routes.filter((route) => route.id !== id),
         alertMessage: "Success. Route is deleted.",

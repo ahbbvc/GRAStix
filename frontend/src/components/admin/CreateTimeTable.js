@@ -6,6 +6,10 @@ import "react-datepicker/dist/react-datepicker.css";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 function convertDate(inputFormat) {
   function pad(s) {
     return s < 10 ? "0" + s : s;
@@ -40,13 +44,13 @@ class CreateTimetable extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:8762/routes/routes").then((res) => {
+    axios.get("http://localhost:8762/routes/routes", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["routeName"]));
       this.setState({ routes: jsonString });
     });
 
-    axios.get("http://localhost:8762/routes/stations").then((res) => {
+    axios.get("http://localhost:8762/routes/stations", config).then((res) => {
       var jsonString = res.data;
       jsonString.map((x) => (x["label"] = x["stationName"]));
       this.setState({ stations: jsonString });
@@ -66,14 +70,14 @@ class CreateTimetable extends Component {
       timeOfArrival: json1,
       timeOfDeparture: json2,
       regular: this.state.regular,
-    });
+    }, config);
 
     const secondRequest = axios.post(
       "http://localhost:8762/routes/routestations?route=" +
       routeId +
       "&station=" +
       stationId
-    );
+      , {}, config);
     try {
       const [firstResponse, secondResponse] = await Promise.all([
         firstRequest,
@@ -85,7 +89,7 @@ class CreateTimetable extends Component {
           firstResponse.data.id +
           "&routestation=" +
           secondResponse.data.id
-        )
+          , {}, config)
         .then(
           this.setState({
             alertMessage: "Success. Timetable is created.",
@@ -93,7 +97,6 @@ class CreateTimetable extends Component {
             alertColor: "success",
           })
         );
-      console.log(this.state.regular);
     } catch (error) {
       this.setState({
         alertMessage:

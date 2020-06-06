@@ -3,6 +3,10 @@ import { Card, Form, Button, Alert } from "react-bootstrap";
 import axios from "axios";
 import "./AdminPanel.css";
 
+const config = {
+  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+};
+
 class CreateStation extends Component {
   state = {
     station: { stationName: "" },
@@ -23,7 +27,7 @@ class CreateStation extends Component {
   };
 
   handlePost = (e) => {
-    axios.post("http://localhost:8762/routes/stations", this.state).then(() => {
+    axios.post("http://localhost:8762/routes/stations", this.state, config).then(() => {
       this.setState({
         alertMessage: "Success. Station is created.",
         alertVisible: true,
