@@ -4,19 +4,26 @@ import axios from "axios";
 import "./AdminPanel.css";
 
 const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+  headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
 
 class CreateRoute extends Component {
   state = {
-    route: { routeName: "", transportType: "Bus" },
+    route: {
+      routeName: "",
+      transportType: "Bus",
+      user: "",
+    },
     alertVisible: false,
     alertMessage: "",
     alertColor: "",
   };
 
   componentDidMount() {
-    this.setState({ transportType: "Bus" });
+    this.setState({
+      transportType: "Bus",
+      user: localStorage.getItem("userId"),
+    });
   }
 
   handleChangeSelect = (e) => {
@@ -35,14 +42,16 @@ class CreateRoute extends Component {
   };
 
   handlePost = (e) => {
-    axios.post("http://localhost:8762/routes/routes", this.state, config).then(() => {
-      this.setState({
-        alertMessage: "Success. Route is created.",
-        alertVisible: true,
-        alertColor: "success",
+    axios
+      .post("http://localhost:8762/routes/routes", this.state, config)
+      .then(() => {
+        this.setState({
+          alertMessage: "Success. Route is created.",
+          alertVisible: true,
+          alertColor: "success",
+        });
+        this.props.markCreated("newRoute", true);
       });
-      this.props.markCreated("newRoute", true);
-    });
   };
 
   validate = (e) => {

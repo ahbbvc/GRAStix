@@ -5,7 +5,7 @@ import axios from "axios";
 import "./AdminPanel.css";
 
 const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+  headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
 
 class DeleteRoute extends Component {

@@ -7,7 +7,7 @@ import axios from "axios";
 import "./AdminPanel.css";
 
 const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+  headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
 
 function convertDate(inputFormat) {
@@ -66,18 +66,24 @@ class CreateTimetable extends Component {
     let stationId = this.state.selectedStation[0].id;
     let routeId = this.state.selectedRoute[0].id;
 
-    const firstRequest = axios.post("http://localhost:8762/routes/timetables", {
-      timeOfArrival: json1,
-      timeOfDeparture: json2,
-      regular: this.state.regular,
-    }, config);
+    const firstRequest = axios.post(
+      "http://localhost:8762/routes/timetables",
+      {
+        timeOfArrival: json1,
+        timeOfDeparture: json2,
+        regular: this.state.regular,
+      },
+      config
+    );
 
     const secondRequest = axios.post(
       "http://localhost:8762/routes/routestations?route=" +
-      routeId +
-      "&station=" +
-      stationId
-      , {}, config);
+        routeId +
+        "&station=" +
+        stationId,
+      {},
+      config
+    );
     try {
       const [firstResponse, secondResponse] = await Promise.all([
         firstRequest,
@@ -86,10 +92,12 @@ class CreateTimetable extends Component {
       await axios
         .post(
           "http://localhost:8762/routes/timetables/addtimetable?timetable=" +
-          firstResponse.data.id +
-          "&routestation=" +
-          secondResponse.data.id
-          , {}, config)
+            firstResponse.data.id +
+            "&routestation=" +
+            secondResponse.data.id,
+          {},
+          config
+        )
         .then(
           this.setState({
             alertMessage: "Success. Timetable is created.",

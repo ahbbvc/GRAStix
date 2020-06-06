@@ -6,7 +6,7 @@ import "./AdminPanel.css";
 import Timetable from "./Timetable";
 
 const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+  headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
 
 class DeleteTimetable extends Component {
@@ -39,13 +39,17 @@ class DeleteTimetable extends Component {
 
   async fetchTimetables() {
     try {
-      const response = await axios.get("http://localhost:8762/routes/timetables", config);
+      const response = await axios.get(
+        "http://localhost:8762/routes/timetables",
+        config
+      );
       let data = response.data;
       this.setState({
         timetables: [
           ...data.filter(
             (item) =>
-              (item.routeStation !== null && (item.routeStation.route.id === this.state.selectedRoute[0].id))
+              item.routeStation !== null &&
+              item.routeStation.route.id === this.state.selectedRoute[0].id
           ),
         ],
       });
@@ -57,7 +61,6 @@ class DeleteTimetable extends Component {
           alertVisible: true,
         });
       }
-
     } catch (error) {
       this.setState({
         alertMessage: "Error! Please try again.",
@@ -118,11 +121,11 @@ class DeleteTimetable extends Component {
               <Button onClick={this.search}>Search</Button>
               {this.state.showTimetables
                 ? this.state.timetables.map((item) => (
-                  <Timetable
-                    data={item}
-                    updateTimetables={this.updateTimetables}
-                  ></Timetable>
-                ))
+                    <Timetable
+                      data={item}
+                      updateTimetables={this.updateTimetables}
+                    ></Timetable>
+                  ))
                 : null}
             </div>
           </Card.Body>

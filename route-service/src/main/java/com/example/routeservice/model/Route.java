@@ -24,9 +24,7 @@ public class Route {
     @NotBlank(message = "Transport type cannot be empty")
     private String transportType;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+    private Integer user;
 
     @JsonIgnore
     @OneToMany(mappedBy = "route", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
@@ -38,6 +36,12 @@ public class Route {
     public Route(String routeName, String transportType) {
         this.routeName = routeName;
         this.transportType = transportType;
+    }
+
+    public Route(String routeName, String transportType, Integer user) {
+        this.routeName = routeName;
+        this.transportType = transportType;
+        this.user = user;
     }
 
     public Integer getId() {
@@ -52,7 +56,7 @@ public class Route {
         return transportType;
     }
 
-    public User getUser() {
+    public Integer getUser() {
         return user;
     }
 
@@ -72,7 +76,7 @@ public class Route {
         this.transportType = transportType;
     }
 
-    public void setUser(User user) {
+    public void setUser(Integer user) {
         this.user = user;
     }
 

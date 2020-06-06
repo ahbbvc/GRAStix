@@ -12,8 +12,6 @@ import java.util.List;
 @RequestMapping("/routes")
 public class RouteController {
 
-    //@Autowired
-    //private RestTemplate restTemplate;
     private final RouteService routeService;
     private final Sender sender;
 
@@ -39,11 +37,7 @@ public class RouteController {
 
     @PostMapping("")
     Route createRoute(@Valid @RequestBody Route data) {
-        // Testirana komunikacija sa mikroservisima
-        // Dodavanje korisnika ce biti naknadno implementirano kroz osiguravanje sigurnosti
-        //Integer userId = 9;
-        //User user = restTemplate.getForObject("http://user-service/user/" + userId, User.class);
-        return routeService.createRoute(data.getRouteName(), data.getTransportType());
+        return routeService.createRoute(data.getRouteName(), data.getTransportType(), data.getUser());
     }
 
     @PutMapping("/{id}")

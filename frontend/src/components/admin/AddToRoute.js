@@ -5,7 +5,7 @@ import axios from "axios";
 import "./AdminPanel.css";
 
 const config = {
-  headers: { Authorization: `Bearer ${localStorage.getItem('access_token')}` }
+  headers: { Authorization: `Bearer ${localStorage.getItem("access_token")}` },
 };
 
 class AddToRoute extends Component {
@@ -53,10 +53,11 @@ class AddToRoute extends Component {
     axios
       .post(
         "http://localhost:8762/routes/routestations?route=" +
-        routeId +
-        "&station=" +
-        stationId
-        , config)
+          routeId +
+          "&station=" +
+          stationId,
+        config
+      )
       .then(
         this.setState({
           alertMessage: "Success. Station is added to route.",
