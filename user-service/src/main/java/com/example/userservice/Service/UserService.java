@@ -54,7 +54,8 @@ public class UserService {
         this.findUserById(id);
 
         user.setId(id);
-        return this.saveUser(user);
+        User updatedUser = this._userRepository.save(user);
+        return new ResponseEntity(updatedUser, HttpStatus.OK);
     }
 
     public ResponseEntity deleteUser(Integer id) throws InvalidRequestException, UserNotFoundException {
