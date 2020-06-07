@@ -1,0 +1,79 @@
+version: '3'
+
+services:
+
+  eureka-server:
+    image:  docker-eureka-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+
+  user-service-docker:
+    image:  docker-user-service:0.0.1-SNAPSHOT
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - event-service-docker
+    ports:
+      - "8081:8081"
+
+  ticket-service-docker:
+    image: docker-ticket-service:0.0.1-SNAPSHOT
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - route-service-docker
+      - user-service-docker
+      - event-service-docker
+    ports:
+      - "8082:8082"
+
+  route-service-docker:
+    image: docker-route-service:0.0.1-SNAPSHOT
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - user-service-docker
+      - event-service-docker
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    ports:
+      - "8083:8083"
+
+  event-service-docker:
+    image: docker-system-events:0.0.1-SNAPSHOT
+    depends_on:
+      - eureka-server
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    ports:
+      - "9090:9090"
+
+  authentication-service-docker:
+    image:  docker-authentication-service:0.0.1-SNAPSHOT
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - ticket-service-docker
+    ports:
+      - "8090:8090"
+    
+  api-gateway-docker:
+    image:  docker-api-gateway:0.0.1-SNAPSHOT
+    environment: 
+        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+        SECURITY_OAUTH2_RESOURCE_GETTOKEN: http://authentication-service-docker:8090/oauth/token
+        SECURITY_OAUTH2_RESOURCE_ACCESSTOKENURI: http://authentication-service-docker:8090/oauth/access_token
+        SECURITY_OAUTH2_RESOURCE_TOKEN-INFO-URI: http://authentication-service-docker:8090/oauth/check_token 
+        SECURITY_OAUTH2_RESOURCE_USER-INFO-URI: http://authentication-service-docker:8090/user 
+        SECURITY_OAUTH2_RESOURCE_USERAUTHORIZATIONURI: http://authentication-service-docker:8090/oauth/authorize
+    depends_on:
+      - eureka-server
+      - ticket-service-docker
+    ports:
+      - "8762:8762"
+
+    

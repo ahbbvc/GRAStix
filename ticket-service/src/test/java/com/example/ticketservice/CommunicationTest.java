@@ -21,14 +21,14 @@ import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-
+/*
 @SpringBootTest
 @AutoConfigureMockMvc
 public class CommunicationTest {
     @Autowired
     private MockMvc mvc;
 
-    /*
+
    U bazama drugi mikroservisa ima:
    Rute:
 
@@ -54,7 +54,7 @@ public class CommunicationTest {
    }
 
 
-    */
+
     @Order(1)
     @Test
     public void getUserSTickets() throws Exception{
@@ -120,3 +120,4 @@ public class CommunicationTest {
     }
 }
 
+*/

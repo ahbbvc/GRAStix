@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
+/*
 @SpringBootTest
 @AutoConfigureMockMvc
 public class STicketControllerTest {
@@ -27,7 +27,7 @@ public class STicketControllerTest {
 
     static Integer id ;
 
-    /*
+
    U bazama drugi mikroservisa ima:
    Rute:
    {
@@ -52,7 +52,7 @@ public class STicketControllerTest {
    }
 
 
-    */
+
     @Test
     @Order(0)
     public void createSTicket() throws Exception{
@@ -135,5 +135,5 @@ public class STicketControllerTest {
 
     }
 
-}
+}*/
 
