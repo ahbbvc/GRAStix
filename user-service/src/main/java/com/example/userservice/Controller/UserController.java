@@ -21,8 +21,7 @@ public class UserController {
 
     @GetMapping("")
     ResponseEntity<List<User>> findAllUsers() {
-        ResponseEntity<List<User>> res = _userService.findAllUsers();
-        return res;
+        return _userService.findAllUsers();
     }
 
     @GetMapping("/{id}")
@@ -40,6 +39,11 @@ public class UserController {
         return this._userService.updateExistingUser(id, user);
     }
 
+    @PutMapping("/newPassword/{id}")
+    ResponseEntity<User> updateUserWithPassword(@PathVariable(value = "id") Integer id, @RequestBody User user) throws InvalidRequestException, UserNotFoundException {
+        return this._userService.updatePassword(id, user);
+    }
+
     @DeleteMapping("delete/{id}")
     ResponseEntity deleteUser(@PathVariable(value = "id") Integer id) throws InvalidRequestException, UserNotFoundException {
         return this._userService.deleteUser(id);
@@ -49,6 +53,4 @@ public class UserController {
     public ResponseEntity<User> UserByMail(@RequestParam("email") String email) throws UserNotFoundException {
         return this._userService.findUserByEmail(email);
     }
-
-
 }
