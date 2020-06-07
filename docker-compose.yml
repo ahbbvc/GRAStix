@@ -1,79 +1,172 @@
-version: '3'
+version: "3"
 
 services:
-
   eureka-server:
-    image:  docker-eureka-server:0.0.1-SNAPSHOT
+    build:
+      context: ./eureka-server/
+      dockerfile: Dockerfile
+    image: docker-eureka-server:0.0.1-SNAPSHOT
+    expose:
+      - 8761
     ports:
-      - "8761:8761"
+      - 8761:8761
+    networks:
+      - grastix
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - 5672:5672
+      - 15672:15672
+    networks:
+      - grastix
+
+  event-service-docker:
+    build:
+      context: ./system-events/
+      dockerfile: Dockerfile
+    image: docker-system-events:0.0.1-SNAPSHOT
+    depends_on:
+      - eureka-server
+    environment:
+      - SPRING_APPLICATION_NAME=system-events
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    expose:
+      - 8084
+    ports:
+      - 8084:8084
+    networks:
+      - grastix
+
+  authentication-service-docker:
+    build:
+      context: ./authentication-service/
+      dockerfile: Dockerfile
+    image: docker-authentication-service:0.0.1-SNAPSHOT
+    environment:
+      - SPRING_APPLICATION_NAME=authentication-service
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+    expose:
+      - 8090
+    ports:
+      - 8090:8090
+    networks:
+      - grastix
+
+  api-gateway-docker:
+    build:
+      context: ./api-gateway/
+      dockerfile: Dockerfile
+    image: docker-api-gateway:0.0.1-SNAPSHOT
+    environment:
+      - SPRING_APPLICATION_NAME=zuul-server
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - authentication-service-docker
+      - route-service-docker
+      - user-service-docker
+      - event-service-docker
+      - ticket-service-docker
+    expose:
+      - 8762
+    ports:
+      - 8762:8762
+    networks:
+      - grastix
 
   user-service-docker:
-    image:  docker-user-service:0.0.1-SNAPSHOT
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    build:
+      context: ./user-service/
+      dockerfile: Dockerfile
+    image: docker-user-service:0.0.1-SNAPSHOT
+    environment:
+      - SPRING_APPLICATION_NAME=user-service
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
     depends_on:
       - eureka-server
       - event-service-docker
+    expose:
+      - 8081
     ports:
-      - "8081:8081"
+      - 8081:8081
+    networks:
+      - grastix
+
+  route-service-docker:
+    build:
+      context: ./route-service/
+      dockerfile: Dockerfile
+    image: docker-route-service:0.0.1-SNAPSHOT
+    environment:
+      - SPRING_APPLICATION_NAME=route-service
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+      - SPRING_RABBITMQ_HOST=rabbitmq
+    depends_on:
+      - eureka-server
+      - user-service-docker
+      - event-service-docker
+    expose:
+      - 8083
+    ports:
+      - 8083:8083
+    networks:
+      - grastix
 
   ticket-service-docker:
+    build:
+      context: ./ticket-service/
+      dockerfile: Dockerfile
     image: docker-ticket-service:0.0.1-SNAPSHOT
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+    environment:
+      - SPRING_APPLICATION_NAME=ticket-service
+      - SPRING_PROFILES_ACTIVE=enableEureka
+      - EUREKA_INSTANCE_PREFER_IP_ADDRESS=true
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+      - SPRING_RABBITMQ_HOST=rabbitmq
     depends_on:
       - eureka-server
       - route-service-docker
       - user-service-docker
       - event-service-docker
+    expose:
+      - 8082
     ports:
-      - "8082:8082"
+      - 8082:8082
+    networks:
+      - grastix
 
-  route-service-docker:
-    image: docker-route-service:0.0.1-SNAPSHOT
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    image: frontend
     depends_on:
-      - eureka-server
-      - user-service-docker
-      - event-service-docker
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
+      - api-gateway-docker
+    stdin_open: true
+    restart: on-failure
     ports:
-      - "8083:8083"
+      - 3000:3000
+    networks:
+      - grastix
 
-  event-service-docker:
-    image: docker-system-events:0.0.1-SNAPSHOT
-    depends_on:
-      - eureka-server
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-    ports:
-      - "9090:9090"
-
-  authentication-service-docker:
-    image:  docker-authentication-service:0.0.1-SNAPSHOT
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-    depends_on:
-      - eureka-server
-      - ticket-service-docker
-    ports:
-      - "8090:8090"
-    
-  api-gateway-docker:
-    image:  docker-api-gateway:0.0.1-SNAPSHOT
-    environment: 
-        EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: http://eureka-server:8761/eureka
-        SECURITY_OAUTH2_RESOURCE_GETTOKEN: http://authentication-service-docker:8090/oauth/token
-        SECURITY_OAUTH2_RESOURCE_ACCESSTOKENURI: http://authentication-service-docker:8090/oauth/access_token
-        SECURITY_OAUTH2_RESOURCE_TOKEN-INFO-URI: http://authentication-service-docker:8090/oauth/check_token 
-        SECURITY_OAUTH2_RESOURCE_USER-INFO-URI: http://authentication-service-docker:8090/user 
-        SECURITY_OAUTH2_RESOURCE_USERAUTHORIZATIONURI: http://authentication-service-docker:8090/oauth/authorize
-    depends_on:
-      - eureka-server
-      - ticket-service-docker
-    ports:
-      - "8762:8762"
-
-    
+networks:
+  grastix:
+    driver: bridge
