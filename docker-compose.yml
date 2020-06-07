@@ -1,0 +1,126 @@
+version: '3'
+
+services:
+  mysql-ticket:
+    image: mysql:8.0.17
+    environment:
+      - MYSQL_ROOT_PASSWORD= password
+      - MYSQL_DATABASE=ticket_db
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=password
+    ports:
+      - "3306:3306"
+    networks:
+      - appnetwork
+
+  eureka-server:
+    image:  docker-eureka-server:0.0.1-SNAPSHOT
+    expose:
+        - 8761
+    ports:
+      - "8761:8761"
+    networks:
+      - appnetwork
+
+  user-service-docker:
+    image:  docker-user-service:0.0.1-SNAPSHOT
+    environment: 
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - event-service-docker
+    expose:
+      - 8081
+    ports:
+      - "8081:8081"
+    networks:
+      - appnetwork
+
+  ticket-service-docker:
+    image: docker-ticket-service:0.0.1-SNAPSHOT
+    environment: 
+      - DATABASE_HOST=mysql-ticket
+      - DATABASE_USER=user
+      - DATABASE_PASSWORD=password
+      - DATABASE_NAME=ticket_db
+      - DATABASE_PORT=3306
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - mysql-ticket
+      - eureka-server
+      - route-service-docker
+      - user-service-docker
+      - event-service-docker
+    expose:
+      - 8082
+    ports:
+      - "8082:8082"
+    networks:
+      - appnetwork
+
+  route-service-docker:
+    image: docker-route-service:0.0.1-SNAPSHOT
+    environment: 
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - user-service-docker
+      - event-service-docker
+    expose:
+      - 8083
+    ports:
+      - "8083:8083"
+    networks:
+      - appnetwork
+
+  event-service-docker:
+    image: docker-system-events:0.0.1-SNAPSHOT
+    depends_on:
+      - eureka-server
+    environment: 
+       - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    expose:
+      - 8084
+    ports:
+      - "8084:8084"
+    networks:
+      - appnetwork
+
+  authentication-service-docker:
+    image:  docker-authentication-service:0.0.1-SNAPSHOT
+    environment: 
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+    depends_on:
+      - eureka-server
+      - ticket-service-docker
+    expose:
+      - 8090
+    ports:
+      - "8090:8090"
+    networks:
+      - appnetwork
+    
+  api-gateway-docker:
+    image:  docker-api-gateway:0.0.1-SNAPSHOT
+    environment: 
+        - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE= http://eureka-server:8761/eureka
+        - SECURITY_OAUTH2_RESOURCE_GETTOKEN= http://authentication-service-docker:8090/oauth/token
+        - SECURITY_OAUTH2_RESOURCE_ACCESSTOKENURI= http://authentication-service-docker:8090/oauth/access_token
+        - SECURITY_OAUTH2_RESOURCE_TOKEN-INFO-URI= http://authentication-service-docker:8090/oauth/check_token 
+        - SECURITY_OAUTH2_RESOURCE_USER-INFO-URI= http://authentication-service-docker:8090/user 
+        - SECURITY_OAUTH2_RESOURCE_USERAUTHORIZATIONURI= http://authentication-service-docker:8090/oauth/authorize
+    depends_on:
+      - eureka-server
+      - ticket-service-docker
+    expose:
+      - 8762
+    ports:
+      - "8762:8762"
+    networks:
+      - appnetwork
+    
+networks:
+    appnetwork:
+        driver: bridge
+
+    

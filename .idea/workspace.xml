@@ -20,18 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="09486356-d038-4909-80db-5bec5cbe57c0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MonthlyTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MyMonthlyTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/MySingleTickets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/components/tickets/SingleTicket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptor.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/java/com/example/ticketservice/Interceptors/TicketServiceInterceptorAppConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/api-gateway/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/ticket-service/src/main/resources/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,26 +45,34 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/api-gateway/src/main/java/com/example/apigateway" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/user-service" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Naida\Desktop\GRAStix\ticket-service\src\main\docker" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="com.example.apigateway" />
       <recent name="com.example.routeservice" />
       <recent name="com.example.userservice" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\Naida\Desktop\GRAStix\api-gateway\src\main\java\com\example\apigateway" />
+      <recent name="C:\Users\Naida\Desktop\GRAStix\user-service" />
+      <recent name="C:\Users\Naida\Desktop\GRAStix\api-gateway" />
+      <recent name="C:\Users\Naida\Desktop\GRAStix\authentication-service" />
+      <recent name="C:\Users\Naida\Desktop\GRAStix\eureka-server" />
+      <recent name="C:\Users\Naida\Desktop\GRAStix\route-service" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ApiGatewayApplication">
+  <component name="RunManager" selected="Application.TicketServiceApplication">
     <configuration name="ApiGatewayApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.example.apigateway.ApiGatewayApplication" />
       <module name="api-gateway" />
@@ -100,12 +99,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="RouteServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.example.routeservice.RouteServiceApplication" />
-      <module name="route-service" />
+    <configuration name="EurekaServerApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.example.eurekaserver.EurekaServerApplication" />
+      <module name="eureka-server" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.example.routeservice.*" />
+          <option name="PATTERN" value="com.example.eurekaserver.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -141,11 +140,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.TicketServiceApplication" />
+        <item itemvalue="Application.EurekaServerApplication" />
         <item itemvalue="Application.ApiGatewayApplication" />
         <item itemvalue="Application.AuthenticationServiceApplication" />
-        <item itemvalue="Application.RouteServiceApplication" />
-        <item itemvalue="Application.TicketServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -187,22 +186,22 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="580" y="185" key="FileChooserDialogImpl/0.0.1600.860@0.0.1600.860" timestamp="1589909996074" />
-    <state width="1557" height="325" key="GridCell.Tab.0.bottom" timestamp="1591394199121">
+    <state width="1557" height="311" key="GridCell.Tab.0.bottom" timestamp="1591547820963">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591394199121" />
-    <state width="1557" height="325" key="GridCell.Tab.0.center" timestamp="1591394199120">
+    <state width="1557" height="311" key="GridCell.Tab.0.bottom/0.0.1600.860@0.0.1600.860" timestamp="1591547820963" />
+    <state width="1557" height="311" key="GridCell.Tab.0.center" timestamp="1591547820963">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
-    <state width="1557" height="325" key="GridCell.Tab.0.left" timestamp="1591394199120">
+    <state width="1557" height="311" key="GridCell.Tab.0.center/0.0.1600.860@0.0.1600.860" timestamp="1591547820963" />
+    <state width="1557" height="311" key="GridCell.Tab.0.left" timestamp="1591547820963">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
-    <state width="1557" height="325" key="GridCell.Tab.0.right" timestamp="1591394199120">
+    <state width="1557" height="311" key="GridCell.Tab.0.left/0.0.1600.860@0.0.1600.860" timestamp="1591547820963" />
+    <state width="1557" height="311" key="GridCell.Tab.0.right" timestamp="1591547820963">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state width="1557" height="325" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591394199120" />
+    <state width="1557" height="311" key="GridCell.Tab.0.right/0.0.1600.860@0.0.1600.860" timestamp="1591547820963" />
     <state width="1557" height="250" key="GridCell.Tab.1.bottom" timestamp="1591149595045">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -227,6 +226,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="301" y="75" key="SettingsEditor/0.0.1600.860@0.0.1600.860" timestamp="1591378698673" />
+    <state x="456" y="195" key="run.anything.popup" timestamp="1591553163804">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1591553163804" />
     <state x="463" y="180" width="672" height="678" key="search.everywhere.popup" timestamp="1591378691562">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

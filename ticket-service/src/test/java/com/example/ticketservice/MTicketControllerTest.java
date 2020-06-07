@@ -17,7 +17,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
+/*
 @SpringBootTest
 @AutoConfigureMockMvc
 public class MTicketControllerTest {
@@ -27,7 +27,7 @@ public class MTicketControllerTest {
     private ObjectMapper objectMapper;
     static Integer id;
 
-    /*
+
     U bazama drugi mikroservisa ima:
     Rute:
     {
@@ -53,7 +53,7 @@ public class MTicketControllerTest {
     }
 
 
-     */
+
 
     @Order(0)
     @Test
@@ -120,4 +120,4 @@ public class MTicketControllerTest {
 
     }
 
-}
+}*/
