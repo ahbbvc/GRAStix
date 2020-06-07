@@ -4,7 +4,7 @@ services:
   eureka-server:
     build:
       context: ./eureka-server/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-eureka-server:0.0.1-SNAPSHOT
     expose:
       - 8761
@@ -28,7 +28,7 @@ services:
   event-service-docker:
     build:
       context: ./system-events/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-system-events:0.0.1-SNAPSHOT
     depends_on:
       - eureka-server
@@ -47,7 +47,7 @@ services:
   authentication-service-docker:
     build:
       context: ./authentication-service/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-authentication-service:0.0.1-SNAPSHOT
     environment:
       - SPRING_APPLICATION_NAME=authentication-service
@@ -66,7 +66,7 @@ services:
   api-gateway-docker:
     build:
       context: ./api-gateway/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-api-gateway:0.0.1-SNAPSHOT
     environment:
       - SPRING_APPLICATION_NAME=zuul-server
@@ -76,6 +76,10 @@ services:
     depends_on:
       - eureka-server
       - authentication-service-docker
+      - route-service-docker
+      - user-service-docker
+      - event-service-docker
+      - ticket-service-docker
     expose:
       - 8762
     ports:
@@ -86,7 +90,7 @@ services:
   user-service-docker:
     build:
       context: ./user-service/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-user-service:0.0.1-SNAPSHOT
     environment:
       - SPRING_APPLICATION_NAME=user-service
@@ -106,7 +110,7 @@ services:
   route-service-docker:
     build:
       context: ./route-service/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-route-service:0.0.1-SNAPSHOT
     environment:
       - SPRING_APPLICATION_NAME=route-service
@@ -128,7 +132,7 @@ services:
   ticket-service-docker:
     build:
       context: ./ticket-service/
-      dockerfile: Docker
+      dockerfile: Dockerfile
     image: docker-ticket-service:0.0.1-SNAPSHOT
     environment:
       - SPRING_APPLICATION_NAME=ticket-service
@@ -145,6 +149,21 @@ services:
       - 8082
     ports:
       - 8082:8082
+    networks:
+      - grastix
+
+  frontend:
+    container_name: frontend
+    build:
+      context: ./frontend/
+      dockerfile: Dockerfile
+    image: frontend
+    depends_on:
+      - api-gateway-docker
+    stdin_open: true
+    restart: on-failure
+    ports:
+      - 3000:3000
     networks:
       - grastix
 
