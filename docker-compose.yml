@@ -11,7 +11,7 @@ services:
     ports:
       - "3306:3306"
     networks:
-      - appnetwork
+      - grastix
 
   eureka-server:
     image:  docker-eureka-server:0.0.1-SNAPSHOT
@@ -20,7 +20,7 @@ services:
     ports:
       - "8761:8761"
     networks:
-      - appnetwork
+      - grastix
 
   user-service-docker:
     image:  docker-user-service:0.0.1-SNAPSHOT
@@ -34,7 +34,7 @@ services:
     ports:
       - "8081:8081"
     networks:
-      - appnetwork
+      - grastix
 
   ticket-service-docker:
     image: docker-ticket-service:0.0.1-SNAPSHOT
@@ -56,7 +56,7 @@ services:
     ports:
       - "8082:8082"
     networks:
-      - appnetwork
+      - grastix
 
   route-service-docker:
     image: docker-route-service:0.0.1-SNAPSHOT
@@ -71,7 +71,7 @@ services:
     ports:
       - "8083:8083"
     networks:
-      - appnetwork
+      - grastix
 
   event-service-docker:
     image: docker-system-events:0.0.1-SNAPSHOT
@@ -84,7 +84,7 @@ services:
     ports:
       - "8084:8084"
     networks:
-      - appnetwork
+      - grastix
 
   authentication-service-docker:
     image:  docker-authentication-service:0.0.1-SNAPSHOT
@@ -98,7 +98,7 @@ services:
     ports:
       - "8090:8090"
     networks:
-      - appnetwork
+      - grastix
     
   api-gateway-docker:
     image:  docker-api-gateway:0.0.1-SNAPSHOT
@@ -117,10 +117,12 @@ services:
     ports:
       - "8762:8762"
     networks:
-      - appnetwork
+      - grastix
+
+  
     
 networks:
-    appnetwork:
+    grastix:
         driver: bridge
 
     
