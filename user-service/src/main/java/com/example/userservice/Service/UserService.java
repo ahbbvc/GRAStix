@@ -72,4 +72,11 @@ public class UserService {
         this._validationService.validateObject(user);
         return new ResponseEntity(user, HttpStatus.OK);
     }
+
+    public ResponseEntity<User> updatePassword(Integer id, User user) throws InvalidRequestException, UserNotFoundException {
+        BCryptPasswordEncoder bCryptPasswordEncoder =
+                new BCryptPasswordEncoder();
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        return updateExistingUser(id, user);
+    }
 }

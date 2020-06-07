@@ -6,6 +6,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 class Register extends Component {
+    
     state = {
         alertVisible: false,
         alertMessage: "",
@@ -52,7 +53,7 @@ class Register extends Component {
             });
         }).catch((error) => {
             this.setState({
-                alertMessage: "There was an error while processing request. " + error.response?.data,
+                alertMessage: "There was an error while processing request." ,
                 alertVisible: true,
                 alertColor: "danger",
             });

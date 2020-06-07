@@ -10,14 +10,19 @@ class Header extends Component {
     render() {
         return (
             <div>
-                <Navbar bg="primary" variant="dark" style={{justifyContent: "space-between"}}>
+                <Navbar bg="primary" variant="dark" style={{ justifyContent: "space-between" }}>
                     <div>
                         <img src={logo} alt="logo" style={{ marginRight: "10px", width: "40px" }} />
                         <Navbar.Brand>GRAStix</Navbar.Brand>
                     </div>
-                    <Navbar.Text>
-                        <a href="/" onClick={this.logout}>Log Out</a>
-                    </Navbar.Text>
+                    <div>
+                        <Navbar.Text>
+                            <a href="/profile" style={{ marginRight: "10px" }}>Profile</a>
+                        </Navbar.Text>
+                        <Navbar.Text>
+                            <a href="/" onClick={this.logout}>Log Out</a>
+                        </Navbar.Text>
+                    </div>
                 </Navbar>
             </div>
         );
