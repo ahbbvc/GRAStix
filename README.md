@@ -25,6 +25,10 @@ Prvo pokrenuti eureka-server
 
 Izvršiti komandu: ```mvn test``` u folderu servisa
 
+### Napomena za dugi dio projekta
+* Treba biti instaliran rabbitmq
+* Prvo se porekce eureka-server, pa system-events pa tek onda preostali servisi
+
 
 ### Demo snimci
 https://drive.google.com/drive/folders/1UpAbdVip71abq4ymrrr_Bt5hxrvasr1j?usp=sharing
