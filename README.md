@@ -28,7 +28,7 @@ Izvršiti komandu: ```mvn test``` u folderu servisa
 ### Napomena za dugi dio projekta
 * Treba biti instaliran rabbitmq
 * Prvo se porekce eureka-server, pa system-events pa tek onda preostali servisi
-* Sa rolom admin se login podacima mail: admin2@mail.com password: admin
+* Sa rolom admin se login-uje podacima mail: admin2@mail.com password: admin
 
 
 ### Demo snimci
