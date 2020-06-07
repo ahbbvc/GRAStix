@@ -1,6 +1,7 @@
 package com.example.apigateway.Controller;
 
 import com.example.apigateway.Model.Login;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
@@ -12,6 +13,8 @@ import java.util.Base64;
 
 @RestController
 public class ApiGatewayController {
+    @Value("${security.oauth2.resource.getToken}")
+    private String authPath;
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody Login login) {
         RestTemplate restTemplate = new RestTemplate();
@@ -30,7 +33,7 @@ public class ApiGatewayController {
         headers.add("Authorization", "Basic " + encodedCredentials);
         HttpEntity<?> request = new HttpEntity<Object>(body, headers);
 
-        String access_token_url = "http://localhost:8090/oauth/token";
+        String access_token_url = authPath;
         ResponseEntity<?> response = restTemplate.exchange(access_token_url, HttpMethod.POST, request, String.class);
 
         return response;
