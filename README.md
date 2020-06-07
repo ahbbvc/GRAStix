@@ -26,9 +26,13 @@ Prvo pokrenuti eureka-server
 Izvršiti komandu: ```mvn test``` u folderu servisa
 
 ### Napomena za dugi dio projekta
-* Treba biti instaliran rabbitmq
-* Prvo se porekce eureka-server, pa system-events pa tek onda preostali servisi
-* Sa rolom admin se login-uje podacima mail: admin2@mail.com password: admin
+* Pokrenut RabbitMQ
+* Prvo se pokreće eureka-server, pa system-events pa tek onda preostali servisi
+* Sa rolom admin se login-uje sa podacima mail: admin2@mail.com password: admin
+
+* Na branchu docker-v2 se nalaze kreirani Docker fajlovi
+* Svi servisi uključujući i frontend se pokreću u pravilnom redoslijedu
+* Branch nije mergean sa masterom jer ne radi komunikacija prema api-gatewayu
 
 
 ### Demo snimci
